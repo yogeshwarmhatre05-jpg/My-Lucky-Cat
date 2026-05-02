@@ -71,7 +71,7 @@ const url = "https://raw.githubusercontent.com/yogeshwarmhatre05-jpg/My-personal
 
 async function loadMembers() {
   try {
-    const res = await fetch(url);
+   const res = await fetch(url + "?t=" + Date.now());
     const members = await res.json();
 
     const container = document.getElementById("membersList");
@@ -94,7 +94,7 @@ async function loadMembers() {
     });
 
   } catch (e) {
-    document.getElementById("membersList").innerText = "Failed to load";
+    document.getElementById("membersList").innerText = "Failed to load =(";
   }
 }
 
