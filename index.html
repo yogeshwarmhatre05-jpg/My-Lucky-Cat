@@ -2,74 +2,147 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pixel Glow Club</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
 
 <style>
-body{
-  background:#0F172A;
-  margin:0;
-  border:2px solid #1E293B;
-  min-height:100vh;
+
+*{
   box-sizing:border-box;
-  border-radius:2px;
-  color:#E2E8F0;
-  transition:background 1s ease,border-color 1s ease;
-  font-family:Arial;
 }
 
+html,
+body{
+  margin:0;
+  padding:0;
+  background:#0F172A;
+  color:#E2E8F0;
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+body{
+  position:relative;
+}
+
+/* RGB BORDER */
+
+.rgbBorder{
+  position:fixed;
+  inset:0;
+  padding:3px;
+  background:linear-gradient(
+    90deg,
+    #ff0000,
+    #ff9900,
+    #ffee00,
+    #00ff00,
+    #00ffff,
+    #0066ff,
+    #aa00ff,
+    #ff0000
+  );
+  background-size:400% 400%;
+  animation:rgbMove 8s linear infinite;
+  z-index:-1;
+}
+
+.rgbBorder::before{
+  content:"";
+  position:absolute;
+  inset:3px;
+  background:#0F172A;
+}
+
+@keyframes rgbMove{
+  0%{background-position:0% 50%;}
+  100%{background-position:400% 50%;}
+}
+
+/* MAIN */
+
 .mainBox{
-  max-width:300px;
+  width:300px;
   margin:auto;
   padding:14px;
-  border-radius:2px;
-  background:#0F172A;
   text-align:center;
-  color:#E2E8F0;
-  border:2px solid #1E293B;
-  transition:background 1s ease,border-color 1s ease,box-shadow 1s ease;
 }
 
 .themeText{
-  transition:color 1s ease,text-shadow 1s ease;
+  color:#22C55E;
 }
 
 .line{
   height:1px;
-  background:rgba(226,232,240,0.2);
+  background:rgba(255,255,255,0.15);
   margin:8px 20px;
 }
 
-@keyframes discoRGB{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+/* PIXEL GLOW */
+
+.pixelGlowBox{
+  width:270px;
+  height:60px;
+  margin:auto;
+  position:relative;
+  overflow:hidden;
+  border-radius:10px;
 }
 
-@keyframes pulse{
-  0%{opacity:1;}
-  50%{opacity:0.3;}
-  100%{opacity:1;}
+.pixelBorder{
+  position:absolute;
+  inset:0;
+  padding:2px;
+  background:linear-gradient(
+    90deg,
+    #ff0000,
+    #ff9900,
+    #ffee00,
+    #00ff00,
+    #00ffff,
+    #0066ff,
+    #aa00ff,
+    #ff0000
+  );
+  background-size:400% 400%;
+  animation:rgbMove 8s linear infinite;
 }
 
-@keyframes scroll{
-  0%{transform:translateX(0);}
-  100%{transform:translateX(-100%);}
+.pixelBorder::before{
+  content:"";
+  position:absolute;
+  inset:2px;
+  background:#0F172A;
+}
+
+#pixelText{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:1rem;
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+  letter-spacing:2px;
+  z-index:2;
+  -webkit-text-stroke:1px #000;
 }
 
 /* PLAYER */
 
 .player{
   width:260px;
-  max-height:180px;
   background:#0F172A;
   border:2px solid #1E293B;
   border-radius:10px;
   padding:8px;
-  color:#E2E8F0;
-  position:relative;
-  box-sizing:border-box;
-  box-shadow:0 10px 25px rgba(0,0,0,0.6);
   margin:auto;
-  transition:background 1s ease,border-color 1s ease,box-shadow 1s ease;
+  position:relative;
 }
 
 .live-dot{
@@ -84,13 +157,18 @@ body{
   animation:pulse 1.2s infinite;
 }
 
+@keyframes pulse{
+  0%{opacity:1;}
+  50%{opacity:0.3;}
+  100%{opacity:1;}
+}
+
 .marquee{
   width:100%;
   overflow:hidden;
   white-space:nowrap;
   font-size:11px;
   margin-bottom:4px;
-  color:#E2E8F0;
 }
 
 .marquee span{
@@ -99,13 +177,17 @@ body{
   animation:scroll 6s linear infinite;
 }
 
+@keyframes scroll{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-100%);}
+}
+
 .screen{
   width:100%;
   aspect-ratio:16/9;
   border:2px solid #1E293B;
   border-radius:6px;
   overflow:hidden;
-  transition:border-color 1s ease;
 }
 
 .screen iframe{
@@ -128,18 +210,7 @@ body{
   width:28px;
   height:20px;
   border-radius:5px;
-  font-size:12px;
   cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transition:0.2s;
-}
-
-.controls button:hover{
-  background:#22C55E;
-  color:#0F172A;
-  transform:scale(1.05);
 }
 
 /* GAME */
@@ -148,10 +219,8 @@ body{
   width:250px;
   height:250px;
   border:2px solid #1E293B;
-  border-radius:2px;
+  border-radius:10px;
   background:radial-gradient(circle at center,#1E293B,#0F172A);
-  touch-action:manipulation;
-  transition:border-color 1s ease,box-shadow 1s ease;
 }
 
 /* CALENDAR */
@@ -160,13 +229,9 @@ body{
   width:260px;
   background:#0F172A;
   border-radius:14px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.6);
-  text-align:center;
-  border:1.5px solid #1E293B;
+  border:2px solid #1E293B;
   padding:10px;
-  box-sizing:border-box;
   margin:auto;
-  transition:background 1s ease,border-color 1s ease,box-shadow 1s ease;
 }
 
 .header{
@@ -174,7 +239,6 @@ body{
   margin-bottom:8px;
   color:#22C55E;
   font-weight:700;
-  letter-spacing:0.5px;
 }
 
 .days,
@@ -186,32 +250,18 @@ body{
 
 .days div{
   font-size:11px;
-  font-weight:600;
-  color:#E2E8F0;
-  opacity:0.85;
 }
 
 .dates div{
   padding:6px 0;
   border-radius:6px;
   background:#1E293B;
-  color:#E2E8F0;
   font-size:11px;
-  transition:0.2s ease;
-  cursor:pointer;
-}
-
-.dates div:hover{
-  background:#22C55E;
-  color:#0F172A;
-  transform:scale(1.05);
 }
 
 .today{
   background:#22C55E !important;
-  color:#0F172A !important;
-  font-weight:bold;
-  box-shadow:0 0 0 2px #22C55E;
+  color:#0F172A;
 }
 
 /* PARTNERS */
@@ -223,19 +273,15 @@ body{
   background:#0F172A;
   width:270px;
   margin:auto;
-  transition:background 1s ease,border-color 1s ease,box-shadow 1s ease;
 }
 
 .section-title{
-  background:linear-gradient(145deg,#1E293B,#0F172A);
+  background:#1E293B;
   border-radius:30px;
   padding:10px;
-  text-align:center;
   margin-bottom:15px;
   color:#22C55E;
   font-weight:bold;
-  letter-spacing:1px;
-  transition:color 1s ease,text-shadow 1s ease;
 }
 
 .partner-card{
@@ -245,8 +291,8 @@ body{
   padding:15px;
   text-align:center;
   margin-bottom:12px;
-  transition:0.2s;
   cursor:pointer;
+  transition:0.2s;
 }
 
 .partner-card:hover{
@@ -259,124 +305,153 @@ body{
   height:70px;
   border-radius:12px;
   object-fit:cover;
-  margin-bottom:8px;
 }
 
 .partner-name{
+  margin-top:8px;
   font-size:14px;
-  color:#E2E8F0;
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="mainBox" id="mainBox">
+<div class="rgbBorder"></div>
 
-  <p style="margin:0;">
-    <iframe width="270" height="60"
-      style="border:0;display:block;margin:0;padding:0;border-radius:2px;"
-      src="https://yogeshwarmhatre05-jpg.github.io/Pixel-g/">
-    </iframe>
-  </p>
+<div class="mainBox">
 
-  <div class="themeText"
-    style="font-size:15px;letter-spacing:2px;color:#22C55E;overflow:hidden;">
-    <marquee behavior="scroll" direction="left" scrollamount="3">
-      ♣Welcome to Our Club♣
-    </marquee>
-  </div>
+<!-- PIXEL GLOW -->
 
-  <br>
+<div class="pixelGlowBox">
 
-  <div style="font-size:11px;letter-spacing:3px;">
-    <span class="themeText"
-      style="font-size:14px;color:#22C55E;">
-      ✧ 𝐎 𝐖 𝐍 𝐄 𝐑 ✧
-    </span>
-  </div>
+<div class="pixelBorder"></div>
 
-  <div style="font-size:22px;font-weight:900;margin-top:6px;">
-    <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/yogi136/php8h3mmr9lb0qd8ZyClyS.png"
-      style="display:block;margin:0 auto;border-radius:2px;"
-      width="100"
-      height="100">
-  </div>
-
-  <div class="themeText"
-    style="
-      font-size:22px;
-      font-weight:900;
-      margin-top:6px;
-      font-family:cursive;
-      color:#22C55E;
-    ">
-    √𝓎𝓸𝓰𝓲136
-  </div>
-
-  <div class="line"></div>
-
-  <div style="font-size:12px;font-style:italic;">
-    “Think like a King. Play like a Master.”
-  </div>
-
-  <br>
-
-  <!-- PLAYER -->
-
-  <div class="player" id="musicPlayerBox">
-
-    <div class="live-dot"></div>
-
-    <div class="marquee">
-      <span id="songText">Now Playing:</span>
-    </div>
-
-    <div class="screen" id="screenBorder">
-      <iframe 
-        id="playerFrame" 
-        src="" 
-        allow="autoplay; fullscreen"
-        allowfullscreen>
-      </iframe>
-    </div>
-
-    <div class="controls">
-      <button onclick="prevSong()">⏮</button>
-      <button onclick="playVideo()">▶</button>
-      <button onclick="pauseVideo()">❚❚</button>
-      <button onclick="nextSong()">⏭</button>
-    </div>
-
-  </div>
-
-  <br>
-
-  <!-- GAME -->
-
-  <canvas id="game"></canvas>
+<div id="pixelText">
+PIXEL GLOW
+</div>
 
 </div>
 
 <br>
 
+<div class="themeText" style="font-size:15px;letter-spacing:2px;overflow:hidden;">
+
+<marquee behavior="scroll" direction="left" scrollamount="3">
+
+♣Welcome to Our Club♣
+
+</marquee>
+
+</div>
+
+<br>
+
+<div style="font-size:11px;letter-spacing:3px;">
+
+<span class="themeText" style="font-size:14px;">
+
+✧ 𝐎 𝐖 𝐍 𝐄 𝐑 ✧
+
+</span>
+
+</div>
+
+<div style="margin-top:6px;">
+
+<img
+src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/yogi136/php8h3mmr9lb0qd8ZyClyS.png"
+width="100"
+height="100"
+style="border-radius:12px;border:2px solid #1E293B;">
+
+</div>
+
+<div
+class="themeText"
+style="
+font-size:22px;
+font-weight:900;
+font-family:cursive;
+margin-top:6px;
+">
+
+√𝓎𝓸𝓰𝓲136
+
+</div>
+
+<div class="line"></div>
+
+<div style="font-size:12px;font-style:italic;">
+
+“Think like a King. Play like a Master.”
+
+</div>
+
+<br>
+
+<!-- PLAYER -->
+
+<div class="player">
+
+<div class="live-dot"></div>
+
+<div class="marquee">
+<span id="songText">Now Playing:</span>
+</div>
+
+<div class="screen">
+
+<iframe
+id="playerFrame"
+src=""
+allow="autoplay; fullscreen"
+allowfullscreen>
+</iframe>
+
+</div>
+
+<div class="controls">
+
+<button onclick="prevSong()">⏮</button>
+
+<button onclick="playVideo()">▶</button>
+
+<button onclick="pauseVideo()">❚❚</button>
+
+<button onclick="nextSong()">⏭</button>
+
+</div>
+
+</div>
+
+<br>
+
+<!-- BUBBLE GAME -->
+
+<canvas id="game"></canvas>
+
+<br>
+
 <!-- CALENDAR -->
 
-<div class="calendar" id="calendarBox">
+<div class="calendar">
 
-  <div class="header themeText" id="monthYear"></div>
+<div class="header" id="monthYear"></div>
 
-  <div class="days">
-    <div>S</div>
-    <div>M</div>
-    <div>T</div>
-    <div>W</div>
-    <div>T</div>
-    <div>F</div>
-    <div>S</div>
-  </div>
+<div class="days">
 
-  <div class="dates" id="dates"></div>
+<div>S</div>
+<div>M</div>
+<div>T</div>
+<div>W</div>
+<div>T</div>
+<div>F</div>
+<div>S</div>
+
+</div>
+
+<div class="dates" id="dates"></div>
 
 </div>
 
@@ -384,135 +459,366 @@ body{
 
 <!-- PARTNERS -->
 
-<div class="section" id="partnerSection">
+<div class="section">
 
-  <div class="section-title themeText">
-    ◆ PARTNERS ◆
-  </div>
+<div class="section-title">
 
-  <div id="partnersContainer"></div>
+◆ PARTNERS ◆
+
+</div>
+
+<div id="partnersContainer"></div>
 
 </div>
 
 <br>
 
-<div style="text-align:center;margin-bottom:20px;">
+<div style="
+font-size:22px;
+font-weight:900;
+font-family:cursive;
+background:linear-gradient(90deg,#ff4d4d,#ffcc00,#22c55e,#3b82f6,#a855f7);
+background-size:300% 300%;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:rgbMove 6s linear infinite;
+display:inline-block;
+">
 
-  <div style="
-    font-size:22px;
-    font-weight:900;
-    margin-top:6px;
-    font-family:cursive;
-    background:linear-gradient(90deg,#ff4d4d,#ffcc00,#22c55e,#3b82f6,#a855f7);
-    background-size:300% 300%;
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    animation:discoRGB 6s ease-in-out infinite;
-    display:inline-block;
-  ">
-    Made by yogi136
-  </div>
+Made by yogi136
+
+</div>
 
 </div>
 
 <script>
 
-/* MUSIC PLAYER */
+/* PIXEL GLOW */
+
+const pixelText = document.getElementById("pixelText");
+
+const glowColors = [
+[34,197,94],
+[59,130,246],
+[16,185,129],
+[132,204,22],
+[94,234,212],
+[167,139,250],
+[226,232,240]
+];
+
+let glowIndex = 0;
+let glowNext = 1;
+let glowT = 0;
+
+function lerp(a,b,t){
+return a + (b - a) * t;
+}
+
+function animateGlow(){
+
+glowT += 0.002;
+
+if(glowT >= 1){
+
+glowT = 0;
+
+glowIndex = glowNext;
+
+glowNext = (glowNext + 1) % glowColors.length;
+
+}
+
+const r = Math.round(
+lerp(glowColors[glowIndex][0],
+glowColors[glowNext][0],
+glowT)
+);
+
+const g = Math.round(
+lerp(glowColors[glowIndex][1],
+glowColors[glowNext][1],
+glowT)
+);
+
+const b = Math.round(
+lerp(glowColors[glowIndex][2],
+glowColors[glowNext][2],
+glowT)
+);
+
+pixelText.style.color = `rgb(${r},${g},${b})`;
+
+pixelText.style.textShadow =
+`0 0 8px rgba(${r},${g},${b},0.8),
+0 0 18px rgba(${r},${g},${b},0.6)`;
+
+requestAnimationFrame(animateGlow);
+
+}
+
+animateGlow();
+
+/* SONGS */
 
 let songs = [
-  {src:"https://youtu.be/kcsGhOmULxQ", name:"Golden Brown - The Stranglers"},
-  {src:"https://youtu.be/_XeE2aEiPHk", name:"The Flame of Love - Rokudenashi"}, 
-  {src:"https://youtu.be/qdpXxGPqW-Y", name:"Faded - Alan Walker"},
-  {src:"https://youtu.be/k50D8-EvNxk", name:"Meu Abrigo - Melim"},
-  {src:"https://youtu.be/9I9c20LHmzY", name:"Come As You Are - Nirvana"},
-  {src:"https://youtu.be/SDNA934EEVk", name:"A Walk - Tycho"},
-  {src:"https://youtu.be/A3xxG5zHuCA", name:"Passo Bem Solto - ATLXS"},
-  {src:"https://youtu.be/Qk5lzJVfcLo", name:"Downtown Baby 2 - Overtonight"},
-  {src:"https://youtu.be/vi72_ggUCHU", name:"Keep Up - ODETARI"},
-  {src:"https://youtu.be/kGobHQ7z8X4", name:"Why Do I? - Unknown Brain"},
-  {src:"https://youtu.be/0jSpCxmb2VQ", name:"Mood - 24kGoldn"},
-  {src:"https://youtu.be/R5aurUlfn3w", name:"Monody - TheFatRat"}, 
-  {src:"https://youtu.be/4jh2H5qFb44", name:"Shape of You - Ed Sheeran"},
-  {src:"https://youtu.be/rfTgO9rpqck", name:"Heat Waves - Glass Animals"},
-  {src:"https://youtu.be/JrNMyzsYr4M", name:"Love Me Like You Do - Ellie Goulding"},
-  {src:"https://youtu.be/DKbfBSrjVHA", name:"Can We Kiss Forever? - Kina"},
-  {src:"https://youtu.be/TdbyjBf93zc", name:"All I Want - Lofi Remix"},
-  {src:"https://youtu.be/z7zoabFKD60", name:"TheFatRat Mix / Songs"}, 
-  {src:"https://youtu.be/i4bWViFpd0Q", name:"Army Dreamers - Kate Bush"},
-  {src:"https://youtu.be/Jkj36B1YuDU", name:"Another Love - Tom Odell"},
-  {src:"https://youtu.be/GXioir-fujY", name:"NO BATIDÃO - ZXKAI"}, 
-  {src:"https://youtu.be/EoNWCYNTANA", name:"If I Killed Someone for You - Alec Benjamin"},
-  {src:"https://youtu.be/y1uzBncUsQQ", name:"Origami - The Rare Occasions"},
-  {src:"https://youtu.be/7U1LFCY70nA", name:"Ava - Underdog"}
+
+{
+src:"https://youtu.be/kcsGhOmULxQ",
+name:"Golden Brown - The Stranglers"
+},
+
+{
+src:"https://youtu.be/_XeE2aEiPHk",
+name:"The Flame of Love - Rokudenashi"
+},
+
+{
+src:"https://youtu.be/qdpXxGPqW-Y",
+name:"Faded - Alan Walker"
+},
+
+{
+src:"https://youtu.be/k50D8-EvNxk",
+name:"Meu Abrigo - Melim"
+},
+
+{
+src:"https://youtu.be/9I9c20LHmzY",
+name:"Come As You Are - Nirvana"
+},
+
+{
+src:"https://youtu.be/SDNA934EEVk",
+name:"A Walk - Tycho"
+},
+
+{
+src:"https://youtu.be/A3xxG5zHuCA",
+name:"Passo Bem Solto - ATLXS"
+},
+
+{
+src:"https://youtu.be/Qk5lzJVfcLo",
+name:"Downtown Baby 2 - Overtonight"
+},
+
+{
+src:"https://youtu.be/vi72_ggUCHU",
+name:"Keep Up - ODETARI"
+},
+
+{
+src:"https://youtu.be/kGobHQ7z8X4",
+name:"Why Do I? - Unknown Brain"
+},
+
+{
+src:"https://youtu.be/0jSpCxmb2VQ",
+name:"Mood - 24kGoldn"
+},
+
+{
+src:"https://youtu.be/R5aurUlfn3w",
+name:"Monody - TheFatRat"
+}
+
 ];
 
 let songIndex = 0;
-let frame = document.getElementById("playerFrame");
-let text = document.getElementById("songText");
+
+const frame = document.getElementById("playerFrame");
+const songText = document.getElementById("songText");
 
 function convert(url){
 
-  if(url.includes("youtu.be")){
+if(url.includes("youtu.be")){
 
-    let id = url.split("youtu.be/")[1].split("?")[0];
+let id = url.split("youtu.be/")[1].split("?")[0];
 
-    return "https://www.youtube.com/embed/" + id + "?enablejsapi=1";
-  }
+return "https://www.youtube.com/embed/" +
+id +
+"?enablejsapi=1";
 
-  return url;
+}
+
+return url;
+
 }
 
 function loadVideo(i){
 
-  frame.src = convert(songs[i].src);
+frame.src = convert(songs[i].src);
 
-  text.innerText = "Now Playing: " + songs[i].name;
+songText.innerText =
+"Now Playing: " + songs[i].name;
+
 }
 
 function prevSong(){
 
-  songIndex--;
+songIndex--;
 
-  if(songIndex < 0){
-    songIndex = songs.length - 1;
-  }
+if(songIndex < 0){
 
-  loadVideo(songIndex);
-}
+songIndex = songs.length - 1;
 
-function playVideo(){
-
-  frame.contentWindow.postMessage(
-    '{"event":"command","func":"playVideo","args":""}', '*'
-  );
-}
-
-function pauseVideo(){
-
-  frame.contentWindow.postMessage(
-    '{"event":"command","func":"pauseVideo","args":""}', '*'
-  );
-}
-
-function nextSong(){
-
-  songIndex++;
-
-  if(songIndex >= songs.length){
-    songIndex = 0;
-  }
-
-  loadVideo(songIndex);
 }
 
 loadVideo(songIndex);
 
-/* GAME */
+}
 
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+function nextSong(){
 
-const scale = window.devicePixelRatio || 1;
+songIndex++;
+
+if(songIndex >= songs.length){
+
+songIndex = 0;
+
+}
+
+loadVideo(songIndex);
+
+}
+
+function playVideo(){
+
+frame.contentWindow.postMessage(
+'{"event":"command","func":"playVideo","args":""}',
+"*"
+);
+
+}
+
+function pauseVideo(){
+
+frame.contentWindow.postMessage(
+'{"event":"command","func":"pauseVideo","args":""}',
+"*"
+);
+
+}
+
+loadVideo(songIndex);
+
+/* CALENDAR */
+
+const monthYear =
+document.getElementById("monthYear");
+
+const dates =
+document.getElementById("dates");
+
+const now = new Date();
+
+const year = now.getFullYear();
+
+const month = now.getMonth();
+
+const today = now.getDate();
+
+const months = [
+"January",
+"February",
+"March",
+"April",
+"May",
+"June",
+"July",
+"August",
+"September",
+"October",
+"November",
+"December"
+];
+
+monthYear.innerText =
+`${months[month]} ${year}`;
+
+const firstDay =
+new Date(year,month,1).getDay();
+
+const lastDate =
+new Date(year,month + 1,0).getDate();
+
+for(let i=0;i<firstDay;i++){
+
+dates.innerHTML += "<div></div>";
+
+}
+
+for(let i=1;i<=lastDate;i++){
+
+if(i === today){
+
+dates.innerHTML +=
+`<div class="today">${i}</div>`;
+
+}
+
+else{
+
+dates.innerHTML += `<div>${i}</div>`;
+
+}
+
+}
+
+/* PARTNERS */
+
+const partners = [
+
+{
+name:"SAPPHIRE",
+img:"https://i.ibb.co/4RYLGQ3z/image.jpg",
+link:"https://www.chess.com/club/sapphire-1"
+},
+
+{
+name:"penguin chess club",
+img:"https://i.ibb.co/0p7z5V4R/your-image.jpg",
+link:"https://www.chess.com/club/penguin-chess-club-3"
+}
+
+];
+
+const container =
+document.getElementById("partnersContainer");
+
+partners.forEach(p=>{
+
+const card =
+document.createElement("div");
+
+card.className = "partner-card";
+
+card.innerHTML = `
+<img src="${p.img}" class="partner-img">
+<div class="partner-name">${p.name}</div>
+`;
+
+card.onclick = ()=>{
+
+window.open(p.link,"_blank");
+
+};
+
+container.appendChild(card);
+
+});
+
+/* BUBBLE GAME */
+
+const canvas =
+document.getElementById("game");
+
+const ctx =
+canvas.getContext("2d");
+
+const scale =
+window.devicePixelRatio || 1;
 
 canvas.width = 250 * scale;
 canvas.height = 250 * scale;
@@ -525,335 +831,191 @@ let score = 0;
 
 function spawnBubble(){
 
-  bubbles.push({
-    x:Math.random() * 230 + 10,
-    y:260,
-    r:Math.random() * 8 + 6,
-    speed:Math.random() * 0.6 + 0.4,
-    alpha:Math.random() * 0.5 + 0.5
-  });
+bubbles.push({
+
+x:Math.random()*230+10,
+y:260,
+r:Math.random()*8+6,
+speed:Math.random()*0.6+0.4,
+alpha:Math.random()*0.5+0.5
+
+});
 
 }
 
 function createPop(x,y){
 
-  for(let i=0;i<6;i++){
+for(let i=0;i<6;i++){
 
-    pops.push({
-      x:x,
-      y:y,
-      dx:(Math.random() - 0.5) * 2,
-      dy:(Math.random() - 0.5) * 2,
-      life:20
-    });
+pops.push({
 
-  }
+x:x,
+y:y,
+dx:(Math.random()-0.5)*2,
+dy:(Math.random()-0.5)*2,
+life:20
+
+});
+
+}
 
 }
 
 function handleTap(e){
 
-  const rect = canvas.getBoundingClientRect();
+const rect =
+canvas.getBoundingClientRect();
 
-  const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+const x =
+(e.touches ?
+e.touches[0].clientX :
+e.clientX) - rect.left;
 
-  const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+const y =
+(e.touches ?
+e.touches[0].clientY :
+e.clientY) - rect.top;
 
-  bubbles = bubbles.filter(b=>{
+bubbles = bubbles.filter(b=>{
 
-    const dist = Math.hypot(b.x - x,b.y - y);
+const dist =
+Math.hypot(b.x - x,b.y - y);
 
-    if(dist < b.r){
+if(dist < b.r){
 
-      createPop(b.x,b.y);
+createPop(b.x,b.y);
 
-      score++;
+score++;
 
-      return false;
-    }
-
-    return true;
-
-  });
+return false;
 
 }
 
-canvas.addEventListener("touchstart",handleTap);
-canvas.addEventListener("mousedown",handleTap);
+return true;
+
+});
+
+}
+
+canvas.addEventListener(
+"touchstart",
+handleTap
+);
+
+canvas.addEventListener(
+"mousedown",
+handleTap
+);
 
 function drawBubbles(){
 
-  bubbles.forEach(b=>{
+bubbles.forEach(b=>{
 
-    ctx.globalAlpha = b.alpha;
+ctx.globalAlpha = b.alpha;
 
-    ctx.beginPath();
+ctx.beginPath();
 
-    ctx.arc(b.x,b.y,b.r,0,Math.PI * 2);
+ctx.arc(
+b.x,
+b.y,
+b.r,
+0,
+Math.PI * 2
+);
 
-    ctx.fillStyle = "#22C55E";
+ctx.fillStyle = "#22C55E";
 
-    ctx.fill();
+ctx.fill();
 
-    ctx.globalAlpha = 1;
+ctx.globalAlpha = 1;
 
-  });
+});
 
 }
 
 function updateBubbles(){
 
-  bubbles.forEach(b=>b.y -= b.speed);
+bubbles.forEach(b=>{
 
-  bubbles = bubbles.filter(b=>b.y > -10);
+b.y -= b.speed;
+
+});
+
+bubbles =
+bubbles.filter(b=>b.y > -10);
 
 }
 
 function drawPops(){
 
-  pops.forEach(p=>{
+pops.forEach(p=>{
 
-    ctx.fillStyle = "#E2E8F0";
+ctx.fillStyle = "#E2E8F0";
 
-    ctx.fillRect(p.x,p.y,2,2);
+ctx.fillRect(p.x,p.y,2,2);
 
-  });
+});
 
 }
 
 function updatePops(){
 
-  pops.forEach(p=>{
+pops.forEach(p=>{
 
-    p.x += p.dx;
-    p.y += p.dy;
-    p.life--;
+p.x += p.dx;
+p.y += p.dy;
+p.life--;
 
-  });
+});
 
-  pops = pops.filter(p=>p.life > 0);
+pops =
+pops.filter(p=>p.life > 0);
 
 }
 
 function drawScore(){
 
-  ctx.fillStyle = "#E2E8F0";
+ctx.fillStyle = "#E2E8F0";
 
-  ctx.font = "12px Arial";
+ctx.font = "12px Arial";
 
-  ctx.fillText("Pops: " + score,10,18);
+ctx.fillText(
+"Pops: " + score,
+10,
+18
+);
 
 }
 
-let frameCount = 0;
+let gameFrame = 0;
 
 function gameLoop(){
 
-  ctx.clearRect(0,0,250,250);
+ctx.clearRect(0,0,250,250);
 
-  if(frameCount % 25 === 0){
-    spawnBubble();
-  }
+if(gameFrame % 25 === 0){
 
-  updateBubbles();
-  updatePops();
+spawnBubble();
 
-  drawBubbles();
-  drawPops();
-  drawScore();
+}
 
-  frameCount++;
+updateBubbles();
 
-  requestAnimationFrame(gameLoop);
+updatePops();
+
+drawBubbles();
+
+drawPops();
+
+drawScore();
+
+gameFrame++;
+
+requestAnimationFrame(gameLoop);
 
 }
 
 gameLoop();
-
-/* CALENDAR */
-
-const monthYear = document.getElementById("monthYear");
-const dates = document.getElementById("dates");
-
-const now = new Date();
-const year = now.getFullYear();
-const month = now.getMonth();
-const today = now.getDate();
-
-const months = [
-  "January","February","March","April","May","June",
-  "July","August","September","October","November","December"
-];
-
-monthYear.innerText = `${months[month]} ${year}`;
-
-const firstDay = new Date(year, month, 1).getDay();
-const lastDate = new Date(year, month + 1, 0).getDate();
-
-for(let i=0;i<firstDay;i++){
-  dates.innerHTML += "<div></div>";
-}
-
-for(let i=1;i<=lastDate;i++){
-
-  if(i === today){
-
-    dates.innerHTML += `<div class="today">${i}</div>`;
-
-  }else{
-
-    dates.innerHTML += `<div>${i}</div>`;
-  }
-}
-
-/* PARTNERS */
-
-const partners = [
-
-  {
-    name:"SAPPHIRE",
-    img:"https://i.ibb.co/4RYLGQ3z/image.jpg",
-    link:"https://www.chess.com/club/sapphire-1"
-  },
-
-  {
-    name:"penguin chess club",
-    img:"https://i.ibb.co/0p7z5V4R/your-image.jpg",
-    link:"https://www.chess.com/club/penguin-chess-club-3"
-  }
-
-];
-
-const container = document.getElementById("partnersContainer");
-
-partners.forEach(p=>{
-
-  const card = document.createElement("div");
-
-  card.className = "partner-card";
-
-  card.innerHTML = `
-    <img src="${p.img}" class="partner-img">
-    <div class="partner-name">${p.name}</div>
-  `;
-
-  card.onclick = ()=>{
-    window.open(p.link,"_blank");
-  };
-
-  container.appendChild(card);
-
-});
-
-/* THEME SYSTEM */
-
-const themes = [
-
-  {
-    bg:"#0F172A",
-    border:"#22C55E",
-    glow:"rgba(34,197,94,0.5)",
-    text:"#22C55E"
-  },
-
-  {
-    bg:"#1E1B4B",
-    border:"#A855F7",
-    glow:"rgba(168,85,247,0.5)",
-    text:"#A855F7"
-  },
-
-  {
-    bg:"#111827",
-    border:"#3B82F6",
-    glow:"rgba(59,130,246,0.5)",
-    text:"#3B82F6"
-  },
-
-  {
-    bg:"#2A0F0F",
-    border:"#FF4D4D",
-    glow:"rgba(255,77,77,0.5)",
-    text:"#FF4D4D"
-  },
-
-  {
-    bg:"#1A1A00",
-    border:"#FFCC00",
-    glow:"rgba(255,204,0,0.5)",
-    text:"#FFCC00"
-  }
-
-];
-
-let themeIndex = 0;
-
-function changeTheme(){
-
-  const theme = themes[themeIndex];
-
-  document.body.style.background = theme.bg;
-  document.body.style.borderColor = theme.border;
-
-  const box = document.getElementById("mainBox");
-
-  box.style.background = theme.bg;
-  box.style.borderColor = theme.border;
-  box.style.boxShadow = `0 0 25px ${theme.glow}`;
-
-  document.querySelectorAll(".themeText").forEach(el=>{
-
-    el.style.color = theme.text;
-
-    el.style.textShadow = `0 0 12px ${theme.glow}`;
-  });
-
-  const player = document.getElementById("musicPlayerBox");
-
-  player.style.background = theme.bg;
-  player.style.borderColor = theme.border;
-  player.style.boxShadow = `0 0 20px ${theme.glow}`;
-
-  document.getElementById("screenBorder").style.borderColor = theme.border;
-
-  document.querySelectorAll(".controls button").forEach(btn=>{
-
-    btn.style.borderColor = theme.border;
-  });
-
-  const calendar = document.getElementById("calendarBox");
-
-  calendar.style.background = theme.bg;
-  calendar.style.borderColor = theme.border;
-  calendar.style.boxShadow = `0 0 20px ${theme.glow}`;
-
-  const section = document.getElementById("partnerSection");
-
-  section.style.background = theme.bg;
-  section.style.borderColor = theme.border;
-  section.style.boxShadow = `0 0 20px ${theme.glow}`;
-
-  document.querySelectorAll(".partner-card").forEach(card=>{
-
-    card.style.borderColor = theme.border;
-  });
-
-  const gameCanvas = document.getElementById("game");
-
-  gameCanvas.style.borderColor = theme.border;
-
-  gameCanvas.style.boxShadow = `0 0 20px ${theme.glow}`;
-
-  themeIndex++;
-
-  if(themeIndex >= themes.length){
-    themeIndex = 0;
-  }
-}
-
-setInterval(changeTheme,6000);
-
-changeTheme();
 
 </script>
 
