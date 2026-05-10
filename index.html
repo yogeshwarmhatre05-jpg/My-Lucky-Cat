@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -83,14 +83,14 @@ body{
   transition:
   background 1s ease,
   border-color 1s ease,
-  box-shadow 1s ease;
+  box-shadow 0.15s linear;
 }
 
 .themeText{
   color:#22C55E;
   transition:
   color 1s ease,
-  text-shadow 1s ease;
+  text-shadow 0.15s linear;
 }
 
 .line{
@@ -99,7 +99,7 @@ body{
   margin:8px 20px;
 }
 
-/* PIXEL GLOW */
+/* PIXEL */
 
 .pixelGlowBox{
   width:270px;
@@ -145,7 +145,7 @@ body{
   color:#22C55E;
   transition:
   color 1s ease,
-  text-shadow 1s ease;
+  text-shadow 0.15s linear;
   -webkit-text-stroke:1px #000;
 }
 
@@ -159,7 +159,9 @@ body{
   padding:8px;
   margin:auto;
   position:relative;
-  transition:border-color 1s ease;
+  transition:
+  border-color 1s ease,
+  box-shadow 0.15s linear;
 }
 
 .live-dot{
@@ -238,7 +240,9 @@ body{
   border:2px solid #1E293B;
   border-radius:10px;
   background:radial-gradient(circle at center,#1E293B,#0F172A);
-  transition:border-color 1s ease;
+  transition:
+  border-color 1s ease,
+  box-shadow 0.15s linear;
 }
 
 /* CALENDAR */
@@ -250,7 +254,9 @@ body{
   border:2px solid #1E293B;
   padding:10px;
   margin:auto;
-  transition:border-color 1s ease;
+  transition:
+  border-color 1s ease,
+  box-shadow 0.15s linear;
 }
 
 .header{
@@ -292,7 +298,9 @@ body{
   background:#0F172A;
   width:270px;
   margin:auto;
-  transition:border-color 1s ease;
+  transition:
+  border-color 1s ease,
+  box-shadow 0.15s linear;
 }
 
 .section-title{
@@ -340,8 +348,6 @@ body{
 <div class="rgbBorder"></div>
 
 <div class="mainBox">
-
-<!-- PIXEL GLOW -->
 
 <div class="pixelGlowBox">
 
@@ -410,8 +416,6 @@ margin-top:6px;
 
 <br>
 
-<!-- PLAYER -->
-
 <div class="player">
 
 <div class="live-dot"></div>
@@ -447,13 +451,9 @@ allowfullscreen>
 
 <br>
 
-<!-- BUBBLE GAME -->
-
 <canvas id="game"></canvas>
 
 <br>
-
-<!-- CALENDAR -->
 
 <div class="calendar">
 
@@ -476,8 +476,6 @@ allowfullscreen>
 </div>
 
 <br>
-
-<!-- PARTNERS -->
 
 <div class="section">
 
@@ -530,51 +528,6 @@ name:"The Flame of Love - Rokudenashi"
 {
 src:"https://youtu.be/qdpXxGPqW-Y",
 name:"Faded - Alan Walker"
-},
-
-{
-src:"https://youtu.be/k50D8-EvNxk",
-name:"Meu Abrigo - Melim"
-},
-
-{
-src:"https://youtu.be/9I9c20LHmzY",
-name:"Come As You Are - Nirvana"
-},
-
-{
-src:"https://youtu.be/SDNA934EEVk",
-name:"A Walk - Tycho"
-},
-
-{
-src:"https://youtu.be/A3xxG5zHuCA",
-name:"Passo Bem Solto - ATLXS"
-},
-
-{
-src:"https://youtu.be/Qk5lzJVfcLo",
-name:"Downtown Baby 2 - Overtonight"
-},
-
-{
-src:"https://youtu.be/vi72_ggUCHU",
-name:"Keep Up - ODETARI"
-},
-
-{
-src:"https://youtu.be/kGobHQ7z8X4",
-name:"Why Do I? - Unknown Brain"
-},
-
-{
-src:"https://youtu.be/0jSpCxmb2VQ",
-name:"Mood - 24kGoldn"
-},
-
-{
-src:"https://youtu.be/R5aurUlfn3w",
-name:"Monody - TheFatRat"
 }
 
 ];
@@ -592,7 +545,7 @@ let id = url.split("youtu.be/")[1].split("?")[0];
 
 return "https://www.youtube.com/embed/" +
 id +
-"?enablejsapi=1";
+"?enablejsapi=1&autoplay=1";
 
 }
 
@@ -621,6 +574,8 @@ songIndex = songs.length - 1;
 
 loadVideo(songIndex);
 
+changeTheme();
+
 }
 
 function nextSong(){
@@ -634,6 +589,8 @@ songIndex = 0;
 }
 
 loadVideo(songIndex);
+
+changeTheme();
 
 }
 
@@ -674,18 +631,9 @@ const month = now.getMonth();
 const today = now.getDate();
 
 const months = [
-"January",
-"February",
-"March",
-"April",
-"May",
-"June",
-"July",
-"August",
-"September",
-"October",
-"November",
-"December"
+"January","February","March","April",
+"May","June","July","August",
+"September","October","November","December"
 ];
 
 monthYear.innerText =
@@ -851,15 +799,8 @@ return true;
 
 }
 
-canvas.addEventListener(
-"touchstart",
-handleTap
-);
-
-canvas.addEventListener(
-"mousedown",
-handleTap
-);
+canvas.addEventListener("touchstart",handleTap);
+canvas.addEventListener("mousedown",handleTap);
 
 function drawBubbles(){
 
@@ -971,43 +912,33 @@ requestAnimationFrame(gameLoop);
 
 gameLoop();
 
-/* RGB THEME */
+/* RGB MUSIC REACTIVE */
 
 const themes = [
 
 {
-  bg:"#0F172A",
-  border:"#22C55E",
-  glow:"rgba(34,197,94,0.5)",
-  text:"#22C55E"
+border:"#22C55E",
+text:"#22C55E"
 },
 
 {
-  bg:"#1E1B4B",
-  border:"#A855F7",
-  glow:"rgba(168,85,247,0.5)",
-  text:"#A855F7"
+border:"#A855F7",
+text:"#A855F7"
 },
 
 {
-  bg:"#111827",
-  border:"#3B82F6",
-  glow:"rgba(59,130,246,0.5)",
-  text:"#3B82F6"
+border:"#3B82F6",
+text:"#3B82F6"
 },
 
 {
-  bg:"#2A0F0F",
-  border:"#FF4D4D",
-  glow:"rgba(255,77,77,0.5)",
-  text:"#FF4D4D"
+border:"#FF4D4D",
+text:"#FF4D4D"
 },
 
 {
-  bg:"#1A1A00",
-  border:"#FFCC00",
-  glow:"rgba(255,204,0,0.5)",
-  text:"#FFCC00"
+border:"#FFCC00",
+text:"#FFCC00"
 }
 
 ];
@@ -1016,66 +947,127 @@ let index = 0;
 
 function changeTheme(){
 
-  const theme = themes[index];
+index++;
 
-  document.body.style.background = theme.bg;
+if(index >= themes.length){
 
-  document.querySelector(".mainBox").style.borderColor = theme.border;
+index = 0;
 
-  document.querySelector(".mainBox").style.boxShadow =
-  `0 0 25px ${theme.glow}`;
-
-  document.querySelector(".player").style.borderColor =
-  theme.border;
-
-  document.querySelector(".calendar").style.borderColor =
-  theme.border;
-
-  document.querySelector(".section").style.borderColor =
-  theme.border;
-
-  document.querySelector("#game").style.borderColor =
-  theme.border;
-
-  document.querySelector(".pixelBorder").style.background =
-  `linear-gradient(
-    90deg,
-    ${theme.border},
-    white,
-    ${theme.border}
-  )`;
-
-  document.querySelector(".pixelBorder").style.backgroundSize =
-  "300% 300%";
-
-  document.querySelector(".pixelBorder").style.animation =
-  "discoRGB 6s ease-in-out infinite";
-
-  document.querySelectorAll(".themeText").forEach(el=>{
-
-    el.style.color = theme.text;
-
-    el.style.textShadow =
-    `0 0 12px ${theme.glow}`;
-
-  });
-
-  document.getElementById("pixelText").style.color =
-  theme.text;
-
-  document.getElementById("pixelText").style.textShadow =
-  `0 0 12px ${theme.glow}`;
-
-  index++;
-
-  if(index >= themes.length){
-    index = 0;
-  }
 }
 
-setInterval(changeTheme,6000);
+}
 
-changeTheme();
+function hexToRgb(hex){
+
+hex = hex.replace("#","");
+
+let r =
+parseInt(hex.substring(0,2),16);
+
+let g =
+parseInt(hex.substring(2,4),16);
+
+let b =
+parseInt(hex.substring(4,6),16);
+
+return `${r},${g},${b}`;
+
+}
+
+let beat = 0;
+
+function musicReactiveTheme(){
+
+beat += 0.09;
+
+const pulse =
+(Math.sin(beat) + 1) / 2;
+
+const theme = themes[index];
+
+const glowSize =
+10 + pulse * 35;
+
+const glowOpacity =
+0.2 + pulse * 0.7;
+
+const glow =
+`rgba(${hexToRgb(theme.border)},${glowOpacity})`;
+
+/* MAIN */
+
+document.querySelector(".mainBox").style.borderColor =
+theme.border;
+
+document.querySelector(".mainBox").style.boxShadow =
+`0 0 ${glowSize}px ${glow}`;
+
+/* PLAYER */
+
+document.querySelector(".player").style.borderColor =
+theme.border;
+
+document.querySelector(".player").style.boxShadow =
+`0 0 ${glowSize}px ${glow}`;
+
+/* GAME */
+
+document.querySelector("#game").style.borderColor =
+theme.border;
+
+document.querySelector("#game").style.boxShadow =
+`0 0 ${glowSize}px ${glow}`;
+
+/* CALENDAR */
+
+document.querySelector(".calendar").style.borderColor =
+theme.border;
+
+document.querySelector(".calendar").style.boxShadow =
+`0 0 ${glowSize}px ${glow}`;
+
+/* PARTNERS */
+
+document.querySelector(".section").style.borderColor =
+theme.border;
+
+document.querySelector(".section").style.boxShadow =
+`0 0 ${glowSize}px ${glow}`;
+
+/* PIXEL BORDER */
+
+document.querySelector(".pixelBorder").style.background =
+`linear-gradient(
+90deg,
+${theme.border},
+white,
+${theme.border}
+)`;
+
+/* PIXEL TEXT */
+
+document.getElementById("pixelText").style.color =
+theme.text;
+
+document.getElementById("pixelText").style.textShadow =
+`0 0 ${12 + pulse * 25}px ${glow}`;
+
+/* TEXT */
+
+document.querySelectorAll(".themeText").forEach(el=>{
+
+el.style.color = theme.text;
+
+el.style.textShadow =
+`0 0 ${8 + pulse * 20}px ${glow}`;
+
+});
+
+requestAnimationFrame(musicReactiveTheme);
+
+}
+
+musicReactiveTheme();
 
 </script>
 
