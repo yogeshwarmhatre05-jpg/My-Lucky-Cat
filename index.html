@@ -23,16 +23,16 @@ body{
   font-family:Arial,sans-serif;
   min-height:100vh;
   overflow-x:hidden;
+  transition:background 1s ease;
 }
-
-/* RGB BODY BORDER */
 
 body{
   position:relative;
 }
 
-body::before{
-  content:"";
+/* RGB BORDER */
+
+.rgbBorder{
   position:fixed;
   inset:0;
   padding:3px;
@@ -48,33 +48,26 @@ body::before{
     #ff0000
   );
   background-size:400% 400%;
-  animation:rgbBorderMove 8s linear infinite;
-  z-index:-2;
-
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-
-  -webkit-mask-composite:xor;
-          mask-composite:exclude;
+  animation:rgbMove 8s linear infinite;
+  z-index:-1;
 }
 
-body::after{
+.rgbBorder::before{
   content:"";
-  position:fixed;
+  position:absolute;
   inset:3px;
   background:#0F172A;
-  z-index:-3;
 }
 
-@keyframes rgbBorderMove{
-  0%{
-    background-position:0% 50%;
-  }
+@keyframes rgbMove{
+  0%{background-position:0% 50%;}
+  100%{background-position:400% 50%;}
+}
 
-  100%{
-    background-position:400% 50%;
-  }
+@keyframes discoRGB{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
 }
 
 /* MAIN */
@@ -84,10 +77,20 @@ body::after{
   margin:auto;
   padding:14px;
   text-align:center;
+  border:2px solid #1E293B;
+  border-radius:12px;
+  background:#0F172A;
+  transition:
+  background 1s ease,
+  border-color 1s ease,
+  box-shadow 1s ease;
 }
 
 .themeText{
   color:#22C55E;
+  transition:
+  color 1s ease,
+  text-shadow 1s ease;
 }
 
 .line{
@@ -96,7 +99,7 @@ body::after{
   margin:8px 20px;
 }
 
-/* PIXEL */
+/* PIXEL GLOW */
 
 .pixelGlowBox{
   width:270px;
@@ -111,7 +114,14 @@ body::after{
   position:absolute;
   inset:0;
   padding:2px;
-  background:#22C55E;
+  background:linear-gradient(
+    90deg,
+    #22C55E,
+    white,
+    #22C55E
+  );
+  background-size:300% 300%;
+  animation:discoRGB 6s ease-in-out infinite;
 }
 
 .pixelBorder::before{
@@ -133,9 +143,10 @@ body::after{
   letter-spacing:2px;
   z-index:2;
   color:#22C55E;
+  transition:
+  color 1s ease,
+  text-shadow 1s ease;
   -webkit-text-stroke:1px #000;
-  text-shadow:
-  0 0 10px rgba(34,197,94,0.7);
 }
 
 /* PLAYER */
@@ -148,6 +159,7 @@ body::after{
   padding:8px;
   margin:auto;
   position:relative;
+  transition:border-color 1s ease;
 }
 
 .live-dot{
@@ -226,6 +238,7 @@ body::after{
   border:2px solid #1E293B;
   border-radius:10px;
   background:radial-gradient(circle at center,#1E293B,#0F172A);
+  transition:border-color 1s ease;
 }
 
 /* CALENDAR */
@@ -237,6 +250,7 @@ body::after{
   border:2px solid #1E293B;
   padding:10px;
   margin:auto;
+  transition:border-color 1s ease;
 }
 
 .header{
@@ -278,6 +292,7 @@ body::after{
   background:#0F172A;
   width:270px;
   margin:auto;
+  transition:border-color 1s ease;
 }
 
 .section-title{
@@ -322,7 +337,11 @@ body::after{
 
 <body>
 
+<div class="rgbBorder"></div>
+
 <div class="mainBox">
+
+<!-- PIXEL GLOW -->
 
 <div class="pixelGlowBox">
 
@@ -391,6 +410,8 @@ margin-top:6px;
 
 <br>
 
+<!-- PLAYER -->
+
 <div class="player">
 
 <div class="live-dot"></div>
@@ -426,9 +447,13 @@ allowfullscreen>
 
 <br>
 
+<!-- BUBBLE GAME -->
+
 <canvas id="game"></canvas>
 
 <br>
+
+<!-- CALENDAR -->
 
 <div class="calendar">
 
@@ -452,6 +477,8 @@ allowfullscreen>
 
 <br>
 
+<!-- PARTNERS -->
+
 <div class="section">
 
 <div class="section-title">
@@ -474,7 +501,7 @@ background:linear-gradient(90deg,#ff4d4d,#ffcc00,#22c55e,#3b82f6,#a855f7);
 background-size:300% 300%;
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-animation:rgbBorderMove 6s linear infinite;
+animation:discoRGB 6s ease-in-out infinite;
 display:inline-block;
 ">
 
@@ -503,6 +530,51 @@ name:"The Flame of Love - Rokudenashi"
 {
 src:"https://youtu.be/qdpXxGPqW-Y",
 name:"Faded - Alan Walker"
+},
+
+{
+src:"https://youtu.be/k50D8-EvNxk",
+name:"Meu Abrigo - Melim"
+},
+
+{
+src:"https://youtu.be/9I9c20LHmzY",
+name:"Come As You Are - Nirvana"
+},
+
+{
+src:"https://youtu.be/SDNA934EEVk",
+name:"A Walk - Tycho"
+},
+
+{
+src:"https://youtu.be/A3xxG5zHuCA",
+name:"Passo Bem Solto - ATLXS"
+},
+
+{
+src:"https://youtu.be/Qk5lzJVfcLo",
+name:"Downtown Baby 2 - Overtonight"
+},
+
+{
+src:"https://youtu.be/vi72_ggUCHU",
+name:"Keep Up - ODETARI"
+},
+
+{
+src:"https://youtu.be/kGobHQ7z8X4",
+name:"Why Do I? - Unknown Brain"
+},
+
+{
+src:"https://youtu.be/0jSpCxmb2VQ",
+name:"Mood - 24kGoldn"
+},
+
+{
+src:"https://youtu.be/R5aurUlfn3w",
+name:"Monody - TheFatRat"
 }
 
 ];
@@ -898,6 +970,112 @@ requestAnimationFrame(gameLoop);
 }
 
 gameLoop();
+
+/* RGB THEME */
+
+const themes = [
+
+{
+  bg:"#0F172A",
+  border:"#22C55E",
+  glow:"rgba(34,197,94,0.5)",
+  text:"#22C55E"
+},
+
+{
+  bg:"#1E1B4B",
+  border:"#A855F7",
+  glow:"rgba(168,85,247,0.5)",
+  text:"#A855F7"
+},
+
+{
+  bg:"#111827",
+  border:"#3B82F6",
+  glow:"rgba(59,130,246,0.5)",
+  text:"#3B82F6"
+},
+
+{
+  bg:"#2A0F0F",
+  border:"#FF4D4D",
+  glow:"rgba(255,77,77,0.5)",
+  text:"#FF4D4D"
+},
+
+{
+  bg:"#1A1A00",
+  border:"#FFCC00",
+  glow:"rgba(255,204,0,0.5)",
+  text:"#FFCC00"
+}
+
+];
+
+let index = 0;
+
+function changeTheme(){
+
+  const theme = themes[index];
+
+  document.body.style.background = theme.bg;
+
+  document.querySelector(".mainBox").style.borderColor = theme.border;
+
+  document.querySelector(".mainBox").style.boxShadow =
+  `0 0 25px ${theme.glow}`;
+
+  document.querySelector(".player").style.borderColor =
+  theme.border;
+
+  document.querySelector(".calendar").style.borderColor =
+  theme.border;
+
+  document.querySelector(".section").style.borderColor =
+  theme.border;
+
+  document.querySelector("#game").style.borderColor =
+  theme.border;
+
+  document.querySelector(".pixelBorder").style.background =
+  `linear-gradient(
+    90deg,
+    ${theme.border},
+    white,
+    ${theme.border}
+  )`;
+
+  document.querySelector(".pixelBorder").style.backgroundSize =
+  "300% 300%";
+
+  document.querySelector(".pixelBorder").style.animation =
+  "discoRGB 6s ease-in-out infinite";
+
+  document.querySelectorAll(".themeText").forEach(el=>{
+
+    el.style.color = theme.text;
+
+    el.style.textShadow =
+    `0 0 12px ${theme.glow}`;
+
+  });
+
+  document.getElementById("pixelText").style.color =
+  theme.text;
+
+  document.getElementById("pixelText").style.textShadow =
+  `0 0 12px ${theme.glow}`;
+
+  index++;
+
+  if(index >= themes.length){
+    index = 0;
+  }
+}
+
+setInterval(changeTheme,6000);
+
+changeTheme();
 
 </script>
 
