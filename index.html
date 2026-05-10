@@ -23,6 +23,7 @@ body{
   font-family:Arial,sans-serif;
   min-height:100vh;
   overflow-x:hidden;
+  transition:background 1s ease;
 }
 
 body{
@@ -63,6 +64,12 @@ body{
   100%{background-position:400% 50%;}
 }
 
+@keyframes discoRGB{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
 /* MAIN */
 
 .mainBox{
@@ -70,10 +77,20 @@ body{
   margin:auto;
   padding:14px;
   text-align:center;
+  border:2px solid #1E293B;
+  border-radius:12px;
+  background:#0F172A;
+  transition:
+  background 1s ease,
+  border-color 1s ease,
+  box-shadow 1s ease;
 }
 
 .themeText{
   color:#22C55E;
+  transition:
+  color 1s ease,
+  text-shadow 1s ease;
 }
 
 .line{
@@ -99,17 +116,12 @@ body{
   padding:2px;
   background:linear-gradient(
     90deg,
-    #ff0000,
-    #ff9900,
-    #ffee00,
-    #00ff00,
-    #00ffff,
-    #0066ff,
-    #aa00ff,
-    #ff0000
+    #22C55E,
+    white,
+    #22C55E
   );
-  background-size:400% 400%;
-  animation:rgbMove 8s linear infinite;
+  background-size:300% 300%;
+  animation:discoRGB 6s ease-in-out infinite;
 }
 
 .pixelBorder::before{
@@ -130,6 +142,10 @@ body{
   font-weight:700;
   letter-spacing:2px;
   z-index:2;
+  color:#22C55E;
+  transition:
+  color 1s ease,
+  text-shadow 1s ease;
   -webkit-text-stroke:1px #000;
 }
 
@@ -143,6 +159,7 @@ body{
   padding:8px;
   margin:auto;
   position:relative;
+  transition:border-color 1s ease;
 }
 
 .live-dot{
@@ -221,6 +238,7 @@ body{
   border:2px solid #1E293B;
   border-radius:10px;
   background:radial-gradient(circle at center,#1E293B,#0F172A);
+  transition:border-color 1s ease;
 }
 
 /* CALENDAR */
@@ -232,6 +250,7 @@ body{
   border:2px solid #1E293B;
   padding:10px;
   margin:auto;
+  transition:border-color 1s ease;
 }
 
 .header{
@@ -273,6 +292,7 @@ body{
   background:#0F172A;
   width:270px;
   margin:auto;
+  transition:border-color 1s ease;
 }
 
 .section-title{
@@ -481,7 +501,7 @@ background:linear-gradient(90deg,#ff4d4d,#ffcc00,#22c55e,#3b82f6,#a855f7);
 background-size:300% 300%;
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-animation:rgbMove 6s linear infinite;
+animation:discoRGB 6s ease-in-out infinite;
 display:inline-block;
 ">
 
@@ -492,72 +512,6 @@ Made by yogi136
 </div>
 
 <script>
-
-/* PIXEL GLOW */
-
-const pixelText = document.getElementById("pixelText");
-
-const glowColors = [
-[34,197,94],
-[59,130,246],
-[16,185,129],
-[132,204,22],
-[94,234,212],
-[167,139,250],
-[226,232,240]
-];
-
-let glowIndex = 0;
-let glowNext = 1;
-let glowT = 0;
-
-function lerp(a,b,t){
-return a + (b - a) * t;
-}
-
-function animateGlow(){
-
-glowT += 0.002;
-
-if(glowT >= 1){
-
-glowT = 0;
-
-glowIndex = glowNext;
-
-glowNext = (glowNext + 1) % glowColors.length;
-
-}
-
-const r = Math.round(
-lerp(glowColors[glowIndex][0],
-glowColors[glowNext][0],
-glowT)
-);
-
-const g = Math.round(
-lerp(glowColors[glowIndex][1],
-glowColors[glowNext][1],
-glowT)
-);
-
-const b = Math.round(
-lerp(glowColors[glowIndex][2],
-glowColors[glowNext][2],
-glowT)
-);
-
-pixelText.style.color = `rgb(${r},${g},${b})`;
-
-pixelText.style.textShadow =
-`0 0 8px rgba(${r},${g},${b},0.8),
-0 0 18px rgba(${r},${g},${b},0.6)`;
-
-requestAnimationFrame(animateGlow);
-
-}
-
-animateGlow();
 
 /* SONGS */
 
@@ -1016,6 +970,112 @@ requestAnimationFrame(gameLoop);
 }
 
 gameLoop();
+
+/* RGB THEME */
+
+const themes = [
+
+{
+  bg:"#0F172A",
+  border:"#22C55E",
+  glow:"rgba(34,197,94,0.5)",
+  text:"#22C55E"
+},
+
+{
+  bg:"#1E1B4B",
+  border:"#A855F7",
+  glow:"rgba(168,85,247,0.5)",
+  text:"#A855F7"
+},
+
+{
+  bg:"#111827",
+  border:"#3B82F6",
+  glow:"rgba(59,130,246,0.5)",
+  text:"#3B82F6"
+},
+
+{
+  bg:"#2A0F0F",
+  border:"#FF4D4D",
+  glow:"rgba(255,77,77,0.5)",
+  text:"#FF4D4D"
+},
+
+{
+  bg:"#1A1A00",
+  border:"#FFCC00",
+  glow:"rgba(255,204,0,0.5)",
+  text:"#FFCC00"
+}
+
+];
+
+let index = 0;
+
+function changeTheme(){
+
+  const theme = themes[index];
+
+  document.body.style.background = theme.bg;
+
+  document.querySelector(".mainBox").style.borderColor = theme.border;
+
+  document.querySelector(".mainBox").style.boxShadow =
+  `0 0 25px ${theme.glow}`;
+
+  document.querySelector(".player").style.borderColor =
+  theme.border;
+
+  document.querySelector(".calendar").style.borderColor =
+  theme.border;
+
+  document.querySelector(".section").style.borderColor =
+  theme.border;
+
+  document.querySelector("#game").style.borderColor =
+  theme.border;
+
+  document.querySelector(".pixelBorder").style.background =
+  `linear-gradient(
+    90deg,
+    ${theme.border},
+    white,
+    ${theme.border}
+  )`;
+
+  document.querySelector(".pixelBorder").style.backgroundSize =
+  "300% 300%";
+
+  document.querySelector(".pixelBorder").style.animation =
+  "discoRGB 6s ease-in-out infinite";
+
+  document.querySelectorAll(".themeText").forEach(el=>{
+
+    el.style.color = theme.text;
+
+    el.style.textShadow =
+    `0 0 12px ${theme.glow}`;
+
+  });
+
+  document.getElementById("pixelText").style.color =
+  theme.text;
+
+  document.getElementById("pixelText").style.textShadow =
+  `0 0 12px ${theme.glow}`;
+
+  index++;
+
+  if(index >= themes.length){
+    index = 0;
+  }
+}
+
+setInterval(changeTheme,6000);
+
+changeTheme();
 
 </script>
 
