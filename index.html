@@ -32,11 +32,11 @@ color:white;
 /* PARTICLES */
 .particle{
 position:fixed;
-width:6px;
-height:6px;
+width:5px;
+height:5px;
 background:white;
 border-radius:50%;
-opacity:0.2;
+opacity:0.15;
 animation:floatUp linear infinite;
 }
 
@@ -47,11 +47,34 @@ to{transform:translateY(-10vh);}
 
 /* HEADER */
 .header{
-margin:18px;
-font-size:22px;
-font-weight:900;
-letter-spacing:2px;
+margin:18px 0;
+text-align:center;
+display:flex;
+flex-direction:column;
+gap:4px;
 z-index:2;
+}
+
+.glow{
+font-size:26px;
+font-weight:900;
+letter-spacing:3px;
+color:#fff;
+text-shadow:0 0 10px rgba(255,140,90,0.8),
+0 0 20px rgba(255,140,90,0.5);
+animation:pulse 2.5s infinite;
+}
+
+.sub{
+font-size:12px;
+letter-spacing:4px;
+opacity:0.8;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.05);}
+100%{transform:scale(1);}
 }
 
 /* WRAPPER */
@@ -133,12 +156,9 @@ grid-template-columns:repeat(7,1fr);
 gap:6px;
 }
 
-.day,.date{
+.date{
 text-align:center;
 font-size:12px;
-}
-
-.date{
 padding:6px;
 border-radius:10px;
 background:rgba(255,255,255,0.3);
@@ -151,21 +171,52 @@ font-weight:900;
 }
 
 /* NAV */
-.nav a{
-display:block;
-margin:6px 0;
-padding:10px;
-border-radius:12px;
-text-decoration:none;
-font-size:12px;
+.nav-title{
+text-align:center;
 font-weight:900;
-background:rgba(255,255,255,0.4);
-color:#3b2a22;
-transition:0.2s;
+margin-bottom:10px;
+letter-spacing:2px;
 }
 
-.nav a:hover{
-transform:scale(1.05);
+.link{
+display:flex;
+align-items:center;
+justify-content:center;
+
+margin:8px 0;
+padding:12px;
+
+border-radius:14px;
+text-decoration:none;
+
+font-size:13px;
+font-weight:900;
+
+background:rgba(255,255,255,0.35);
+color:#3b2a22;
+
+position:relative;
+overflow:hidden;
+transition:0.25s;
+}
+
+.link::before{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);
+transition:0.5s;
+}
+
+.link:hover::before{
+left:100%;
+}
+
+.link:hover{
+transform:translateY(-2px) scale(1.03);
 }
 
 /* RGB */
@@ -187,31 +238,24 @@ animation:rgb 6s infinite;
 50%{background-position:100%}
 100%{background-position:0%}
 }
-
-/* PAWS */
-.paw{
-position:absolute;
-opacity:0.1;
-animation:float 10s linear infinite;
-}
-
-@keyframes float{
-from{transform:translateY(100vh);}
-to{transform:translateY(-100px);}
-}
 </style>
 </head>
 
 <body>
 
-<div class="header">WELCOME TO SAPPHIRE</div>
+<div class="header">
+<div class="glow">WELCOME</div>
+<div class="sub">TO SAPPHIRE CLUB</div>
+</div>
 
 <div class="wrapper">
 
+<!-- IMAGE -->
 <div class="glass">
 <img id="themeImage" src="https://i.ibb.co/qFhrggbt/image.png">
 </div>
 
+<!-- MUSIC -->
 <div class="glass">
 <div class="screen">
 <iframe id="player"></iframe>
@@ -226,15 +270,20 @@ to{transform:translateY(-100px);}
 </div>
 </div>
 
+<!-- CALENDAR -->
 <div class="glass">
 <div class="month" id="month"></div>
 <div class="grid" id="cal"></div>
 </div>
 
-<div class="glass nav">
-<a href="https://www.chess.com">RULES</a>
-<a href="https://www.youtube.com">EVENTS</a>
-<a href="#">MEMBERS</a>
+<!-- NAV -->
+<div class="glass">
+<div class="nav-title">PORTAL</div>
+
+<a class="link" href="https://www.chess.com" target="_blank">♟ RULES</a>
+<a class="link" href="https://www.youtube.com" target="_blank">🎬 EVENTS</a>
+<a class="link" href="https://www.google.com" target="_blank">👥 MEMBERS</a>
+<a class="link" href="#">⚡ CLICK HERE</a>
 </div>
 
 </div>
@@ -244,7 +293,7 @@ to{transform:translateY(-100px);}
 <script>
 
 /* PARTICLES */
-for(let i=0;i<25;i++){
+for(let i=0;i<20;i++){
 let d=document.createElement("div");
 d.className="particle";
 d.style.left=Math.random()*100+"vw";
@@ -252,26 +301,12 @@ d.style.animationDuration=(5+Math.random()*5)+"s";
 document.body.appendChild(d);
 }
 
-/* THEME MEMORY */
-function setTheme(){
-let saved=localStorage.getItem("theme");
-let hour=new Date().getHours();
-
-if(saved){
-document.body.classList.toggle("dark",saved==="dark");
-}else{
-document.body.classList.toggle("dark",!(hour>=6 && hour<18));
+/* THEME */
+function theme(){
+let h=new Date().getHours();
+document.body.classList.toggle("dark",!(h>=6 && h<18));
 }
-}
-setTheme();
-
-setInterval(()=>{
-let hour=new Date().getHours();
-document.getElementById("themeImage").src=
-(hour>=6 && hour<18)
-?"https://i.ibb.co/qFhrggbt/image.png"
-:"https://i.ibb.co/93NMvDYs/image.png";
-},60000);
+theme();
 
 /* CALENDAR */
 let now=new Date();
@@ -281,15 +316,15 @@ now.toLocaleString('default',{month:'long',year:'numeric'});
 let first=new Date(now.getFullYear(),now.getMonth(),1).getDay();
 let last=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
 
-let cal="";
+let html="";
 
-for(let i=0;i<first;i++) cal+="<div></div>";
+for(let i=0;i<first;i++) html+="<div></div>";
 
 for(let i=1;i<=last;i++){
-cal+=`<div class="date ${i===now.getDate()?'today':''}">${i}</div>`;
+html+=`<div class="date ${i===now.getDate()?'today':''}">${i}</div>`;
 }
 
-document.getElementById("cal").innerHTML=cal;
+document.getElementById("cal").innerHTML=html;
 
 /* MUSIC */
 let songs=[
