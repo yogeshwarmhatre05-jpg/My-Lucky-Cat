@@ -21,18 +21,11 @@ body{
   background:linear-gradient(to bottom,#fffbea,#ffe08a,#ffd36b);
 }
 
-/* DARK MODE */
 body.dark{
   background:linear-gradient(to bottom,#0f172a,#111827,#020617);
   color:white;
 }
 
-/* MUSIC BORDER */
-body.music-on{
-  box-shadow:inset 0 0 40px #ff4d4d, 0 0 60px #ff1a1a;
-}
-
-/* BUTTON */
 #themeBtn{
   position:fixed;
   top:10px;
@@ -44,14 +37,12 @@ body.music-on{
   z-index:1000;
 }
 
-/* TITLE */
 .welcome-top{
   margin-top:14px;
   font-size:22px;
   font-weight:900;
 }
 
-/* WRAPPER */
 .wrapper{
   width:100%;
   max-width:320px;
@@ -61,7 +52,6 @@ body.music-on{
   margin-top:20px;
 }
 
-/* CARDS */
 .music-player, .calendar, .nav-box{
   background:rgba(255,255,255,0.75);
   border-radius:28px;
@@ -76,7 +66,6 @@ body.dark .nav-box{
   border:3px solid #334155;
 }
 
-/* SCREEN CENTER FIX */
 .screen{
   width:100%;
   aspect-ratio:16/9;
@@ -86,7 +75,6 @@ body.dark .nav-box{
   position:relative;
 }
 
-/* YOUTUBE */
 #player{
   width:100%;
   height:100%;
@@ -95,7 +83,6 @@ body.dark .nav-box{
   left:0;
 }
 
-/* IMAGE */
 img{
   width:100%;
   height:100%;
@@ -103,9 +90,7 @@ img{
 }
 
 /* CALENDAR */
-.calendar{
-  padding:14px;
-}
+.calendar{padding:14px;}
 
 .header{
   text-align:center;
@@ -126,7 +111,6 @@ img{
   font-weight:800;
 }
 
-/* FIXED NUMBERS */
 .dates div{
   height:32px;
   display:flex;
@@ -136,17 +120,15 @@ img{
   background:#fffaf5;
   border:1px solid #edd5c4;
   font-weight:bold;
-  color:#3b2a22; /* FIX FOR DAY MODE */
+  color:#3b2a22;
 }
 
-/* DARK MODE FIX */
 body.dark .dates div{
   background:#1f2937;
   border:1px solid #334155;
-  color:#ffffff; /* FIX FOR NIGHT MODE */
+  color:white;
 }
 
-/* TODAY */
 .today{
   background:#ffb38a!important;
   color:white!important;
@@ -154,10 +136,8 @@ body.dark .dates div{
 
 body.dark .today{
   background:#ff6b6b!important;
-  color:white!important;
 }
 
-/* NAV */
 .nav-box{
   background:#5c3b2e;
   color:white;
@@ -188,14 +168,14 @@ body.dark .today{
 
 <div class="wrapper">
 
-  <!-- 🐱 CAT -->
+  <!-- 🐱 CAT IMAGE -->
   <div class="music-player">
     <div class="screen">
       <img id="catImg" src="">
     </div>
   </div>
 
-  <!-- 🎥 VIDEO -->
+  <!-- 🎥 YOUTUBE -->
   <div class="music-player">
     <div class="screen">
       <div id="player"></div>
@@ -230,27 +210,30 @@ body.dark .today{
 
 let player;
 
-/* CAT IMAGES */
-const dayCat="https://i.ibb.co/qFhrggbt/image.png";
-const nightCat="https://i.ibb.co/93NMvDYs/image.png";
+/* 🐱 YOUR IMAGES */
+const dayCat = "https://i.ibb.co/qFhrggbt/image.png";
 
-/* THEME */
+/* NEW NIGHT IMAGE (your link) */
+const nightCat = "https://i.ibb.co/Zz89JYQ2";
+
+/* THEME SWITCH */
 function updateTheme(){
   const hour=new Date().getHours();
   const cat=document.getElementById("catImg");
 
   if(hour>=6 && hour<18){
     document.body.classList.remove("dark");
-    cat.src=dayCat;
+    cat.src = dayCat;
   }else{
     document.body.classList.add("dark");
-    cat.src=nightCat;
+    cat.src = nightCat;
   }
 }
+
 updateTheme();
 setInterval(updateTheme,60000);
 
-/* MANUAL TOGGLE */
+/* MANUAL THEME */
 document.getElementById("themeBtn").onclick=function(){
   document.body.classList.toggle("dark");
 };
@@ -264,12 +247,12 @@ function onYouTubeIframeAPIReady(){
   });
 }
 
-/* BORDER ON PLAY */
+/* BORDER EFFECT */
 function onStateChange(event){
   if(event.data===YT.PlayerState.PLAYING){
-    document.body.classList.add("music-on");
+    document.body.style.boxShadow="0 0 60px #ff3d3d inset, 0 0 80px #ff1a1a";
   }else{
-    document.body.classList.remove("music-on");
+    document.body.style.boxShadow="none";
   }
 }
 
