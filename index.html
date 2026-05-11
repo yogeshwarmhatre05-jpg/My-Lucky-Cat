@@ -18,7 +18,34 @@ body{
   font-family:Arial,sans-serif;
   overflow-x:hidden;
   transition:0.5s;
+
   background:linear-gradient(to bottom,#fffbea,#ffe08a,#ffd36b);
+
+  /* BASE BORDER */
+  border:0px solid transparent;
+}
+
+/* 🎧 ACTIVE MUSIC BORDER */
+body.music-on{
+  border:8px solid #ff4d4d;
+  box-shadow:
+    inset 0 0 30px #ff6b6b,
+    0 0 40px #ff4d4d,
+    0 0 80px #ff1a1a;
+  animation:pulseBorder 1.2s infinite alternate;
+}
+
+@keyframes pulseBorder{
+  from{
+    box-shadow:
+      inset 0 0 20px #ff6b6b,
+      0 0 30px #ff4d4d;
+  }
+  to{
+    box-shadow:
+      inset 0 0 50px #ff3d3d,
+      0 0 90px #ff1a1a;
+  }
 }
 
 /* DARK MODE */
@@ -63,7 +90,6 @@ body.dark{
   border-radius:28px;
   padding:10px;
   border:3px solid #d9b79f;
-  transition:0.2s;
 }
 
 body.dark .music-player,
@@ -71,15 +97,6 @@ body.dark .calendar,
 body.dark .nav-box{
   background:rgba(15,23,42,0.85);
   border:3px solid #334155;
-}
-
-/* BEAT */
-.beat{
-  box-shadow:0 0 15px #ffb38a,
-             0 0 35px #ff6b6b,
-             0 0 60px #ff3d3d;
-  transform:scale(1.02);
-  transition:0.2s;
 }
 
 /* screen */
@@ -160,14 +177,14 @@ img{
 <div class="wrapper">
 
   <!-- IMAGE -->
-  <div class="music-player beat-target">
+  <div class="music-player">
     <div class="screen">
       <img id="themeImage" src="https://i.ibb.co/qFhrggbt/image.png">
     </div>
   </div>
 
   <!-- YOUTUBE -->
-  <div class="music-player beat-target">
+  <div class="music-player">
     <div class="screen">
       <div id="player"></div>
     </div>
@@ -199,10 +216,9 @@ img{
 
 <script>
 
-let beatInterval;
 let player;
 
-/* AUTO THEME */
+/* THEME AUTO */
 function updateTheme(){
   const hour=new Date().getHours();
   const img=document.getElementById("themeImage");
@@ -218,7 +234,7 @@ function updateTheme(){
 updateTheme();
 setInterval(updateTheme,60000);
 
-/* MANUAL TOGGLE */
+/* MANUAL THEME */
 document.getElementById("themeBtn").onclick=function(){
   document.body.classList.toggle("dark");
 };
@@ -232,31 +248,12 @@ function onYouTubeIframeAPIReady(){
   });
 }
 
-/* BEAT */
-function startBeat(){
-  const targets=document.querySelectorAll(".beat-target");
-
-  beatInterval=setInterval(()=>{
-    targets.forEach(el=>el.classList.add("beat"));
-
-    setTimeout(()=>{
-      targets.forEach(el=>el.classList.remove("beat"));
-    },250);
-
-  },705);
-}
-
-function stopBeat(){
-  clearInterval(beatInterval);
-  document.querySelectorAll(".beat-target")
-    .forEach(el=>el.classList.remove("beat"));
-}
-
+/* BODY BORDER CONTROL */
 function onStateChange(event){
   if(event.data===YT.PlayerState.PLAYING){
-    startBeat();
+    document.body.classList.add("music-on");
   }else{
-    stopBeat();
+    document.body.classList.remove("music-on");
   }
 }
 
