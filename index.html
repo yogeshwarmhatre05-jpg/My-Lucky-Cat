@@ -18,34 +18,7 @@ body{
   font-family:Arial,sans-serif;
   overflow-x:hidden;
   transition:0.5s;
-
   background:linear-gradient(to bottom,#fffbea,#ffe08a,#ffd36b);
-
-  /* BASE BORDER */
-  border:0px solid transparent;
-}
-
-/* 🎧 ACTIVE MUSIC BORDER */
-body.music-on{
-  border:8px solid #ff4d4d;
-  box-shadow:
-    inset 0 0 30px #ff6b6b,
-    0 0 40px #ff4d4d,
-    0 0 80px #ff1a1a;
-  animation:pulseBorder 1.2s infinite alternate;
-}
-
-@keyframes pulseBorder{
-  from{
-    box-shadow:
-      inset 0 0 20px #ff6b6b,
-      0 0 30px #ff4d4d;
-  }
-  to{
-    box-shadow:
-      inset 0 0 50px #ff3d3d,
-      0 0 90px #ff1a1a;
-  }
 }
 
 /* DARK MODE */
@@ -54,7 +27,7 @@ body.dark{
   color:white;
 }
 
-/* toggle button */
+/* BUTTON */
 #themeBtn{
   position:fixed;
   top:10px;
@@ -63,18 +36,17 @@ body.dark{
   border-radius:12px;
   border:none;
   font-weight:bold;
-  cursor:pointer;
   z-index:1000;
 }
 
-/* title */
+/* TITLE */
 .welcome-top{
   margin-top:14px;
   font-size:22px;
   font-weight:900;
 }
 
-/* layout */
+/* WRAPPER */
 .wrapper{
   width:100%;
   max-width:320px;
@@ -84,7 +56,7 @@ body.dark{
   margin-top:20px;
 }
 
-/* cards */
+/* CARDS */
 .music-player, .calendar, .nav-box{
   background:rgba(255,255,255,0.75);
   border-radius:28px;
@@ -99,7 +71,7 @@ body.dark .nav-box{
   border:3px solid #334155;
 }
 
-/* screen */
+/* SCREEN */
 .screen{
   width:100%;
   aspect-ratio:16/9;
@@ -108,20 +80,23 @@ body.dark .nav-box{
   border:2px solid #edd5c4;
 }
 
-/* image */
+/* CAT IMAGE */
 img{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-/* calendar */
-.calendar{padding:14px;}
+/* CALENDAR */
+.calendar{
+  padding:14px;
+}
 
 .header{
   text-align:center;
   font-size:22px;
   font-weight:900;
+  margin-bottom:10px;
 }
 
 .days,.dates{
@@ -130,14 +105,23 @@ img{
   gap:5px;
 }
 
+/* DAYS */
+.days div{
+  text-align:center;
+  font-size:10px;
+  font-weight:800;
+}
+
+/* NUMBERS FIXED */
 .dates div{
-  height:30px;
+  height:32px;
   display:flex;
   justify-content:center;
   align-items:center;
   border-radius:10px;
   background:#fffaf5;
   border:1px solid #edd5c4;
+  font-weight:bold;
 }
 
 .today{
@@ -145,7 +129,7 @@ img{
   color:white!important;
 }
 
-/* nav */
+/* NAV */
 .nav-box{
   background:#5c3b2e;
   color:white;
@@ -176,10 +160,10 @@ img{
 
 <div class="wrapper">
 
-  <!-- IMAGE -->
+  <!-- 🐱 CAT IMAGE (DAY/NIGHT) -->
   <div class="music-player">
     <div class="screen">
-      <img id="themeImage" src="https://i.ibb.co/qFhrggbt/image.png">
+      <img id="catImg" src="">
     </div>
   </div>
 
@@ -218,17 +202,22 @@ img{
 
 let player;
 
-/* THEME AUTO */
+/* CAT IMAGES */
+const dayCat = "https://i.ibb.co/qFhrggbt/image.png";
+const nightCat = "https://i.ibb.co/93NMvDYs/image.png";
+
+/* THEME */
 function updateTheme(){
+
   const hour=new Date().getHours();
-  const img=document.getElementById("themeImage");
+  const cat=document.getElementById("catImg");
 
   if(hour>=6 && hour<18){
     document.body.classList.remove("dark");
-    img.src="https://i.ibb.co/qFhrggbt/image.png";
+    cat.src = dayCat;
   }else{
     document.body.classList.add("dark");
-    img.src="https://i.ibb.co/93NMvDYs/image.png";
+    cat.src = nightCat;
   }
 }
 updateTheme();
@@ -248,16 +237,18 @@ function onYouTubeIframeAPIReady(){
   });
 }
 
-/* BODY BORDER CONTROL */
+/* BORDER ON PLAY */
 function onStateChange(event){
   if(event.data===YT.PlayerState.PLAYING){
-    document.body.classList.add("music-on");
+    document.body.style.border="8px solid #ff4d4d";
+    document.body.style.boxShadow="0 0 60px #ff3d3d";
   }else{
-    document.body.classList.remove("music-on");
+    document.body.style.border="none";
+    document.body.style.boxShadow="none";
   }
 }
 
-/* CALENDAR */
+/* CALENDAR FIXED */
 const monthYear=document.getElementById("monthYear");
 const dates=document.getElementById("dates");
 
@@ -273,10 +264,12 @@ monthYear.innerText=`${months[month]} ${year}`;
 const firstDay=new Date(year,month,1).getDay();
 const lastDate=new Date(year,month+1,0).getDate();
 
+/* EMPTY CELLS */
 for(let i=0;i<firstDay;i++){
   dates.innerHTML+=`<div></div>`;
 }
 
+/* NUMBERS (FIXED DISPLAY) */
 for(let i=1;i<=lastDate;i++){
   dates.innerHTML+=`<div class="${i===today?'today':''}">${i}</div>`;
 }
