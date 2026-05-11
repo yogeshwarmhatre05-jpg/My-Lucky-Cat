@@ -7,9 +7,9 @@
 
 <style>
 *{
-box-sizing:border-box;
 margin:0;
 padding:0;
+box-sizing:border-box;
 font-family:Arial,sans-serif;
 }
 
@@ -18,32 +18,40 @@ min-height:100vh;
 display:flex;
 flex-direction:column;
 align-items:center;
-background:linear-gradient(135deg,#fff1e6,#ffd7ba,#ffb38a,#7c4a2d);
-transition:0.5s;
 overflow-x:hidden;
+transition:0.5s;
+background:linear-gradient(135deg,#ffe9d6,#ffb38a,#7c4a2d);
 }
 
-/* DARK MODE */
+/* DARK */
 body.dark{
-background:linear-gradient(135deg,#0f172a,#111827,#1e293b,#020617);
+background:linear-gradient(135deg,#0f172a,#111827,#020617);
 color:white;
 }
 
-/* GLASS CARD */
-.glass{
-background:rgba(255,255,255,0.18);
-backdrop-filter:blur(12px);
-border:1px solid rgba(255,255,255,0.25);
-border-radius:22px;
-box-shadow:0 8px 30px rgba(0,0,0,0.15);
+/* PARTICLES */
+.particle{
+position:fixed;
+width:6px;
+height:6px;
+background:white;
+border-radius:50%;
+opacity:0.2;
+animation:floatUp linear infinite;
 }
 
-/* TOP */
+@keyframes floatUp{
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
+}
+
+/* HEADER */
 .header{
-margin:18px 0;
+margin:18px;
 font-size:22px;
 font-weight:900;
 letter-spacing:2px;
+z-index:2;
 }
 
 /* WRAPPER */
@@ -53,31 +61,30 @@ max-width:360px;
 display:flex;
 flex-direction:column;
 gap:16px;
+z-index:2;
+}
+
+/* GLASS */
+.glass{
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(10px);
+border-radius:20px;
+padding:12px;
+border:1px solid rgba(255,255,255,0.2);
 }
 
 /* IMAGE */
-.image-box{
-padding:10px;
-overflow:hidden;
-}
-
-.image-box img{
+img{
 width:100%;
-border-radius:18px;
+border-radius:16px;
 }
 
 /* MUSIC */
-.music{
-padding:12px;
-text-align:center;
-}
-
 .screen{
 width:100%;
 aspect-ratio:16/9;
 border-radius:16px;
 overflow:hidden;
-margin-bottom:10px;
 }
 
 iframe{
@@ -87,10 +94,10 @@ border:none;
 }
 
 .song{
+text-align:center;
 font-size:13px;
 font-weight:800;
-margin-bottom:8px;
-opacity:0.9;
+margin:8px 0;
 }
 
 .controls{
@@ -100,8 +107,8 @@ gap:10px;
 }
 
 button{
-border:none;
 padding:10px 14px;
+border:none;
 border-radius:50%;
 cursor:pointer;
 font-weight:900;
@@ -114,13 +121,8 @@ transform:scale(1.1);
 }
 
 /* CALENDAR */
-.calendar{
-padding:14px;
-text-align:center;
-}
-
 .month{
-font-size:18px;
+text-align:center;
 font-weight:900;
 margin-bottom:10px;
 }
@@ -131,20 +133,15 @@ grid-template-columns:repeat(7,1fr);
 gap:6px;
 }
 
-.day{
-font-size:10px;
-font-weight:900;
-opacity:0.7;
+.day,.date{
+text-align:center;
+font-size:12px;
 }
 
 .date{
-height:30px;
-display:flex;
-align-items:center;
-justify-content:center;
+padding:6px;
 border-radius:10px;
-background:rgba(255,255,255,0.35);
-font-size:12px;
+background:rgba(255,255,255,0.3);
 }
 
 .today{
@@ -154,16 +151,6 @@ font-weight:900;
 }
 
 /* NAV */
-.nav{
-padding:14px;
-text-align:center;
-}
-
-.nav-title{
-font-weight:900;
-margin-bottom:10px;
-}
-
 .nav a{
 display:block;
 margin:6px 0;
@@ -172,7 +159,7 @@ border-radius:12px;
 text-decoration:none;
 font-size:12px;
 font-weight:900;
-background:rgba(255,255,255,0.5);
+background:rgba(255,255,255,0.4);
 color:#3b2a22;
 transition:0.2s;
 }
@@ -181,9 +168,10 @@ transition:0.2s;
 transform:scale(1.05);
 }
 
-/* RGB TEXT */
+/* RGB */
 .rgb{
-margin:14px 0;
+margin:14px;
+text-align:center;
 font-weight:900;
 font-family:cursive;
 font-size:14px;
@@ -192,7 +180,6 @@ background-size:300% 300%;
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 animation:rgb 6s infinite;
-text-align:center;
 }
 
 @keyframes rgb{
@@ -201,18 +188,17 @@ text-align:center;
 100%{background-position:0%}
 }
 
-/* FLOAT ANIMATION */
+/* PAWS */
 .paw{
 position:absolute;
-opacity:0.12;
-animation:float linear infinite;
+opacity:0.1;
+animation:float 10s linear infinite;
 }
 
 @keyframes float{
-0%{transform:translateY(100vh)}
-100%{transform:translateY(-120px)}
+from{transform:translateY(100vh);}
+to{transform:translateY(-100px);}
 }
-
 </style>
 </head>
 
@@ -222,149 +208,125 @@ animation:float linear infinite;
 
 <div class="wrapper">
 
-<!-- IMAGE -->
-<div class="glass image-box">
+<div class="glass">
 <img id="themeImage" src="https://i.ibb.co/qFhrggbt/image.png">
 </div>
 
-<!-- MUSIC -->
-<div class="glass music">
+<div class="glass">
 <div class="screen">
-<iframe id="playerFrame"></iframe>
+<iframe id="player"></iframe>
 </div>
 
 <div class="song">Now Playing: <span id="songName"></span></div>
 
 <div class="controls">
-<button onclick="prevSong()">⏮</button>
-<button onclick="togglePlay()" id="btn">▶</button>
-<button onclick="nextSong()">⏭</button>
+<button onclick="prev()">⏮</button>
+<button onclick="toggle()" id="btn">▶</button>
+<button onclick="next()">⏭</button>
 </div>
 </div>
 
-<!-- CALENDAR -->
-<div class="glass calendar">
-<div class="month" id="monthYear"></div>
-
-<div class="grid">
-<div class="day">S</div><div class="day">M</div><div class="day">T</div>
-<div class="day">W</div><div class="day">T</div><div class="day">F</div><div class="day">S</div>
+<div class="glass">
+<div class="month" id="month"></div>
+<div class="grid" id="cal"></div>
 </div>
 
-<div class="grid" id="dates"></div>
-</div>
-
-<!-- NAV -->
 <div class="glass nav">
-<div class="nav-title">CAT MENU</div>
-<a href="https://www.chess.com" target="_blank">RULES</a>
-<a href="https://www.youtube.com" target="_blank">EVENTS</a>
-<a href="https://www.google.com" target="_blank">MEMBERS</a>
-<a href="#">CLICK HERE</a>
+<a href="https://www.chess.com">RULES</a>
+<a href="https://www.youtube.com">EVENTS</a>
+<a href="#">MEMBERS</a>
 </div>
 
 </div>
 
-<div class="rgb">
-Made by yogi136 • Sapphire Club
-</div>
+<div class="rgb">Made by yogi136 • Sapphire Club</div>
 
 <script>
 
-/* FLOAT PAWS */
-for(let i=0;i<10;i++){
-let p=document.createElement("div");
-p.className="paw";
-p.innerHTML="🐾";
-p.style.left=Math.random()*100+"%";
-p.style.animationDuration=(6+Math.random()*8)+"s";
-p.style.animationDelay=Math.random()*5+"s";
-p.style.fontSize=(14+Math.random()*10)+"px";
-document.body.appendChild(p);
+/* PARTICLES */
+for(let i=0;i<25;i++){
+let d=document.createElement("div");
+d.className="particle";
+d.style.left=Math.random()*100+"vw";
+d.style.animationDuration=(5+Math.random()*5)+"s";
+document.body.appendChild(d);
 }
 
-/* THEME IMAGE */
-function updateTheme(){
-let h=new Date().getHours();
-let img=document.getElementById("themeImage");
+/* THEME MEMORY */
+function setTheme(){
+let saved=localStorage.getItem("theme");
+let hour=new Date().getHours();
 
-if(h>=6 && h<18){
-document.body.classList.remove("dark");
-img.src="https://i.ibb.co/qFhrggbt/image.png";
+if(saved){
+document.body.classList.toggle("dark",saved==="dark");
 }else{
-document.body.classList.add("dark");
-img.src="https://i.ibb.co/93NMvDYs/image.png";
+document.body.classList.toggle("dark",!(hour>=6 && hour<18));
 }
 }
-updateTheme();
-setInterval(updateTheme,60000);
+setTheme();
+
+setInterval(()=>{
+let hour=new Date().getHours();
+document.getElementById("themeImage").src=
+(hour>=6 && hour<18)
+?"https://i.ibb.co/qFhrggbt/image.png"
+:"https://i.ibb.co/93NMvDYs/image.png";
+},60000);
 
 /* CALENDAR */
-const now=new Date();
-const monthNames=[
-"January","February","March","April","May","June",
-"July","August","September","October","November","December"
-];
-
-document.getElementById("monthYear").innerText =
-`${monthNames[now.getMonth()]} ${now.getFullYear()}`;
+let now=new Date();
+document.getElementById("month").innerText=
+now.toLocaleString('default',{month:'long',year:'numeric'});
 
 let first=new Date(now.getFullYear(),now.getMonth(),1).getDay();
 let last=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
 
-let html="";
+let cal="";
 
-for(let i=0;i<first;i++) html+=`<div></div>`;
+for(let i=0;i<first;i++) cal+="<div></div>";
 
 for(let i=1;i<=last;i++){
-html+=`<div class="date ${i===now.getDate()?'today':''}">${i}</div>`;
+cal+=`<div class="date ${i===now.getDate()?'today':''}">${i}</div>`;
 }
 
-document.getElementById("dates").innerHTML=html;
+document.getElementById("cal").innerHTML=cal;
 
 /* MUSIC */
 let songs=[
-{ name:"Golden Brown", url:"https://www.youtube.com/watch?v=kcsGhOmULxQ" },
-{ name:"Numb", url:"https://www.youtube.com/watch?v=kXYiU_JCYtU" }
+{name:"Golden Brown",url:"https://www.youtube.com/watch?v=kcsGhOmULxQ"},
+{name:"Numb",url:"https://www.youtube.com/watch?v=kXYiU_JCYtU"}
 ];
 
-let index=0;
-let playing=false;
-
-let frame=document.getElementById("playerFrame");
+let i=0,playing=false;
+let frame=document.getElementById("player");
 let btn=document.getElementById("btn");
 
-function getID(url){
-return new URL(url).searchParams.get("v");
+function id(u){return new URL(u).searchParams.get("v");}
+
+function load(x){
+frame.src=`https://www.youtube.com/embed/${id(songs[x].url)}?enablejsapi=1`;
+document.getElementById("songName").innerText=songs[x].name;
 }
 
-function load(i){
-frame.src=`https://www.youtube.com/embed/${getID(songs[i].url)}?enablejsapi=1`;
-document.getElementById("songName").innerText=songs[i].name;
-}
+load(i);
 
-load(index);
-
-function togglePlay(){
+function toggle(){
 playing=!playing;
 btn.innerText=playing?"❚❚":"▶";
-frame.contentWindow.postMessage(
-JSON.stringify({event:"command",func:playing?"playVideo":"pauseVideo"}),"*"
-);
+frame.contentWindow.postMessage(JSON.stringify({
+event:"command",
+func:playing?"playVideo":"pauseVideo"
+}),"*");
 }
 
-function nextSong(){
-index=(index+1)%songs.length;
-load(index);
-playing=false;
-btn.innerText="▶";
+function next(){
+i=(i+1)%songs.length;
+load(i);playing=false;btn.innerText="▶";
 }
 
-function prevSong(){
-index=(index-1+songs.length)%songs.length;
-load(index);
-playing=false;
-btn.innerText="▶";
+function prev(){
+i=(i-1+songs.length)%songs.length;
+load(i);playing=false;btn.innerText="▶";
 }
 
 </script>
