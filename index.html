@@ -1,286 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sapphire Club</title>
+<html>
+<body style="margin: 0; display: flex; justify-content: center; align-items: center; background: #333;">
+    <canvas id="flowerCanvas" width="300" height="1200" style="box-shadow: 0 0 20px rgba(0,0,0,0.5);"></canvas>
 
-<style>
+    <script>
+        const canvas = document.getElementById('flowerCanvas');
+        const ctx = canvas.getContext('2d');
 
-*{box-sizing:border-box;}
+        function drawPetal(x, y, length, width, angle, color) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle);
+            
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            // Sharp dahlia-style tip logic
+            ctx.bezierCurveTo(width / 2, -length / 4, width, -length / 2, 0, -length);
+            ctx.bezierCurveTo(-width, -length / 2, -width / 2, -length / 4, 0, 0);
+            
+            ctx.fillStyle = color;
+            ctx.shadowBlur = 8; // Softer edges
+            ctx.shadowColor = color;
+            ctx.fill();
+            ctx.restore();
+        }
 
-body{
-  margin:0;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  font-family:Arial,sans-serif;
-  overflow-x:hidden;
-  transition:0.5s;
-  background:linear-gradient(to bottom,#fffbea,#ffe08a,#ffd36b);
-}
+        function draw() {
+            // 1. Background Gradient (Soft beige/green wash)
+            const bgGrad = ctx.createLinearGradient(0, 0, 300, 1200);
+            bgGrad.addColorStop(0, '#e5e1ba');
+            bgGrad.addColorStop(0.5, '#f7f1d5');
+            bgGrad.addColorStop(1, '#fdf5e6');
+            ctx.fillStyle = bgGrad;
+            ctx.fillRect(0, 0, 300, 1200);
 
-body.dark{
-  background:linear-gradient(to bottom,#0f172a,#111827,#020617);
-  color:white;
-}
+            // 2. Position center in the bottom-right corner area
+            const centerX = 280; 
+            const centerY = 1000;
 
-#themeBtn{
-  position:fixed;
-  top:10px;
-  right:10px;
-  padding:8px 12px;
-  border-radius:12px;
-  border:none;
-  font-weight:bold;
-  z-index:1000;
-}
+            // 3. Define petal layers (Outer to Inner)
+            const layers = [
+                // Pale outer petals
+                { count: 14, length: 320, width: 90, color: 'rgba(255, 240, 150, 0.3)' },
+                // Mid-tone yellow
+                { count: 18, length: 240, width: 70, color: 'rgba(255, 215, 60, 0.5)' },
+                // Saturated gold
+                { count: 16, length: 160, width: 50, color: 'rgba(255, 190, 0, 0.7)' },
+                // Deep orange core
+                { count: 12, length: 80, width: 30, color: 'rgba(230, 90, 40, 0.8)' }
+            ];
 
-.welcome-top{
-  margin-top:14px;
-  font-size:22px;
-  font-weight:900;
-}
+            layers.forEach((layer, index) => {
+                for (let i = 0; i < layer.count; i++) {
+                    // Spread petals primarily toward the top-left to fill the 1200px height
+                    const baseAngle = (i / layer.count) * Math.PI * 2;
+                    const jitter = (Math.random() - 0.5) * 0.2;
+                    drawPetal(centerX, centerY, layer.length, layer.width, baseAngle + jitter, layer.color);
+                }
+            });
+            
+            // 4. Subtle texture overlay (to mimic paper)
+            ctx.globalCompositeOperation = 'multiply';
+            ctx.fillStyle = 'rgba(200, 190, 150, 0.1)';
+            for(let i=0; i<500; i++) {
+                ctx.fillRect(Math.random()*300, Math.random()*1200, 1, 1);
+            }
+        }
 
-.wrapper{
-  width:100%;
-  max-width:320px;
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-  margin-top:20px;
-}
-
-.music-player, .calendar, .nav-box{
-  background:rgba(255,255,255,0.75);
-  border-radius:28px;
-  padding:10px;
-  border:3px solid #d9b79f;
-}
-
-body.dark .music-player,
-body.dark .calendar,
-body.dark .nav-box{
-  background:rgba(15,23,42,0.85);
-  border:3px solid #334155;
-}
-
-.screen{
-  width:100%;
-  aspect-ratio:16/9;
-  border-radius:16px;
-  overflow:hidden;
-  border:2px solid #edd5c4;
-  position:relative;
-}
-
-#player{
-  width:100%;
-  height:100%;
-  position:absolute;
-  top:0;
-  left:0;
-}
-
-img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* CALENDAR */
-.calendar{padding:14px;}
-
-.header{
-  text-align:center;
-  font-size:22px;
-  font-weight:900;
-  margin-bottom:10px;
-}
-
-.days,.dates{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:5px;
-}
-
-.days div{
-  text-align:center;
-  font-size:10px;
-  font-weight:800;
-}
-
-.dates div{
-  height:32px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  border-radius:10px;
-  background:#fffaf5;
-  border:1px solid #edd5c4;
-  font-weight:bold;
-  color:#3b2a22;
-}
-
-body.dark .dates div{
-  background:#1f2937;
-  border:1px solid #334155;
-  color:white;
-}
-
-.today{
-  background:#ffb38a!important;
-  color:white!important;
-}
-
-body.dark .today{
-  background:#ff6b6b!important;
-}
-
-.nav-box{
-  background:#5c3b2e;
-  color:white;
-  border-radius:24px;
-  padding:14px;
-}
-
-.nav-box a{
-  display:block;
-  text-align:center;
-  margin:6px 0;
-  padding:10px;
-  border-radius:12px;
-  text-decoration:none;
-  font-weight:900;
-  background:#fff1e5;
-  color:#5c3b2e;
-}
-
-</style>
-</head>
-
-<body>
-
-<button id="themeBtn">🌙 / ☀️</button>
-
-<div class="welcome-top">WELCOME TO SAPPHIRE</div>
-
-<div class="wrapper">
-
-  <!-- 🐱 CAT IMAGE -->
-  <div class="music-player">
-    <div class="screen">
-      <img id="catImg" src="">
-    </div>
-  </div>
-
-  <!-- 🎥 YOUTUBE -->
-  <div class="music-player">
-    <div class="screen">
-      <div id="player"></div>
-    </div>
-  </div>
-
-  <!-- 📅 CALENDAR -->
-  <div class="calendar">
-    <div class="header" id="monthYear"></div>
-
-    <div class="days">
-      <div>SUN</div><div>MON</div><div>TUE</div>
-      <div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
-    </div>
-
-    <div class="dates" id="dates"></div>
-  </div>
-
-  <!-- MENU -->
-  <div class="nav-box">
-    <a href="#">RULES</a>
-    <a href="#">EVENTS</a>
-    <a href="#">MEMBERS</a>
-    <a href="#">CLICK HERE</a>
-  </div>
-
-</div>
-
-<script src="https://www.youtube.com/iframe_api"></script>
-
-<script>
-
-let player;
-
-/* 🐱 YOUR IMAGES */
-const dayCat = "https://i.ibb.co/qFhrggbt/image.png";
-
-/* NEW NIGHT IMAGE (your link) */
-const nightCat = "https://i.ibb.co/4Z9k6hQ/image.png";
-
-/* THEME SWITCH */
-function updateTheme(){
-  const hour=new Date().getHours();
-  const cat=document.getElementById("catImg");
-
-  if(hour>=6 && hour<18){
-    document.body.classList.remove("dark");
-    cat.src = dayCat;
-  }else{
-    document.body.classList.add("dark");
-    cat.src = nightCat;
-  }
-}
-
-updateTheme();
-setInterval(updateTheme,60000);
-
-/* MANUAL THEME */
-document.getElementById("themeBtn").onclick=function(){
-  document.body.classList.toggle("dark");
-};
-
-/* YOUTUBE */
-function onYouTubeIframeAPIReady(){
-  player=new YT.Player('player',{
-    videoId:'kcsGhOmULxQ',
-    playerVars:{autoplay:1,controls:1},
-    events:{onStateChange:onStateChange}
-  });
-}
-
-/* BORDER EFFECT */
-function onStateChange(event){
-  if(event.data===YT.PlayerState.PLAYING){
-    document.body.style.boxShadow="0 0 60px #ff3d3d inset, 0 0 80px #ff1a1a";
-  }else{
-    document.body.style.boxShadow="none";
-  }
-}
-
-/* CALENDAR */
-const monthYear=document.getElementById("monthYear");
-const dates=document.getElementById("dates");
-
-const now=new Date();
-const year=now.getFullYear();
-const month=now.getMonth();
-const today=now.getDate();
-
-const months=["January","February","March","April","May","June","July","August","September","October","November","December"];
-
-monthYear.innerText=`${months[month]} ${year}`;
-
-const firstDay=new Date(year,month,1).getDay();
-const lastDate=new Date(year,month+1,0).getDate();
-
-for(let i=0;i<firstDay;i++){
-  dates.innerHTML+=`<div></div>`;
-}
-
-for(let i=1;i<=lastDate;i++){
-  dates.innerHTML+=`<div class="${i===today?'today':''}">${i}</div>`;
-}
-
-</script>
-
+        draw();
+    </script>
 </body>
 </html>
