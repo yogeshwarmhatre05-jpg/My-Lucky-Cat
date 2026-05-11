@@ -20,12 +20,14 @@ flex-direction:column;
 align-items:center;
 overflow-x:hidden;
 transition:0.5s;
-background:linear-gradient(135deg,#ffe9d6,#ffb38a,#7c4a2d);
+
+/* 🌅 COLOR THEME */
+background:linear-gradient(to bottom,#fffaf4,#ffe9d6,#f5d2bc,#c49a7a);
 }
 
-/* DARK */
+/* DARK MODE */
 body.dark{
-background:linear-gradient(135deg,#0f172a,#111827,#020617);
+background:linear-gradient(to bottom,#0f172a,#111827,#1e293b,#020617);
 color:white;
 }
 
@@ -55,10 +57,11 @@ gap:4px;
 z-index:2;
 }
 
+/* 🔥 UPDATED WELCOME SIZE */
 .glow{
-font-size:26px;
+font-size:42px;
 font-weight:900;
-letter-spacing:3px;
+letter-spacing:4px;
 color:#fff;
 text-shadow:0 0 10px rgba(255,140,90,0.8),
 0 0 20px rgba(255,140,90,0.5);
@@ -165,7 +168,7 @@ background:rgba(255,255,255,0.3);
 }
 
 .today{
-background:#ff7a45;
+background:#ffb38a;
 color:white;
 font-weight:900;
 }
@@ -182,19 +185,14 @@ letter-spacing:2px;
 display:flex;
 align-items:center;
 justify-content:center;
-
 margin:8px 0;
 padding:12px;
-
 border-radius:14px;
 text-decoration:none;
-
 font-size:13px;
 font-weight:900;
-
 background:rgba(255,255,255,0.35);
 color:#3b2a22;
-
 position:relative;
 overflow:hidden;
 transition:0.25s;
@@ -250,12 +248,10 @@ animation:rgb 6s infinite;
 
 <div class="wrapper">
 
-<!-- IMAGE -->
 <div class="glass">
 <img id="themeImage" src="https://i.ibb.co/qFhrggbt/image.png">
 </div>
 
-<!-- MUSIC -->
 <div class="glass">
 <div class="screen">
 <iframe id="player"></iframe>
@@ -270,13 +266,11 @@ animation:rgb 6s infinite;
 </div>
 </div>
 
-<!-- CALENDAR -->
 <div class="glass">
 <div class="month" id="month"></div>
 <div class="grid" id="cal"></div>
 </div>
 
-<!-- NAV -->
 <div class="glass">
 <div class="nav-title">PORTAL</div>
 
@@ -317,13 +311,10 @@ let first=new Date(now.getFullYear(),now.getMonth(),1).getDay();
 let last=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
 
 let html="";
-
 for(let i=0;i<first;i++) html+="<div></div>";
-
 for(let i=1;i<=last;i++){
 html+=`<div class="date ${i===now.getDate()?'today':''}">${i}</div>`;
 }
-
 document.getElementById("cal").innerHTML=html;
 
 /* MUSIC */
