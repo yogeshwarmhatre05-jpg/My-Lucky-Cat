@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Sapphire Club</title>
 
 <style>
@@ -32,9 +31,8 @@ body{
   );
 }
 
-/* 🌙 DARK MODE */
+/* DARK MODE */
 body.dark{
-
   background:linear-gradient(
     to bottom,
     #0f172a 0%,
@@ -42,79 +40,20 @@ body.dark{
     #1e293b 65%,
     #020617 100%
   );
-
   color:white;
 }
 
-body.dark .welcome-top{
-  color:#f8fafc;
-  text-shadow:0 2px 8px rgba(255,255,255,0.2);
-}
-
-body.dark .music-player,
-body.dark .calendar{
-  background:rgba(15,23,42,0.78);
-  border:3px solid #334155;
-}
-
-body.dark .header,
-body.dark .days div,
-body.dark .footer,
-body.dark .marquee{
-  color:#f8fafc;
-}
-
-body.dark .dates div{
-  background:#1e293b;
-  border:1px solid #334155;
-  color:white;
-}
-
-body.dark .today{
-  background:#3b82f6!important;
-  color:white!important;
-}
-
-body.dark .nav-box{
-  background:rgba(2,6,23,0.95);
-  border:3px solid #334155;
-}
-
-body.dark .nav-title{
-  color:#f8fafc;
-}
-
-body.dark .nav a{
-  background:linear-gradient(to right,#1e293b,#334155);
-  color:white;
-}
-
-body.dark .single-control button{
-  background:linear-gradient(to bottom,#1e293b,#334155);
-  color:white;
-}
-
-body.dark .fluff{
-  background:
-  radial-gradient(circle at 10% 100%, #1e293b 80px, transparent 81px),
-  radial-gradient(circle at 30% 100%, #0f172a 90px, transparent 91px),
-  radial-gradient(circle at 50% 100%, #1e293b 80px, transparent 81px),
-  radial-gradient(circle at 70% 100%, #0f172a 90px, transparent 91px),
-  radial-gradient(circle at 90% 100%, #1e293b 80px, transparent 81px);
-}
-
-/* paw */
+/* paws */
 .paw{
   position:absolute;
   font-size:20px;
   opacity:0.15;
   animation:float 10s linear infinite;
-  z-index:0;
 }
 
 @keyframes float{
-  0%{transform:translateY(100vh) rotate(0deg);}
-  100%{transform:translateY(-120px) rotate(360deg);}
+  0%{transform:translateY(100vh);}
+  100%{transform:translateY(-120px);}
 }
 
 /* title */
@@ -123,8 +62,6 @@ body.dark .fluff{
   font-size:20px;
   font-weight:900;
   color:#5c3b2e;
-  letter-spacing:2px;
-  z-index:2;
 }
 
 /* wrapper */
@@ -134,7 +71,6 @@ body.dark .fluff{
   display:flex;
   flex-direction:column;
   gap:18px;
-  z-index:2;
   margin-top:20px;
 }
 
@@ -144,8 +80,15 @@ body.dark .fluff{
   border-radius:28px;
   padding:10px;
   border:3px solid #d9b79f;
-  backdrop-filter:blur(6px);
-  box-shadow:0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* DARK cards */
+body.dark .music-player,
+body.dark .calendar,
+body.dark .nav-box{
+  background:rgba(15,23,42,0.78);
+  border:3px solid #334155;
+  color:white;
 }
 
 /* image */
@@ -173,8 +116,6 @@ img{
   text-align:center;
   font-size:22px;
   font-weight:900;
-  color:#5c3b2e;
-  margin-bottom:16px;
 }
 
 .days, .dates{
@@ -187,7 +128,6 @@ img{
   text-align:center;
   font-size:10px;
   font-weight:800;
-  color:#7a5b49;
 }
 
 .dates div{
@@ -196,8 +136,6 @@ img{
   justify-content:center;
   align-items:center;
   border-radius:10px;
-  font-size:11px;
-  font-weight:700;
   background:#fffaf5;
   border:1px solid #edd5c4;
 }
@@ -234,29 +172,13 @@ img{
   font-size:12px;
   font-weight:900;
   color:#5c3b2e;
-  background:linear-gradient(to right,#fff1e5,#ffd2b5);
-}
-
-/* fluff */
-.fluff{
-  position:absolute;
-  bottom:0;
-  width:100%;
-  height:120px;
-  background:
-  radial-gradient(circle at 10% 100%, #fff3e6 80px, transparent 81px),
-  radial-gradient(circle at 30% 100%, #ffe8d1 90px, transparent 91px),
-  radial-gradient(circle at 50% 100%, #fff3e6 80px, transparent 81px),
-  radial-gradient(circle at 70% 100%, #ffe8d1 90px, transparent 91px),
-  radial-gradient(circle at 90% 100%, #fff3e6 80px, transparent 81px);
+  background:#fff1e5;
 }
 
 </style>
 </head>
 
 <body>
-
-<div class="fluff"></div>
 
 <div class="welcome-top">WELCOME TO SAPPHIRE</div>
 
@@ -273,34 +195,34 @@ for(let i=0;i<18;i++){
 
 <div class="wrapper">
 
-  <!-- 🖼 IMAGE -->
+  <!-- IMAGE -->
   <div class="music-player">
     <div class="screen">
-      <img id="themeImage" src="https://i.ibb.co/qFhrggbt/image.png" alt="theme image">
+      <img id="themeImage" src="https://i.ibb.co/qFhrggbt/image.png">
     </div>
   </div>
 
-  <!-- 🎵 MUSIC -->
+  <!-- VIDEO -->
   <div class="music-player">
     <div class="screen">
-      <iframe id="playerFrame" src="" allow="autoplay; fullscreen"></iframe>
+      <iframe id="playerFrame"
+        src="https://www.youtube.com/embed/kcsGhOmULxQ?autoplay=1"
+        allow="autoplay; fullscreen">
+      </iframe>
     </div>
   </div>
 
-  <!-- 📅 CALENDAR -->
+  <!-- CALENDAR -->
   <div class="calendar">
     <div class="header" id="monthYear"></div>
-
     <div class="days">
       <div>SUN</div><div>MON</div><div>TUE</div>
       <div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
     </div>
-
     <div class="dates" id="dates"></div>
-    <div class="footer">🎃 SAPPHIRE SOCIAL CLUB 🎃</div>
   </div>
 
-  <!-- 📦 MENU -->
+  <!-- MENU -->
   <div class="nav-box">
     <div class="nav-title">CAT MENU</div>
     <div class="nav">
@@ -315,7 +237,7 @@ for(let i=0;i<18;i++){
 
 <script>
 
-/* THEME SWITCH */
+/* THEME */
 function updateTheme(){
 
   const hour=new Date().getHours();
