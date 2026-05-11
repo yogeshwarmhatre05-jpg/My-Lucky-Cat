@@ -7,192 +7,220 @@
 
 <style>
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
+/* ☀️ DAY (BANANA THEME) */
 body{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  overflow-x:hidden;
-  transition:0.6s;
-  background:linear-gradient(to bottom,#fffaf4,#ffe9d6,#f5d2bc,#c49a7a);
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+overflow-x:hidden;
+transition:0.6s ease;
+
+background:linear-gradient(to bottom,#fff8d6,#ffeaa6,#ffd84d,#f6c400);
+color:#3a2a00;
 }
 
+/* 🌙 NIGHT (DARK BLUE) */
 body.dark{
-  background:linear-gradient(to bottom,#0f172a,#111827,#1e293b,#020617);
-  color:white;
+background:linear-gradient(to bottom,#0b1020,#0f1b3d,#0a1a4a,#050814);
+color:#dbe7ff;
+}
+
+/* IMAGE THEME (PNG DIRECT SWITCH) */
+body:not(.dark) #themeImage{
+content:url("https://i.ibb.co/hRjTVF3w.png");
+}
+
+body.dark #themeImage{
+content:url("https://i.ibb.co/Zz89JYQ2.png");
 }
 
 /* HEADER */
 .header{
-  margin:18px 0;
-  text-align:center;
+margin:18px 0;
+text-align:center;
+display:flex;
+flex-direction:column;
+gap:4px;
 }
 
 .glow{
-  font-size:58px;
-  font-weight:1000;
-  letter-spacing:6px;
-  color:#fff;
-  text-shadow:0 0 10px rgba(255,140,90,0.6),
-               0 0 25px rgba(255,80,80,0.4);
+font-size:56px;
+font-weight:1000;
+letter-spacing:6px;
+color:#fff7b2;
+text-shadow:0 0 10px rgba(255,215,0,0.8),
+0 0 20px rgba(255,200,0,0.6);
 }
 
 .sub{
-  font-size:12px;
-  letter-spacing:4px;
-  opacity:0.8;
+font-size:12px;
+letter-spacing:4px;
+opacity:0.85;
 }
 
 /* WRAPPER */
 .wrapper{
-  width:92%;
-  max-width:360px;
-  display:flex;
-  flex-direction:column;
-  gap:16px;
+width:92%;
+max-width:360px;
+display:flex;
+flex-direction:column;
+gap:16px;
 }
 
 /* GLASS */
 .glass{
-  background:rgba(255,255,255,0.15);
-  backdrop-filter:blur(10px);
-  border-radius:20px;
-  padding:12px;
-  border:1px solid rgba(255,255,255,0.2);
+background:rgba(255, 230, 120, 0.25);
+backdrop-filter:blur(10px);
+border-radius:20px;
+padding:12px;
+border:1px solid rgba(255, 215, 0, 0.4);
+}
+
+body.dark .glass{
+background:rgba(60, 90, 160, 0.15);
+border:1px solid rgba(120, 160, 255, 0.25);
 }
 
 /* IMAGE */
 img{
-  width:100%;
-  border-radius:16px;
+width:100%;
+border-radius:16px;
 }
 
-/* PLAYER */
+/* MUSIC */
 .screen{
-  width:100%;
-  aspect-ratio:16/9;
-  border-radius:16px;
-  overflow:hidden;
+width:100%;
+aspect-ratio:16/9;
+border-radius:16px;
+overflow:hidden;
 }
 
 iframe{
-  width:100%;
-  height:100%;
-  border:none;
+width:100%;
+height:100%;
+border:none;
 }
 
 .song{
-  text-align:center;
-  font-size:13px;
-  font-weight:800;
-  margin:8px 0;
+text-align:center;
+font-size:13px;
+font-weight:800;
+margin:8px 0;
 }
 
 /* BUTTONS */
 .controls{
-  display:flex;
-  justify-content:center;
-  gap:10px;
+display:flex;
+justify-content:center;
+gap:10px;
 }
 
 button{
-  padding:10px 14px;
-  border:none;
-  border-radius:50%;
-  cursor:pointer;
-  font-weight:900;
-  background:rgba(255,255,255,0.25);
-  backdrop-filter:blur(6px);
-  box-shadow:0 4px 10px rgba(0,0,0,0.15);
-  transition:0.2s;
+padding:10px 14px;
+border:none;
+border-radius:50%;
+cursor:pointer;
+font-weight:900;
+background:linear-gradient(145deg,#ffe066,#ffcc00);
+color:#3a2a00;
+transition:0.2s;
+}
+
+body.dark button{
+background:linear-gradient(145deg,#2b4cff,#1a2a66);
+color:#dbe7ff;
 }
 
 button:hover{
-  transform:scale(1.1);
+transform:scale(1.1);
 }
 
 /* CALENDAR */
 .month{
-  text-align:center;
-  font-weight:900;
-  margin-bottom:10px;
+text-align:center;
+font-weight:900;
+margin-bottom:10px;
 }
 
 .grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:6px;
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:6px;
 }
 
 .date{
-  text-align:center;
-  font-size:12px;
-  padding:6px;
-  border-radius:10px;
-  background:rgba(255,255,255,0.3);
+text-align:center;
+font-size:12px;
+padding:6px;
+border-radius:10px;
+background:rgba(255,255,255,0.3);
+}
+
+body.dark .date{
+background:rgba(255,255,255,0.08);
 }
 
 .today{
-  background:#ffb38a;
-  color:white;
-  font-weight:900;
-}
-
-/* DARK MODE FIX */
-body.dark .date{
-  background:rgba(255,255,255,0.08);
-  color:white;
+background:#ffcc00;
+color:#000;
+font-weight:900;
 }
 
 /* LINKS */
 .nav-title{
-  text-align:center;
-  font-weight:900;
-  margin-bottom:10px;
+text-align:center;
+font-weight:900;
+margin-bottom:10px;
 }
 
 .link{
-  display:flex;
-  justify-content:center;
-  margin:8px 0;
-  padding:12px;
-  border-radius:14px;
-  text-decoration:none;
-  font-size:13px;
-  font-weight:900;
-  background:rgba(255,255,255,0.35);
-  color:#3b2a22;
-  transition:0.25s;
+display:flex;
+justify-content:center;
+margin:8px 0;
+padding:12px;
+border-radius:14px;
+text-decoration:none;
+font-size:13px;
+font-weight:900;
+background:rgba(255, 215, 0, 0.3);
+color:#3a2a00;
+transition:0.25s;
+}
+
+body.dark .link{
+background:rgba(80,120,255,0.2);
+color:#dbe7ff;
 }
 
 .link:hover{
-  transform:translateY(-2px) scale(1.03);
+transform:translateY(-2px) scale(1.03);
 }
 
 /* RGB TEXT */
 .rgb{
-  margin:14px;
-  text-align:center;
-  font-weight:900;
-  font-family:cursive;
-  font-size:14px;
-  background:linear-gradient(90deg,#ff4d4d,#ffcc00,#22c55e,#3b82f6,#a855f7);
-  background-size:300% 300%;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:rgb 6s infinite;
+margin:14px;
+text-align:center;
+font-weight:900;
+font-family:cursive;
+font-size:14px;
+background:linear-gradient(90deg,#ffcc00,#ffe066,#ffd000,#ffb300);
+background-size:300% 300%;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:rgb 6s infinite;
 }
 
 @keyframes rgb{
-  0%{background-position:0%}
-  50%{background-position:100%}
-  100%{background-position:0%}
+0%{background-position:0%}
+50%{background-position:100%}
+100%{background-position:0%}
 }
 </style>
 </head>
@@ -200,135 +228,130 @@ body.dark .date{
 <body>
 
 <div class="header">
-  <div class="glow">WELCOME</div>
-  <div class="sub">TO SAPPHIRE CLUB</div>
+<div class="glow">WELCOME</div>
+<div class="sub">TO SAPPHIRE CLUB</div>
 </div>
 
 <div class="wrapper">
 
 <!-- IMAGE -->
 <div class="glass">
-  <img id="themeImage" src="https://i.ibb.co/hRjTVF3w.png">
+<img id="themeImage">
 </div>
 
 <!-- MUSIC -->
 <div class="glass">
-  <div class="screen">
-    <iframe id="player"></iframe>
-  </div>
+<div class="screen">
+<iframe id="player"></iframe>
+</div>
 
-  <div class="song">Now Playing: <span id="songName"></span></div>
+<div class="song">Now Playing: <span id="songName"></span></div>
 
-  <div class="controls">
-    <button onclick="prev()">⏮</button>
-    <button onclick="toggle()" id="btn">▶</button>
-    <button onclick="next()">⏭</button>
-  </div>
+<div class="controls">
+<button onclick="prev()">⏮</button>
+<button onclick="toggle()" id="btn">▶</button>
+<button onclick="next()">⏭</button>
+</div>
 </div>
 
 <!-- CALENDAR -->
 <div class="glass">
-  <div class="month" id="month"></div>
-  <div class="grid" id="cal"></div>
+<div class="month" id="month"></div>
+<div class="grid" id="cal"></div>
 </div>
 
 <!-- NAV -->
 <div class="glass">
-  <div class="nav-title">PORTAL</div>
-  <a class="link" href="https://www.chess.com" target="_blank">♟ RULES</a>
-  <a class="link" href="https://www.youtube.com" target="_blank">🎬 EVENTS</a>
-  <a class="link" href="https://www.google.com" target="_blank">👥 MEMBERS</a>
+<div class="nav-title">PORTAL</div>
+<a class="link" href="https://www.chess.com" target="_blank">♟ RULES</a>
+<a class="link" href="https://www.youtube.com" target="_blank">🎬 EVENTS</a>
+<a class="link" href="https://www.google.com" target="_blank">👥 MEMBERS</a>
 </div>
 
 </div>
 
-<div class="rgb">Made by yogi136 • Sapphire Club</div>
+<div class="rgb">Made by yogi136 • Sapphire Club 🍌</div>
 
 <script>
 
-/* THEME */
+/* THEME SWITCH */
 function theme(){
-  let h = new Date().getHours();
-  let img = document.getElementById("themeImage");
+let h = new Date().getHours();
 
-  if(h >= 6 && h < 18){
-    document.body.classList.remove("dark");
-    img.src = "https://i.ibb.co/hRjTVF3w.png";
-  } else {
-    document.body.classList.add("dark");
-    img.src = "https://i.ibb.co/Zz89JYQ2.png";
-  }
+if(h >= 6 && h < 18){
+document.body.classList.remove("dark");
+}else{
+document.body.classList.add("dark");
+}
 }
 theme();
-setInterval(theme, 60000);
+setInterval(theme,60000);
 
 /* CALENDAR */
-let now = new Date();
+let now=new Date();
 
-document.getElementById("month").innerText =
+document.getElementById("month").innerText=
 now.toLocaleString('default',{month:'long',year:'numeric'});
 
-let first = new Date(now.getFullYear(),now.getMonth(),1).getDay();
-let last = new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
+let first=new Date(now.getFullYear(),now.getMonth(),1).getDay();
+let last=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
 
-let html = "";
+let html="";
 
-let days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-html += days.map(d=>`<div class="date" style="font-weight:900">${d}</div>`).join("");
+let days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+html+=days.map(d=>`<div class="date" style="font-weight:900">${d}</div>`).join("");
 
-for(let i=0;i<first;i++) html += "<div></div>";
+for(let i=0;i<first;i++) html+="<div></div>";
 
 for(let i=1;i<=last;i++){
-  html += `<div class="date ${i===now.getDate()?'today':''}">${i}</div>`;
+html+=`<div class="date ${i===now.getDate()?'today':''}">${i}</div>`;
 }
 
-document.getElementById("cal").innerHTML = html;
+document.getElementById("cal").innerHTML=html;
 
 /* MUSIC */
-let songs = [
-  {name:"Golden Brown",url:"https://www.youtube.com/watch?v=kcsGhOmULxQ"},
-  {name:"Numb",url:"https://www.youtube.com/watch?v=kXYiU_JCYtU"}
+let songs=[
+{name:"Golden Brown",url:"https://www.youtube.com/watch?v=kcsGhOmULxQ"},
+{name:"Numb",url:"https://www.youtube.com/watch?v=kXYiU_JCYtU"}
 ];
 
-let i = 0;
-let playing = false;
-
-let frame = document.getElementById("player");
-let btn = document.getElementById("btn");
+let i=0,playing=false;
+let frame=document.getElementById("player");
+let btn=document.getElementById("btn");
 
 function id(u){
-  return new URL(u).searchParams.get("v");
+return new URL(u).searchParams.get("v");
 }
 
 function load(x){
-  i = x;
-  frame.src = `https://www.youtube.com/embed/${id(songs[i].url)}?enablejsapi=1`;
-  document.getElementById("songName").innerText = songs[i].name;
+i=x;
+frame.src=`https://www.youtube.com/embed/${id(songs[i].url)}?enablejsapi=1`;
+document.getElementById("songName").innerText=songs[i].name;
 }
 
 load(i);
 
 function toggle(){
-  playing = !playing;
-  btn.innerText = playing ? "❚❚" : "▶";
+playing=!playing;
+btn.innerText=playing?"❚❚":"▶";
 
-  if(playing){
-    frame.src += "&autoplay=1";
-  } else {
-    load(i);
-  }
+if(playing){
+frame.src+="&autoplay=1";
+}else{
+load(i);
+}
 }
 
 function next(){
-  load((i+1)%songs.length);
-  playing = false;
-  btn.innerText = "▶";
+load((i+1)%songs.length);
+playing=false;
+btn.innerText="▶";
 }
 
 function prev(){
-  load((i-1+songs.length)%songs.length);
-  playing = false;
-  btn.innerText = "▶";
+load((i-1+songs.length)%songs.length);
+playing=false;
+btn.innerText="▶";
 }
 
 </script>
