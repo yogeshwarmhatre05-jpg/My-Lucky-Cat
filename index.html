@@ -19,9 +19,11 @@
 body{
   min-height:100vh;
   overflow-x:hidden;
+
   display:flex;
   flex-direction:column;
   align-items:center;
+
   padding:18px 0 40px;
 
   font-family:'Poppins',sans-serif;
@@ -42,13 +44,22 @@ body{
 
 /* RGB BODY BORDER */
 
-body::before{
-  content:"";
+.rgb-border{
   position:fixed;
   inset:0;
-  padding:2px;
+  pointer-events:none;
+  z-index:999;
+}
 
-  background:linear-gradient(
+.rgb-border::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  border:3px solid transparent;
+
+  border-image:
+  linear-gradient(
     90deg,
     #ff4d4d,
     #ffcc00,
@@ -56,40 +67,19 @@ body::before{
     #3b82f6,
     #a855f7,
     #ff4d4d
-  );
+  ) 1;
 
-  background-size:500% 500%;
-
-  animation:rgbMove 4s linear infinite;
-
-  z-index:-2;
-}
-
-body::after{
-  content:"";
-  position:fixed;
-  inset:2px;
-
-  background:
-  linear-gradient(
-    to bottom,
-    #fffffd,
-    #fdffe8,
-    #f7ffd2,
-    #f1ffc2
-  );
-
-  z-index:-1;
+  animation:rgbMove 3s linear infinite;
 }
 
 @keyframes rgbMove{
 
   0%{
-    background-position:0% 50%;
+    filter:hue-rotate(0deg);
   }
 
   100%{
-    background-position:500% 50%;
+    filter:hue-rotate(360deg);
   }
 
 }
@@ -114,46 +104,11 @@ body::after{
 
   border-radius:18px;
 
-  position:relative;
-
   color:#475569;
 
-  background:rgba(255,255,255,0.55);
+  background:rgba(255,255,255,0.7);
 
-  overflow:hidden;
-}
-
-.welcome-top::before{
-
-  content:"";
-
-  position:absolute;
-
-  inset:0;
-
-  padding:2px;
-
-  border-radius:18px;
-
-  background:linear-gradient(
-    90deg,
-    #ff4d4d,
-    #ffcc00,
-    #22c55e,
-    #3b82f6,
-    #a855f7,
-    #ff4d4d
-  );
-
-  background-size:500% 500%;
-
-  animation:rgbMove 4s linear infinite;
-
-  -webkit-mask:
-  linear-gradient(#fff 0 0) content-box,
-  linear-gradient(#fff 0 0);
-
-  -webkit-mask-composite:xor;
+  border:2px solid #d9f99d;
 }
 
 /* OWNER */
@@ -168,43 +123,9 @@ body::after{
 
   border-radius:18px;
 
-  background:rgba(255,255,255,0.55);
+  background:rgba(255,255,255,0.7);
 
-  position:relative;
-
-  overflow:hidden;
-}
-
-.owner-box::before{
-
-  content:"";
-
-  position:absolute;
-
-  inset:0;
-
-  padding:2px;
-
-  border-radius:18px;
-
-  background:linear-gradient(
-    90deg,
-    #22c55e,
-    #3b82f6,
-    #a855f7,
-    #ffcc00,
-    #22c55e
-  );
-
-  background-size:500% 500%;
-
-  animation:rgbMove 5s linear infinite;
-
-  -webkit-mask:
-  linear-gradient(#fff 0 0) content-box,
-  linear-gradient(#fff 0 0);
-
-  -webkit-mask-composite:xor;
+  border:2px solid #d9f99d;
 }
 
 .owner-title{
@@ -237,10 +158,6 @@ body::after{
     #a855f7
   );
 
-  background-size:300% 300%;
-
-  animation:rgbMove 5s linear infinite;
-
   -webkit-background-clip:text;
 
   -webkit-text-fill-color:transparent;
@@ -272,52 +189,13 @@ body::after{
   width:100%;
 
   background:
-  rgba(255,255,255,0.65);
+  rgba(255,255,255,0.7);
 
   border-radius:24px;
 
   padding:12px;
 
-  position:relative;
-
-  overflow:hidden;
-}
-
-/* RGB CARD BORDER */
-
-.music-player::before,
-.calendar::before,
-.nav-box::before{
-
-  content:"";
-
-  position:absolute;
-
-  inset:0;
-
-  padding:2px;
-
-  border-radius:24px;
-
-  background:linear-gradient(
-    90deg,
-    #ff4d4d,
-    #ffcc00,
-    #22c55e,
-    #3b82f6,
-    #a855f7,
-    #ff4d4d
-  );
-
-  background-size:500% 500%;
-
-  animation:rgbMove 4s linear infinite;
-
-  -webkit-mask:
-  linear-gradient(#fff 0 0) content-box,
-  linear-gradient(#fff 0 0);
-
-  -webkit-mask-composite:xor;
+  border:2px solid #d9f99d;
 }
 
 /* PLAYER */
@@ -368,9 +246,9 @@ iframe{
 
 .controls button{
 
-  width:110px;
+  width:120px;
 
-  height:34px;
+  height:36px;
 
   border:none;
 
@@ -390,10 +268,6 @@ iframe{
     #3b82f6,
     #a855f7
   );
-
-  background-size:300% 300%;
-
-  animation:rgbMove 5s linear infinite;
 }
 
 /* CALENDAR */
@@ -486,10 +360,6 @@ iframe{
     #3b82f6,
     #a855f7
   );
-
-  background-size:300% 300%;
-
-  animation:rgbMove 5s linear infinite;
 }
 
 /* FOOTER */
@@ -513,10 +383,6 @@ iframe{
     #a855f7
   );
 
-  background-size:300% 300%;
-
-  animation:rgbMove 6s linear infinite;
-
   -webkit-background-clip:text;
 
   -webkit-text-fill-color:transparent;
@@ -526,6 +392,8 @@ iframe{
 </head>
 
 <body>
+
+<div class="rgb-border"></div>
 
 <div class="welcome-top">
   WELCOME TO SAPPHIRE
@@ -549,7 +417,7 @@ iframe{
 
   <div class="music-player">
 
-    <div class="song" id="songText">
+    <div class="song">
       Now Playing : Golden Brown
     </div>
 
@@ -557,15 +425,17 @@ iframe{
 
       <iframe
       id="playerFrame"
-      allow="autoplay; fullscreen">
+      src="https://www.youtube.com/embed/kcsGhOmULxQ?enablejsapi=1"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
       </iframe>
 
     </div>
 
     <div class="controls">
 
-      <button onclick="toggleVideo()">
-        PLAY / PAUSE
+      <button id="playBtn">
+        PLAY
       </button>
 
     </div>
@@ -620,17 +490,17 @@ iframe{
 
 <script>
 
-/* VIDEO */
+/* YOUTUBE PLAYER */
 
 const frame =
 document.getElementById("playerFrame");
 
-frame.src =
-"https://www.youtube.com/embed/kcsGhOmULxQ?enablejsapi=1";
+const playBtn =
+document.getElementById("playBtn");
 
 let playing = false;
 
-function toggleVideo(){
+playBtn.addEventListener("click",()=>{
 
   if(!playing){
 
@@ -638,6 +508,8 @@ function toggleVideo(){
     '{"event":"command","func":"playVideo","args":""}',
     "*"
     );
+
+    playBtn.innerText = "PAUSE";
 
     playing = true;
 
@@ -648,11 +520,13 @@ function toggleVideo(){
     "*"
     );
 
+    playBtn.innerText = "PLAY";
+
     playing = false;
 
   }
 
-}
+});
 
 /* CALENDAR */
 
