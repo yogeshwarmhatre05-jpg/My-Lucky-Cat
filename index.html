@@ -27,6 +27,11 @@ body.dark{
   color:white;
 }
 
+/* MUSIC BORDER */
+body.music-on{
+  box-shadow:inset 0 0 40px #ff4d4d, 0 0 60px #ff1a1a;
+}
+
 /* BUTTON */
 #themeBtn{
   position:fixed;
@@ -71,16 +76,26 @@ body.dark .nav-box{
   border:3px solid #334155;
 }
 
-/* SCREEN */
+/* SCREEN CENTER FIX */
 .screen{
   width:100%;
   aspect-ratio:16/9;
   border-radius:16px;
   overflow:hidden;
   border:2px solid #edd5c4;
+  position:relative;
 }
 
-/* CAT IMAGE */
+/* YOUTUBE */
+#player{
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+}
+
+/* IMAGE */
 img{
   width:100%;
   height:100%;
@@ -105,14 +120,13 @@ img{
   gap:5px;
 }
 
-/* DAYS */
 .days div{
   text-align:center;
   font-size:10px;
   font-weight:800;
 }
 
-/* NUMBERS FIXED */
+/* FIXED NUMBERS */
 .dates div{
   height:32px;
   display:flex;
@@ -122,10 +136,24 @@ img{
   background:#fffaf5;
   border:1px solid #edd5c4;
   font-weight:bold;
+  color:#3b2a22; /* FIX FOR DAY MODE */
 }
 
+/* DARK MODE FIX */
+body.dark .dates div{
+  background:#1f2937;
+  border:1px solid #334155;
+  color:#ffffff; /* FIX FOR NIGHT MODE */
+}
+
+/* TODAY */
 .today{
   background:#ffb38a!important;
+  color:white!important;
+}
+
+body.dark .today{
+  background:#ff6b6b!important;
   color:white!important;
 }
 
@@ -160,21 +188,21 @@ img{
 
 <div class="wrapper">
 
-  <!-- 🐱 CAT IMAGE (DAY/NIGHT) -->
+  <!-- 🐱 CAT -->
   <div class="music-player">
     <div class="screen">
       <img id="catImg" src="">
     </div>
   </div>
 
-  <!-- YOUTUBE -->
+  <!-- 🎥 VIDEO -->
   <div class="music-player">
     <div class="screen">
       <div id="player"></div>
     </div>
   </div>
 
-  <!-- CALENDAR -->
+  <!-- 📅 CALENDAR -->
   <div class="calendar">
     <div class="header" id="monthYear"></div>
 
@@ -203,27 +231,26 @@ img{
 let player;
 
 /* CAT IMAGES */
-const dayCat = "https://i.ibb.co/qFhrggbt/image.png";
-const nightCat = "https://i.ibb.co/93NMvDYs/image.png";
+const dayCat="https://i.ibb.co/qFhrggbt/image.png";
+const nightCat="https://i.ibb.co/93NMvDYs/image.png";
 
 /* THEME */
 function updateTheme(){
-
   const hour=new Date().getHours();
   const cat=document.getElementById("catImg");
 
   if(hour>=6 && hour<18){
     document.body.classList.remove("dark");
-    cat.src = dayCat;
+    cat.src=dayCat;
   }else{
     document.body.classList.add("dark");
-    cat.src = nightCat;
+    cat.src=nightCat;
   }
 }
 updateTheme();
 setInterval(updateTheme,60000);
 
-/* MANUAL THEME */
+/* MANUAL TOGGLE */
 document.getElementById("themeBtn").onclick=function(){
   document.body.classList.toggle("dark");
 };
@@ -240,15 +267,13 @@ function onYouTubeIframeAPIReady(){
 /* BORDER ON PLAY */
 function onStateChange(event){
   if(event.data===YT.PlayerState.PLAYING){
-    document.body.style.border="8px solid #ff4d4d";
-    document.body.style.boxShadow="0 0 60px #ff3d3d";
+    document.body.classList.add("music-on");
   }else{
-    document.body.style.border="none";
-    document.body.style.boxShadow="none";
+    document.body.classList.remove("music-on");
   }
 }
 
-/* CALENDAR FIXED */
+/* CALENDAR */
 const monthYear=document.getElementById("monthYear");
 const dates=document.getElementById("dates");
 
@@ -264,12 +289,10 @@ monthYear.innerText=`${months[month]} ${year}`;
 const firstDay=new Date(year,month,1).getDay();
 const lastDate=new Date(year,month+1,0).getDate();
 
-/* EMPTY CELLS */
 for(let i=0;i<firstDay;i++){
   dates.innerHTML+=`<div></div>`;
 }
 
-/* NUMBERS (FIXED DISPLAY) */
 for(let i=1;i<=lastDate;i++){
   dates.innerHTML+=`<div class="${i===today?'today':''}">${i}</div>`;
 }
