@@ -5,290 +5,239 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sapphire Club</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
-
 <style>
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
 }
 
 body{
-min-height:100vh;
-display:flex;
-flex-direction:column;
-align-items:center;
-overflow-x:hidden;
-transition:0.6s;
-background:linear-gradient(135deg,#fff0e6,#ffd6b3,#ffb38a,#c97b63);
-background-size:400% 400%;
-animation:bgFlow 10s ease infinite;
-color:#1a1a1a;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  overflow-x:hidden;
+  transition:0.6s;
+  background:linear-gradient(to bottom,#fffaf4,#ffe9d6,#f5d2bc,#c49a7a);
 }
 
-@keyframes bgFlow{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
-
-/* DARK MODE */
 body.dark{
-background:linear-gradient(135deg,#0b1020,#0f172a,#111827,#020617);
-color:white;
+  background:linear-gradient(to bottom,#0f172a,#111827,#1e293b,#020617);
+  color:white;
 }
 
 /* HEADER */
 .header{
-margin:25px 0;
-text-align:center;
+  margin:18px 0;
+  text-align:center;
 }
 
 .glow{
-font-size:58px;
-font-weight:900;
-letter-spacing:7px;
-color:white;
-text-shadow:
-0 0 10px rgba(255,120,90,0.8),
-0 0 30px rgba(255,80,80,0.6),
-0 0 60px rgba(255,60,60,0.3);
-animation:pulse 2.2s infinite;
-}
-
-@keyframes pulse{
-0%,100%{transform:scale(1)}
-50%{transform:scale(1.07)}
+  font-size:58px;
+  font-weight:1000;
+  letter-spacing:6px;
+  color:#fff;
+  text-shadow:0 0 10px rgba(255,140,90,0.6),
+               0 0 25px rgba(255,80,80,0.4);
 }
 
 .sub{
-font-size:13px;
-letter-spacing:5px;
-opacity:0.85;
+  font-size:12px;
+  letter-spacing:4px;
+  opacity:0.8;
 }
 
-/* MAIN WRAPPER */
+/* WRAPPER */
 .wrapper{
-width:92%;
-max-width:390px;
-display:flex;
-flex-direction:column;
-gap:22px;
+  width:92%;
+  max-width:360px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
 }
 
-/* GLASS CARDS */
+/* GLASS */
 .glass{
-background:rgba(255,255,255,0.14);
-backdrop-filter:blur(18px);
-border-radius:24px;
-padding:16px;
-border:1px solid rgba(255,255,255,0.25);
-box-shadow:0 12px 35px rgba(0,0,0,0.25);
-transition:0.3s;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(10px);
+  border-radius:20px;
+  padding:12px;
+  border:1px solid rgba(255,255,255,0.2);
 }
 
-.glass:hover{
-transform:translateY(-4px);
+/* IMAGE */
+img{
+  width:100%;
+  border-radius:16px;
 }
 
-/* IMAGE CARD (IMPROVED IMPORTANT PART) */
-.hero-img{
-width:100%;
-border-radius:20px;
-overflow:hidden;
-box-shadow:0 10px 30px rgba(0,0,0,0.3);
-position:relative;
-}
-
-.hero-img img{
-width:100%;
-display:block;
-transform:scale(1.02);
-transition:0.4s;
-}
-
-.hero-img:hover img{
-transform:scale(1.08);
-}
-
-/* MUSIC */
+/* PLAYER */
 .screen{
-width:100%;
-aspect-ratio:16/9;
-border-radius:18px;
-overflow:hidden;
+  width:100%;
+  aspect-ratio:16/9;
+  border-radius:16px;
+  overflow:hidden;
 }
 
 iframe{
-width:100%;
-height:100%;
-border:none;
+  width:100%;
+  height:100%;
+  border:none;
 }
 
 .song{
-text-align:center;
-font-weight:700;
-margin-top:10px;
-font-size:14px;
+  text-align:center;
+  font-size:13px;
+  font-weight:800;
+  margin:8px 0;
 }
 
+/* BUTTONS */
 .controls{
-display:flex;
-justify-content:center;
-gap:14px;
-margin-top:10px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
 }
 
 button{
-padding:11px 15px;
-border-radius:50%;
-border:1px solid rgba(255,255,255,0.3);
-background:rgba(255,255,255,0.18);
-backdrop-filter:blur(10px);
-cursor:pointer;
-font-weight:900;
-transition:0.2s;
+  padding:10px 14px;
+  border:none;
+  border-radius:50%;
+  cursor:pointer;
+  font-weight:900;
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(6px);
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  transition:0.2s;
 }
 
 button:hover{
-transform:scale(1.15);
-background:rgba(255,255,255,0.35);
-}
-
-button:active{
-transform:scale(0.95);
+  transform:scale(1.1);
 }
 
 /* CALENDAR */
 .month{
-text-align:center;
-font-weight:900;
-margin-bottom:10px;
+  text-align:center;
+  font-weight:900;
+  margin-bottom:10px;
 }
 
 .grid{
-display:grid;
-grid-template-columns:repeat(7,1fr);
-gap:6px;
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
 }
 
 .date{
-text-align:center;
-font-size:12px;
-padding:7px;
-border-radius:10px;
-background:rgba(255,255,255,0.25);
+  text-align:center;
+  font-size:12px;
+  padding:6px;
+  border-radius:10px;
+  background:rgba(255,255,255,0.3);
 }
 
 .today{
-background:#ff7a4d;
-color:white;
-font-weight:900;
-box-shadow:0 0 12px rgba(255,120,80,0.5);
+  background:#ffb38a;
+  color:white;
+  font-weight:900;
 }
 
-/* NAV */
+/* DARK MODE FIX */
+body.dark .date{
+  background:rgba(255,255,255,0.08);
+  color:white;
+}
+
+/* LINKS */
 .nav-title{
-text-align:center;
-font-weight:900;
-margin-bottom:10px;
-letter-spacing:2px;
+  text-align:center;
+  font-weight:900;
+  margin-bottom:10px;
 }
 
 .link{
-display:block;
-text-align:center;
-margin:8px 0;
-padding:12px;
-border-radius:14px;
-text-decoration:none;
-font-size:13px;
-font-weight:800;
-background:rgba(255,255,255,0.3);
-color:#2b1f1a;
-transition:0.25s;
+  display:flex;
+  justify-content:center;
+  margin:8px 0;
+  padding:12px;
+  border-radius:14px;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:900;
+  background:rgba(255,255,255,0.35);
+  color:#3b2a22;
+  transition:0.25s;
 }
 
 .link:hover{
-transform:scale(1.05);
-background:rgba(255,255,255,0.5);
+  transform:translateY(-2px) scale(1.03);
 }
 
-/* FOOTER RGB */
+/* RGB TEXT */
 .rgb{
-margin:18px;
-text-align:center;
-font-weight:900;
-font-size:14px;
-background:linear-gradient(90deg,#ff4d4d,#ffcc00,#22c55e,#3b82f6,#a855f7);
-background-size:300% 300%;
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:rgb 6s infinite;
+  margin:14px;
+  text-align:center;
+  font-weight:900;
+  font-family:cursive;
+  font-size:14px;
+  background:linear-gradient(90deg,#ff4d4d,#ffcc00,#22c55e,#3b82f6,#a855f7);
+  background-size:300% 300%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:rgb 6s infinite;
 }
 
 @keyframes rgb{
-0%{background-position:0%}
-50%{background-position:100%}
-100%{background-position:0%}
+  0%{background-position:0%}
+  50%{background-position:100%}
+  100%{background-position:0%}
 }
-
-body{
--webkit-tap-highlight-color:transparent;
-}
-
 </style>
 </head>
 
 <body>
 
 <div class="header">
-<div class="glow">WELCOME</div>
-<div class="sub">TO SAPPHIRE CLUB</div>
+  <div class="glow">WELCOME</div>
+  <div class="sub">TO SAPPHIRE CLUB</div>
 </div>
 
 <div class="wrapper">
 
-<!-- IMAGE (NOW MORE PREMIUM) -->
+<!-- IMAGE -->
 <div class="glass">
-<div class="hero-img">
-<img id="themeImage" src="https://i.ibb.co/hRjTVF3w.png">
-</div>
+  <img id="themeImage" src="https://i.ibb.co/hRjTVF3w.png">
 </div>
 
 <!-- MUSIC -->
 <div class="glass">
-<div class="screen">
-<iframe id="player"></iframe>
-</div>
+  <div class="screen">
+    <iframe id="player"></iframe>
+  </div>
 
-<div class="song">Now Playing: <span id="songName"></span></div>
+  <div class="song">Now Playing: <span id="songName"></span></div>
 
-<div class="controls">
-<button onclick="prev()">⏮</button>
-<button onclick="toggle()" id="btn">▶</button>
-<button onclick="next()">⏭</button>
-</div>
+  <div class="controls">
+    <button onclick="prev()">⏮</button>
+    <button onclick="toggle()" id="btn">▶</button>
+    <button onclick="next()">⏭</button>
+  </div>
 </div>
 
 <!-- CALENDAR -->
 <div class="glass">
-<div class="month" id="month"></div>
-<div class="grid" id="cal"></div>
+  <div class="month" id="month"></div>
+  <div class="grid" id="cal"></div>
 </div>
 
 <!-- NAV -->
 <div class="glass">
-<div class="nav-title">PORTAL</div>
-
-<a class="link" href="https://www.chess.com" target="_blank">♟ RULES</a>
-<a class="link" href="https://www.youtube.com" target="_blank">🎬 EVENTS</a>
-<a class="link" href="https://www.google.com" target="_blank">👥 MEMBERS</a>
-<a class="link" href="#">⚡ CLICK HERE</a>
-
+  <div class="nav-title">PORTAL</div>
+  <a class="link" href="https://www.chess.com" target="_blank">♟ RULES</a>
+  <a class="link" href="https://www.youtube.com" target="_blank">🎬 EVENTS</a>
+  <a class="link" href="https://www.google.com" target="_blank">👥 MEMBERS</a>
 </div>
 
 </div>
@@ -299,81 +248,87 @@ body{
 
 /* THEME */
 function theme(){
-let h=new Date().getHours();
-let dark=h<6||h>=18;
+  let h = new Date().getHours();
+  let img = document.getElementById("themeImage");
 
-document.body.classList.toggle("dark",dark);
-
-document.getElementById("themeImage").src =
-dark
-? "https://i.ibb.co/Zz89JYQ2.png"
-: "https://i.ibb.co/hRjTVF3w.png";
+  if(h >= 6 && h < 18){
+    document.body.classList.remove("dark");
+    img.src = "https://i.ibb.co/hRjTVF3w.png";
+  } else {
+    document.body.classList.add("dark");
+    img.src = "https://i.ibb.co/Zz89JYQ2.png";
+  }
 }
 theme();
-setInterval(theme,60000);
+setInterval(theme, 60000);
 
 /* CALENDAR */
-function calendar(){
-let now=new Date();
+let now = new Date();
 
 document.getElementById("month").innerText =
 now.toLocaleString('default',{month:'long',year:'numeric'});
 
-let first=new Date(now.getFullYear(),now.getMonth(),1).getDay();
-let last=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
+let first = new Date(now.getFullYear(),now.getMonth(),1).getDay();
+let last = new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
 
-let cal=document.getElementById("cal");
-cal.innerHTML="";
+let html = "";
 
-for(let i=0;i<first;i++) cal.innerHTML+="<div></div>";
+let days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+html += days.map(d=>`<div class="date" style="font-weight:900">${d}</div>`).join("");
+
+for(let i=0;i<first;i++) html += "<div></div>";
 
 for(let i=1;i<=last;i++){
-cal.innerHTML+=`<div class="date ${i===now.getDate()?'today':''}">${i}</div>`;
+  html += `<div class="date ${i===now.getDate()?'today':''}">${i}</div>`;
 }
-}
-calendar();
+
+document.getElementById("cal").innerHTML = html;
 
 /* MUSIC */
-let songs=[
-{name:"Golden Brown",id:"kcsGhOmULxQ"},
-{name:"Numb",id:"kXYiU_JCYtU"}
+let songs = [
+  {name:"Golden Brown",url:"https://www.youtube.com/watch?v=kcsGhOmULxQ"},
+  {name:"Numb",url:"https://www.youtube.com/watch?v=kXYiU_JCYtU"}
 ];
 
-let i=0;
-let playing=false;
+let i = 0;
+let playing = false;
 
-let frame=document.getElementById("player");
-let btn=document.getElementById("btn");
+let frame = document.getElementById("player");
+let btn = document.getElementById("btn");
+
+function id(u){
+  return new URL(u).searchParams.get("v");
+}
 
 function load(x){
-frame.src=`https://www.youtube.com/embed/${songs[x].id}?enablejsapi=1&origin=${location.origin}`;
-document.getElementById("songName").innerText=songs[x].name;
+  i = x;
+  frame.src = `https://www.youtube.com/embed/${id(songs[i].url)}?enablejsapi=1`;
+  document.getElementById("songName").innerText = songs[i].name;
 }
 
 load(i);
 
 function toggle(){
-playing=!playing;
-btn.innerText=playing?"❚❚":"▶";
+  playing = !playing;
+  btn.innerText = playing ? "❚❚" : "▶";
 
-frame.contentWindow.postMessage(JSON.stringify({
-event:"command",
-func:playing?"playVideo":"pauseVideo"
-}),"*");
+  if(playing){
+    frame.src += "&autoplay=1";
+  } else {
+    load(i);
+  }
 }
 
 function next(){
-i=(i+1)%songs.length;
-playing=false;
-btn.innerText="▶";
-load(i);
+  load((i+1)%songs.length);
+  playing = false;
+  btn.innerText = "▶";
 }
 
 function prev(){
-i=(i-1+songs.length)%songs.length;
-playing=false;
-btn.innerText="▶";
-load(i);
+  load((i-1+songs.length)%songs.length);
+  playing = false;
+  btn.innerText = "▶";
 }
 
 </script>
