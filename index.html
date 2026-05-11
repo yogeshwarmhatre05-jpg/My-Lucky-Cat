@@ -3,70 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Sapphire Club</title>
 
 <style>
 
 *{
   box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-  margin:0;
   min-height:100vh;
   display:flex;
   flex-direction:column;
   align-items:center;
   font-family:Arial,sans-serif;
-  overflow-x:hidden;
-  position:relative;
   transition:0.5s;
 
-  /* ☀️ LIGHT BANANA THEME */
+  /* 🍌 LIGHT BANANA THEME */
   background:linear-gradient(
     to bottom,
-    #fff9db 0%,
-    #fff3b0 35%,
-    #ffe680 70%,
-    #ffd24d 100%
+    #fffef6 0%,
+    #fff9c9 35%,
+    #fff3a0 70%,
+    #ffe066 100%
   );
 }
 
-/* 🌙 DARK BLUE THEME */
-
+/* 🌙 DARK BLUE */
 body.dark{
   background:linear-gradient(
     to bottom,
-    #0b1220 0%,
-    #0a1a33 35%,
-    #06142a 70%,
+    #050816 0%,
+    #0a1633 40%,
+    #061022 70%,
     #020617 100%
   );
   color:white;
 }
 
-/* paw (unchanged) */
-.paw{
-  position:absolute;
-  font-size:20px;
-  opacity:0.15;
-  animation:float 10s linear infinite;
-  z-index:0;
-}
-
-@keyframes float{
-  0%{transform:translateY(100vh) rotate(0deg);}
-  100%{transform:translateY(-120px) rotate(360deg);}
-}
-
-/* title */
+/* TITLE */
 .welcome-top{
-  margin-top:14px;
+  margin-top:16px;
   font-size:22px;
   font-weight:900;
-  color:#5c3b00;
-  letter-spacing:2px;
+  color:#5a4300;
   z-index:2;
 }
 
@@ -74,24 +56,25 @@ body.dark .welcome-top{
   color:#f8fafc;
 }
 
-/* wrapper */
+/* WRAPPER */
 .wrapper{
   width:100%;
-  max-width:290px;
+  max-width:320px;
+  margin-top:18px;
   display:flex;
   flex-direction:column;
   gap:18px;
   z-index:2;
-  margin-top:20px;
 }
 
-/* image box */
+/* IMAGE */
 .screen{
   width:100%;
   aspect-ratio:16/9;
   border-radius:16px;
   overflow:hidden;
-  border:2px solid #e6c24a;
+  border:3px solid #f2d36a;
+  box-shadow:0 10px 20px rgba(0,0,0,0.15);
 }
 
 body.dark .screen{
@@ -105,30 +88,38 @@ img{
   display:block;
 }
 
-/* music + calendar (kept minimal changes) */
-.music-player, .calendar{
+/* CARDS */
+.card{
   background:rgba(255,255,255,0.75);
-  border-radius:28px;
+  border-radius:20px;
+  padding:10px;
+}
+
+body.dark .card{
+  background:rgba(15,23,42,0.85);
+}
+
+/* MUSIC + CALENDAR STYLES (kept minimal) */
+.music-player, .calendar, .nav-box{
+  border-radius:20px;
   padding:12px;
-  transition:0.5s;
+  background:rgba(255,255,255,0.75);
 }
 
 body.dark .music-player,
-body.dark .calendar{
-  background:rgba(15,23,42,0.85);
-  color:white;
-}
-
-/* nav */
-.nav-box{
-  background:#6b4f00;
-  color:white;
-  border-radius:24px;
-  padding:14px;
-}
-
+body.dark .calendar,
 body.dark .nav-box{
-  background:#0f172a;
+  background:rgba(15,23,42,0.85);
+}
+
+/* BUTTON */
+button{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  border:none;
+  font-size:18px;
+  font-weight:bold;
 }
 
 </style>
@@ -141,15 +132,49 @@ body.dark .nav-box{
 <div class="wrapper">
 
   <!-- 🖼 IMAGE -->
-  <div class="screen">
-    <img id="themeImage" src="https://ibb.co/hRjTVF3w" alt="theme image">
+  <div class="card">
+    <div class="screen">
+      <img id="themeImage" src="" alt="theme">
+    </div>
+  </div>
+
+  <!-- 🎵 MUSIC -->
+  <div class="music-player">
+
+    <div class="screen">
+      <iframe id="playerFrame" allow="autoplay"></iframe>
+    </div>
+
+    <div style="display:flex;justify-content:center;margin-top:10px;">
+      <button onclick="togglePlay()" id="btn">▶</button>
+    </div>
+
+  </div>
+
+  <!-- 📅 CALENDAR -->
+  <div class="calendar">
+
+    <div id="monthYear" style="text-align:center;font-weight:900;margin-bottom:10px;"></div>
+    <div id="dates" style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;"></div>
+
+  </div>
+
+  <!-- 📦 MENU -->
+  <div class="nav-box">
+
+    <div style="text-align:center;font-weight:900;margin-bottom:10px;">MENU</div>
+
+    <a href="#">RULES</a>
+    <a href="#">EVENTS</a>
+    <a href="#">MEMBERS</a>
+
   </div>
 
 </div>
 
 <script>
 
-/* ☀️🌙 THEME SWITCH + IMAGE SWITCH */
+/* 🌞🌙 THEME SWITCH */
 
 function updateTheme(){
 
@@ -158,20 +183,56 @@ function updateTheme(){
 
   if(hour >= 6 && hour < 18){
     document.body.classList.remove("dark");
-
-    // ☀️ DAY IMAGE
-    img.src = "https://ibb.co/hRjTVF3w";
-
+    img.src = "https://i.ibb.co/hRjTVF3w.jpg";
   } else {
     document.body.classList.add("dark");
-
-    // 🌙 NIGHT IMAGE
-    img.src = "https://ibb.co/Zz89JYQ2";
+    img.src = "https://i.ibb.co/Zz89JYQ2.jpg";
   }
 }
 
 updateTheme();
 setInterval(updateTheme,60000);
+
+/* 🎵 MUSIC */
+let frame = document.getElementById("playerFrame");
+let playing = false;
+
+frame.src = "https://www.youtube.com/embed/kcsGhOmULxQ?enablejsapi=1";
+
+function togglePlay(){
+
+  let btn = document.getElementById("btn");
+
+  if(!playing){
+    frame.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}',"*");
+    btn.innerText = "❚❚";
+    playing = true;
+  } else {
+    frame.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}',"*");
+    btn.innerText = "▶";
+    playing = false;
+  }
+}
+
+/* 📅 CALENDAR */
+const now = new Date();
+const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+document.getElementById("monthYear").innerText =
+monthNames[now.getMonth()] + " " + now.getFullYear();
+
+const dates = document.getElementById("dates");
+
+let firstDay = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
+let lastDate = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+
+for(let i=0;i<firstDay;i++){
+  dates.innerHTML += "<div></div>";
+}
+
+for(let i=1;i<=lastDate;i++){
+  dates.innerHTML += `<div>${i}</div>`;
+}
 
 </script>
 
