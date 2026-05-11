@@ -21,17 +21,17 @@ align-items:center;
 overflow-x:hidden;
 transition:0.5s;
 
-/* ✅ ONLY COLOR ADDED */
+/* color kept */
 background:linear-gradient(to bottom,#fffaf4,#ffe9d6,#f5d2bc,#c49a7a);
 }
 
-/* DARK */
+/* dark mode */
 body.dark{
 background:linear-gradient(to bottom,#0f172a,#111827,#1e293b,#020617);
 color:white;
 }
 
-/* HEADER (NO EFFECT) */
+/* HEADER */
 .header{
 margin:18px 0;
 text-align:center;
@@ -41,13 +41,20 @@ gap:4px;
 z-index:2;
 }
 
+/* 🔥 BIG WELCOME + BORDER */
 .glow{
-font-size:26px;
-font-weight:900;
-letter-spacing:3px;
+font-size:72px;
+font-weight:1000;
+letter-spacing:6px;
 color:#fff;
-text-shadow:0 0 10px rgba(255,140,90,0.8),
-0 0 20px rgba(255,140,90,0.5);
+
+/* border effect */
+-webkit-text-stroke:2px rgba(0,0,0,0.25);
+
+text-shadow:
+0 0 8px rgba(255,140,90,0.6),
+0 0 18px rgba(255,140,90,0.5),
+0 0 35px rgba(255,80,80,0.4);
 }
 
 .sub{
@@ -262,15 +269,6 @@ animation:rgb 6s infinite;
 <div class="rgb">Made by yogi136 • Sapphire Club</div>
 
 <script>
-
-/* PARTICLES */
-for(let i=0;i<20;i++){
-let d=document.createElement("div");
-d.className="particle";
-d.style.left=Math.random()*100+"vw";
-d.style.animationDuration=(5+Math.random()*5)+"s";
-document.body.appendChild(d);
-}
 
 /* THEME */
 function theme(){
