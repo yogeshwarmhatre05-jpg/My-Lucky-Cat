@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,26 +21,26 @@ body{
   font-family:Arial,sans-serif;
   overflow-x:hidden;
   position:relative;
-  transition:0.6s;
+  transition:0.5s;
 
-  /* 🍌 LIGHTEST BANANA (PASTEL CREAM) */
+  /* ☀️ LIGHTEST BANANA */
   background:linear-gradient(
     to bottom,
-    #fffef7,
-    #fff9e6,
-    #fff3cc,
-    #ffeeb3
+    #fffef7 0%,
+    #fff9e6 35%,
+    #fff3cc 65%,
+    #ffeeb3 100%
   );
 }
 
-/* 🌙 DARK BLUE */
+/* 🌙 DARK MODE */
 body.dark{
   background:linear-gradient(
     to bottom,
-    #0b1220,
-    #0f1b3d,
-    #0a1a4a,
-    #050814
+    #0f172a 0%,
+    #111827 35%,
+    #1e293b 65%,
+    #020617 100%
   );
   color:white;
 }
@@ -47,10 +48,11 @@ body.dark{
 /* TEXT FIX */
 body.dark .welcome-top,
 body.dark .header,
-body.dark .nav-title,
+body.dark .days div,
 body.dark .footer,
-body.dark .marquee{
-  color:#e6f0ff;
+body.dark .marquee,
+body.dark .nav-title{
+  color:#f8fafc;
 }
 
 /* CARDS */
@@ -63,7 +65,7 @@ body.dark .marquee{
 /* LIGHT CARDS */
 .music-player,
 .calendar{
-  background:rgba(255,255,255,0.8);
+  background:rgba(255,255,255,0.75);
   border:3px solid #f3e7c3;
   border-radius:28px;
 }
@@ -75,13 +77,12 @@ body.dark .calendar{
   border:3px solid #334155;
 }
 
-/* NAV DARK */
+/* NAV */
 body.dark .nav-box{
   background:rgba(2,6,23,0.95);
   border:3px solid #334155;
 }
 
-/* HEADER */
 .welcome-top{
   margin-top:14px;
   font-size:20px;
@@ -113,16 +114,36 @@ body.dark button{
 }
 
 /* CALENDAR */
-.dates div{
-  padding:6px;
-  border-radius:10px;
-  text-align:center;
-  background:#fffdf3;
+.calendar{
+  width:100%;
+  padding:14px;
+  border-radius:28px;
 }
 
-body.dark .dates div{
-  background:#1e293b;
-  color:white;
+.header{
+  text-align:center;
+  font-size:22px;
+  font-weight:900;
+  color:#5c3b2e;
+  margin-bottom:16px;
+}
+
+.dates{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+}
+
+.dates div{
+  height:30px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:10px;
+  font-size:11px;
+  font-weight:700;
+  background:#fffdf3;
+  border:1px solid #edd5c4;
 }
 
 .today{
@@ -147,26 +168,10 @@ body.dark .nav a{
   color:white;
 }
 
-/* FLUFF */
-.fluff{
-  position:absolute;
-  bottom:0;
-  width:100%;
-  height:120px;
-  background:
-  radial-gradient(circle at 10% 100%, #fff6dd 80px, transparent 81px),
-  radial-gradient(circle at 30% 100%, #fff2c2 90px, transparent 91px),
-  radial-gradient(circle at 50% 100%, #fff6dd 80px, transparent 81px),
-  radial-gradient(circle at 70% 100%, #fff2c2 90px, transparent 91px),
-  radial-gradient(circle at 90% 100%, #fff6dd 80px, transparent 81px);
-}
-
 </style>
 </head>
 
 <body>
-
-<div class="fluff"></div>
 
 <div class="welcome-top">WELCOME TO SAPPHIRE</div>
 
@@ -191,8 +196,11 @@ body.dark .nav a{
 
 <!-- CALENDAR -->
 <div class="calendar">
+
 <div class="header" id="monthYear"></div>
+
 <div class="dates" id="dates"></div>
+
 </div>
 
 <!-- NAV -->
@@ -207,25 +215,27 @@ body.dark .nav a{
 
 </div>
 
-<div class="footer">Made by yogi136</div>
+<div style="text-align:center;margin-top:10px;">
+Made by yogi136
+</div>
 
 <script>
 
-/* 🌙 THEME */
+/* ☀️🌙 THEME + IMAGE */
 function updateTheme(){
 
-let h = new Date().getHours();
+let hour = new Date().getHours();
 let img = document.getElementById("themeImage");
 
-if(h >= 6 && h < 18){
+if(hour >= 6 && hour < 18){
 
 document.body.classList.remove("dark");
-img.src = "https://i.ibb.co/qFhrggbt/image.png";
+img.src = "https://i.ibb.co/hRjTVF3w.png";
 
 }else{
 
 document.body.classList.add("dark");
-img.src = "https://i.ibb.co/93NMvDYs/image.png";
+img.src = "https://i.ibb.co/Zz89JYQ2.png";
 
 }
 
@@ -235,41 +245,51 @@ updateTheme();
 setInterval(updateTheme,60000);
 
 /* 📅 CALENDAR */
-let now=new Date();
-let monthYear=document.getElementById("monthYear");
-let dates=document.getElementById("dates");
+const monthYear = document.getElementById("monthYear");
+const dates = document.getElementById("dates");
 
-const months=[
-"Jan","Feb","Mar","Apr","May","Jun",
-"Jul","Aug","Sep","Oct","Nov","Dec"
+const now = new Date();
+const year = now.getFullYear();
+const month = now.getMonth();
+const today = now.getDate();
+
+const months = [
+"January","February","March","April","May","June",
+"July","August","September","October","November","December"
 ];
 
-monthYear.innerText = months[now.getMonth()]+" "+now.getFullYear();
+monthYear.innerText = `${months[month]} ${year}`;
 
-let first=new Date(now.getFullYear(),now.getMonth(),1).getDay();
-let last=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
+const firstDay = new Date(year,month,1).getDay();
+const lastDate = new Date(year,month+1,0).getDate();
 
-for(let i=0;i<first;i++){
-dates.innerHTML+="<div></div>";
+for(let i=0;i<firstDay;i++){
+dates.innerHTML += `<div></div>`;
 }
 
-for(let i=1;i<=last;i++){
-dates.innerHTML+=`<div class="${i===now.getDate()?'today':''}">${i}</div>`;
+for(let i=1;i<=lastDate;i++){
+if(i===today){
+dates.innerHTML += `<div class="today">${i}</div>`;
+}else{
+dates.innerHTML += `<div>${i}</div>`;
+}
 }
 
 /* 🎵 MUSIC */
-let songs=[{src:"https://youtu.be/kcsGhOmULxQ",name:"Golden Brown"}];
+let songs = [
+{ src:"https://youtu.be/kcsGhOmULxQ" }
+];
 
-let frame=document.getElementById("playerFrame");
-let btn=document.getElementById("toggleBtn");
-let playing=false;
+let frame = document.getElementById("playerFrame");
+let btn = document.getElementById("toggleBtn");
+let playing = false;
 
 function convert(url){
-let id=url.split("youtu.be/")[1];
+let id = url.split("youtu.be/")[1];
 return "https://www.youtube.com/embed/"+id+"?enablejsapi=1";
 }
 
-frame.src=convert(songs[0].src);
+frame.src = convert(songs[0].src);
 
 function togglePlay(){
 
@@ -281,7 +301,7 @@ frame.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":"
 btn.innerText="▶";
 }
 
-playing=!playing;
+playing = !playing;
 
 }
 
