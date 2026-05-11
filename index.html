@@ -21,33 +21,17 @@ align-items:center;
 overflow-x:hidden;
 transition:0.5s;
 
-/* 🌅 DAY THEME COLOR (added from your first code) */
+/* ✅ ONLY COLOR ADDED */
 background:linear-gradient(to bottom,#fffaf4,#ffe9d6,#f5d2bc,#c49a7a);
 }
 
-/* 🌙 NIGHT MODE */
+/* DARK */
 body.dark{
 background:linear-gradient(to bottom,#0f172a,#111827,#1e293b,#020617);
 color:white;
 }
 
-/* PARTICLES */
-.particle{
-position:fixed;
-width:5px;
-height:5px;
-background:white;
-border-radius:50%;
-opacity:0.15;
-animation:floatUp linear infinite;
-}
-
-@keyframes floatUp{
-from{transform:translateY(100vh);}
-to{transform:translateY(-10vh);}
-}
-
-/* HEADER */
+/* HEADER (NO EFFECT) */
 .header{
 margin:18px 0;
 text-align:center;
@@ -57,36 +41,19 @@ gap:4px;
 z-index:2;
 }
 
-/* 💎 ULTRA WELCOME (from your first code) */
 .glow{
-font-size:68px;
-font-weight:1000;
-letter-spacing:10px;
-text-align:center;
-
-background:linear-gradient(90deg,#fff,#ffb38a,#ff3b3b,#fff);
-background-size:400% 400%;
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-
-text-shadow:
-0 0 10px rgba(255,255,255,0.5),
-0 0 30px rgba(255,80,80,0.6),
-0 0 60px rgba(255,80,80,0.4);
-
-animation:glow 2.8s ease-in-out infinite;
+font-size:26px;
+font-weight:900;
+letter-spacing:3px;
+color:#fff;
+text-shadow:0 0 10px rgba(255,140,90,0.8),
+0 0 20px rgba(255,140,90,0.5);
 }
 
 .sub{
 font-size:12px;
 letter-spacing:4px;
 opacity:0.8;
-}
-
-@keyframes glow{
-0%{transform:scale(1);background-position:0%;}
-50%{transform:scale(1.12);background-position:100%;}
-100%{transform:scale(1);background-position:0%;}
 }
 
 /* WRAPPER */
@@ -287,6 +254,7 @@ animation:rgb 6s infinite;
 <a class="link" href="https://www.youtube.com" target="_blank">🎬 EVENTS</a>
 <a class="link" href="https://www.google.com" target="_blank">👥 MEMBERS</a>
 <a class="link" href="#">⚡ CLICK HERE</a>
+
 </div>
 
 </div>
@@ -304,13 +272,12 @@ d.style.animationDuration=(5+Math.random()*5)+"s";
 document.body.appendChild(d);
 }
 
-/* DAY / NIGHT THEME */
-function updateTheme(){
+/* THEME */
+function theme(){
 let h=new Date().getHours();
 document.body.classList.toggle("dark",!(h>=6 && h<18));
 }
-updateTheme();
-setInterval(updateTheme,60000);
+theme();
 
 /* CALENDAR */
 let now=new Date();
