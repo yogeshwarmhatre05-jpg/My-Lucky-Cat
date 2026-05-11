@@ -1,73 +1,25 @@
 <!DOCTYPE html>
 <html>
-<body style="margin: 0; display: flex; justify-content: center; align-items: center; background: #333;">
-    <canvas id="flowerCanvas" width="300" height="1200" style="box-shadow: 0 0 20px rgba(0,0,0,0.5);"></canvas>
+<body style="margin: 0; background: #333; display: flex; justify-content: center;">
+
+    <canvas id="myCanvas" width="300" height="1200"></canvas>
 
     <script>
-        const canvas = document.getElementById('flowerCanvas');
+        const canvas = document.getElementById('myCanvas');
         const ctx = canvas.getContext('2d');
+        const img = new Image();
 
-        function drawPetal(x, y, length, width, angle, color) {
-            ctx.save();
-            ctx.translate(x, y);
-            ctx.rotate(angle);
-            
-            ctx.beginPath();
-            ctx.moveTo(0, 0);
-            // Sharp dahlia-style tip logic
-            ctx.bezierCurveTo(width / 2, -length / 4, width, -length / 2, 0, -length);
-            ctx.bezierCurveTo(-width, -length / 2, -width / 2, -length / 4, 0, 0);
-            
-            ctx.fillStyle = color;
-            ctx.shadowBlur = 8; // Softer edges
-            ctx.shadowColor = color;
-            ctx.fill();
-            ctx.restore();
-        }
+        // Replace this with the actual path to your image file
+        img.src = '1000008877.jpg'; 
 
-        function draw() {
-            // 1. Background Gradient (Soft beige/green wash)
-            const bgGrad = ctx.createLinearGradient(0, 0, 300, 1200);
-            bgGrad.addColorStop(0, '#e5e1ba');
-            bgGrad.addColorStop(0.5, '#f7f1d5');
-            bgGrad.addColorStop(1, '#fdf5e6');
-            ctx.fillStyle = bgGrad;
-            ctx.fillRect(0, 0, 300, 1200);
+        img.onload = function() {
+            // Calculate scale to fill the 300x1200 area (Aspect Fill)
+            const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+            const x = (canvas.width / 2) - (img.width / 2) * scale;
+            const y = (canvas.height / 2) - (img.height / 2) * scale;
 
-            // 2. Position center in the bottom-right corner area
-            const centerX = 280; 
-            const centerY = 1000;
-
-            // 3. Define petal layers (Outer to Inner)
-            const layers = [
-                // Pale outer petals
-                { count: 14, length: 320, width: 90, color: 'rgba(255, 240, 150, 0.3)' },
-                // Mid-tone yellow
-                { count: 18, length: 240, width: 70, color: 'rgba(255, 215, 60, 0.5)' },
-                // Saturated gold
-                { count: 16, length: 160, width: 50, color: 'rgba(255, 190, 0, 0.7)' },
-                // Deep orange core
-                { count: 12, length: 80, width: 30, color: 'rgba(230, 90, 40, 0.8)' }
-            ];
-
-            layers.forEach((layer, index) => {
-                for (let i = 0; i < layer.count; i++) {
-                    // Spread petals primarily toward the top-left to fill the 1200px height
-                    const baseAngle = (i / layer.count) * Math.PI * 2;
-                    const jitter = (Math.random() - 0.5) * 0.2;
-                    drawPetal(centerX, centerY, layer.length, layer.width, baseAngle + jitter, layer.color);
-                }
-            });
-            
-            // 4. Subtle texture overlay (to mimic paper)
-            ctx.globalCompositeOperation = 'multiply';
-            ctx.fillStyle = 'rgba(200, 190, 150, 0.1)';
-            for(let i=0; i<500; i++) {
-                ctx.fillRect(Math.random()*300, Math.random()*1200, 1, 1);
-            }
-        }
-
-        draw();
+            ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+        };
     </script>
 </body>
 </html>
