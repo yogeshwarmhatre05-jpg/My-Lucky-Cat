@@ -20,21 +20,20 @@ body{
   font-family:Arial,sans-serif;
   overflow-x:hidden;
   position:relative;
-  transition:0.5s;
+  transition:0.6s;
 
-  /* 🍌 LIGHT BANANA (PASTEL) */
+  /* 🍌 LIGHTEST BANANA (PASTEL CREAM) */
   background:linear-gradient(
     to bottom,
-    #fffdf6,
-    #fff7dd,
-    #fff1c2,
-    #ffeaa8
+    #fffef7,
+    #fff9e6,
+    #fff3cc,
+    #ffeeb3
   );
 }
 
-/* 🌙 DARK BLUE THEME */
+/* 🌙 DARK BLUE */
 body.dark{
-
   background:linear-gradient(
     to bottom,
     #0b1220,
@@ -42,7 +41,6 @@ body.dark{
     #0a1a4a,
     #050814
   );
-
   color:white;
 }
 
@@ -62,27 +60,28 @@ body.dark .marquee{
   transition:0.5s;
 }
 
-/* LIGHT MODE CARDS */
+/* LIGHT CARDS */
 .music-player,
 .calendar{
-  background:rgba(255,255,255,0.75);
-  border:3px solid #f3e2b8;
+  background:rgba(255,255,255,0.8);
+  border:3px solid #f3e7c3;
   border-radius:28px;
 }
 
-/* DARK MODE CARDS */
+/* DARK CARDS */
 body.dark .music-player,
 body.dark .calendar{
   background:rgba(15,23,42,0.78);
   border:3px solid #334155;
 }
 
-/* NAV */
+/* NAV DARK */
 body.dark .nav-box{
   background:rgba(2,6,23,0.95);
   border:3px solid #334155;
 }
 
+/* HEADER */
 .welcome-top{
   margin-top:14px;
   font-size:20px;
@@ -96,7 +95,6 @@ body.dark .nav-box{
   height:100%;
   object-fit:cover;
   display:block;
-  border-radius:16px;
 }
 
 /* BUTTON */
@@ -119,7 +117,7 @@ body.dark button{
   padding:6px;
   border-radius:10px;
   text-align:center;
-  background:#fffaf0;
+  background:#fffdf3;
 }
 
 body.dark .dates div{
@@ -128,7 +126,7 @@ body.dark .dates div{
 }
 
 .today{
-  background:#ffd166!important;
+  background:#ffe08a!important;
 }
 
 /* NAV */
@@ -140,7 +138,7 @@ body.dark .dates div{
   border-radius:12px;
   text-decoration:none;
   font-weight:900;
-  background:#fff4d6;
+  background:#fff6d6;
   color:#5a4a2f;
 }
 
@@ -149,10 +147,26 @@ body.dark .nav a{
   color:white;
 }
 
+/* FLUFF */
+.fluff{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:120px;
+  background:
+  radial-gradient(circle at 10% 100%, #fff6dd 80px, transparent 81px),
+  radial-gradient(circle at 30% 100%, #fff2c2 90px, transparent 91px),
+  radial-gradient(circle at 50% 100%, #fff6dd 80px, transparent 81px),
+  radial-gradient(circle at 70% 100%, #fff2c2 90px, transparent 91px),
+  radial-gradient(circle at 90% 100%, #fff6dd 80px, transparent 81px);
+}
+
 </style>
 </head>
 
 <body>
+
+<div class="fluff"></div>
 
 <div class="welcome-top">WELCOME TO SAPPHIRE</div>
 
@@ -167,37 +181,28 @@ body.dark .nav a{
 
 <!-- MUSIC -->
 <div class="music-player">
-
 <div class="screen">
 <iframe id="playerFrame" allow="autoplay"></iframe>
 </div>
-
 <div style="text-align:center;margin-top:10px;">
 <button id="toggleBtn" onclick="togglePlay()">▶</button>
 </div>
-
 </div>
 
 <!-- CALENDAR -->
 <div class="calendar">
-
 <div class="header" id="monthYear"></div>
-
 <div class="dates" id="dates"></div>
-
 </div>
 
 <!-- NAV -->
 <div class="nav-box">
-
 <div class="nav-title">MENU</div>
-
 <div class="nav">
 <a href="https://www.chess.com">RULES</a>
 <a href="https://www.youtube.com">EVENTS</a>
 <a href="https://www.google.com">MEMBERS</a>
 </div>
-
 </div>
 
 </div>
@@ -206,7 +211,7 @@ body.dark .nav a{
 
 <script>
 
-/* 🌙 THEME SWITCH */
+/* 🌙 THEME */
 function updateTheme(){
 
 let h = new Date().getHours();
@@ -249,52 +254,34 @@ dates.innerHTML+="<div></div>";
 }
 
 for(let i=1;i<=last;i++){
-
-if(i===now.getDate()){
-dates.innerHTML+=`<div class="today">${i}</div>`;
-}else{
-dates.innerHTML+=`<div>${i}</div>`;
-}
-
+dates.innerHTML+=`<div class="${i===now.getDate()?'today':''}">${i}</div>`;
 }
 
 /* 🎵 MUSIC */
-let songs=[
-{
-src:"https://youtu.be/kcsGhOmULxQ",
-name:"Golden Brown"
-}
-];
-
-let i=0;
-let playing=false;
+let songs=[{src:"https://youtu.be/kcsGhOmULxQ",name:"Golden Brown"}];
 
 let frame=document.getElementById("playerFrame");
 let btn=document.getElementById("toggleBtn");
+let playing=false;
 
 function convert(url){
 let id=url.split("youtu.be/")[1];
 return "https://www.youtube.com/embed/"+id+"?enablejsapi=1";
 }
 
-function load(){
-frame.src=convert(songs[i].src);
-}
+frame.src=convert(songs[0].src);
 
-load();
-
-/* toggle */
 function togglePlay(){
 
 if(!playing){
 frame.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}',"*");
 btn.innerText="❚❚";
-playing=true;
 }else{
 frame.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}',"*");
 btn.innerText="▶";
-playing=false;
 }
+
+playing=!playing;
 
 }
 
