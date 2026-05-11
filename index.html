@@ -43,19 +43,6 @@ body.dark{
   color:white;
 }
 
-/* paws */
-.paw{
-  position:absolute;
-  font-size:20px;
-  opacity:0.15;
-  animation:float 10s linear infinite;
-}
-
-@keyframes float{
-  0%{transform:translateY(100vh);}
-  100%{transform:translateY(-120px);}
-}
-
 /* title */
 .welcome-top{
   margin-top:14px;
@@ -67,22 +54,24 @@ body.dark{
 /* wrapper */
 .wrapper{
   width:100%;
-  max-width:290px;
+  max-width:320px;
   display:flex;
   flex-direction:column;
   gap:18px;
   margin-top:20px;
+  align-items:center;
 }
 
 /* cards */
 .music-player, .calendar, .nav-box{
+  width:100%;
   background:rgba(255,255,255,0.72);
   border-radius:28px;
   padding:10px;
   border:3px solid #d9b79f;
 }
 
-/* DARK cards */
+/* dark cards */
 body.dark .music-player,
 body.dark .calendar,
 body.dark .nav-box{
@@ -91,20 +80,31 @@ body.dark .nav-box{
   color:white;
 }
 
-/* image */
+/* image + video box */
 .screen{
   width:100%;
   aspect-ratio:16/9;
   border-radius:16px;
   overflow:hidden;
   border:2px solid #edd5c4;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
+/* image */
 img{
   width:100%;
   height:100%;
   object-fit:cover;
   display:block;
+}
+
+/* video centered fix */
+iframe{
+  width:100%;
+  height:100%;
+  border:none;
 }
 
 /* calendar */
@@ -152,6 +152,7 @@ img{
   border-radius:24px;
   padding:14px;
   color:white;
+  width:100%;
 }
 
 .nav-title{
@@ -182,17 +183,6 @@ img{
 
 <div class="welcome-top">WELCOME TO SAPPHIRE</div>
 
-<script>
-for(let i=0;i<18;i++){
-  let p=document.createElement("div");
-  p.className="paw";
-  p.innerHTML="🐾";
-  p.style.left=Math.random()*100+"%";
-  p.style.animationDuration=(6+Math.random()*8)+"s";
-  document.body.appendChild(p);
-}
-</script>
-
 <div class="wrapper">
 
   <!-- IMAGE -->
@@ -202,10 +192,11 @@ for(let i=0;i<18;i++){
     </div>
   </div>
 
-  <!-- VIDEO -->
+  <!-- VIDEO (CENTERED FIXED) -->
   <div class="music-player">
     <div class="screen">
-      <iframe id="playerFrame"
+      <iframe
+        id="playerFrame"
         src="https://www.youtube.com/embed/kcsGhOmULxQ?autoplay=1"
         allow="autoplay; fullscreen">
       </iframe>
@@ -215,10 +206,12 @@ for(let i=0;i<18;i++){
   <!-- CALENDAR -->
   <div class="calendar">
     <div class="header" id="monthYear"></div>
+
     <div class="days">
       <div>SUN</div><div>MON</div><div>TUE</div>
       <div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
     </div>
+
     <div class="dates" id="dates"></div>
   </div>
 
@@ -237,7 +230,7 @@ for(let i=0;i<18;i++){
 
 <script>
 
-/* THEME */
+/* THEME SWITCH */
 function updateTheme(){
 
   const hour=new Date().getHours();
