@@ -5,12 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sapphire Club</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+
 <style>
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:'Poppins',sans-serif;
 }
 
 body{
@@ -19,36 +21,47 @@ display:flex;
 flex-direction:column;
 align-items:center;
 overflow-x:hidden;
+color:#fff;
 transition:0.5s;
-background:linear-gradient(to bottom,#fffaf4,#ffe9d6,#f5d2bc,#c49a7a);
-color:#1b1b1b;
+background:linear-gradient(120deg,#fffaf4,#ffe9d6,#f5d2bc,#c49a7a);
+background-size:300% 300%;
+animation:bgMove 12s ease infinite;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }
 
 body.dark{
-background:linear-gradient(to bottom,#0f172a,#111827,#1e293b,#020617);
-color:#fff;
+background:linear-gradient(120deg,#0f172a,#111827,#1e293b,#020617);
 }
 
 .header{
-margin:20px 0;
+margin:24px 0;
 text-align:center;
 }
 
 .glow{
-font-size:52px;
-font-weight:1000;
+font-size:54px;
+font-weight:800;
 letter-spacing:6px;
-color:#fff;
--webkit-text-stroke:2px rgba(0,0,0,0.25);
 text-shadow:0 0 10px rgba(255,140,90,0.6),
-0 0 25px rgba(255,120,80,0.5);
+0 0 25px rgba(255,100,80,0.5);
+animation:pulse 2.5s infinite;
+}
+
+@keyframes pulse{
+0%,100%{transform:scale(1)}
+50%{transform:scale(1.05)}
 }
 
 .sub{
 font-size:12px;
 letter-spacing:5px;
 opacity:0.8;
-margin-top:4px;
+margin-top:6px;
 }
 
 .wrapper{
@@ -56,31 +69,33 @@ width:92%;
 max-width:380px;
 display:flex;
 flex-direction:column;
-gap:18px;
+gap:22px;
 }
 
+/* GLASS CARD */
 .glass{
-background:rgba(255,255,255,0.15);
-backdrop-filter:blur(12px);
-border-radius:18px;
-padding:14px;
-border:1px solid rgba(255,255,255,0.2);
+background:rgba(255,255,255,0.12);
+backdrop-filter:blur(16px);
+border-radius:22px;
+padding:16px;
+border:1px solid rgba(255,255,255,0.25);
+box-shadow:0 10px 30px rgba(0,0,0,0.25);
+transition:0.3s;
 }
 
-body.dark .glass{
-background:rgba(255,255,255,0.08);
+.glass:hover{
+transform:translateY(-3px);
 }
 
 img{
 width:100%;
-border-radius:14px;
-display:block;
+border-radius:18px;
 }
 
 .screen{
 width:100%;
 aspect-ratio:16/9;
-border-radius:14px;
+border-radius:18px;
 overflow:hidden;
 }
 
@@ -92,9 +107,9 @@ border:none;
 
 .song{
 text-align:center;
-font-size:13px;
-font-weight:800;
-margin-top:8px;
+font-size:14px;
+font-weight:600;
+margin-top:10px;
 }
 
 .controls{
@@ -106,21 +121,28 @@ margin-top:10px;
 
 button{
 padding:10px 14px;
-border:none;
 border-radius:50%;
+border:1px solid rgba(255,255,255,0.3);
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(10px);
 cursor:pointer;
-font-weight:900;
-background:rgba(255,255,255,0.4);
+font-weight:800;
 transition:0.2s;
 }
 
 button:hover{
 transform:scale(1.1);
+background:rgba(255,255,255,0.3);
 }
 
+button:active{
+transform:scale(0.95);
+}
+
+/* CALENDAR */
 .month{
 text-align:center;
-font-weight:900;
+font-weight:800;
 margin-bottom:10px;
 }
 
@@ -135,7 +157,7 @@ text-align:center;
 font-size:12px;
 padding:7px;
 border-radius:10px;
-background:rgba(255,255,255,0.25);
+background:rgba(255,255,255,0.2);
 }
 
 .today{
@@ -144,9 +166,10 @@ color:white;
 font-weight:900;
 }
 
+/* NAV */
 .nav-title{
 text-align:center;
-font-weight:900;
+font-weight:800;
 margin-bottom:10px;
 letter-spacing:2px;
 }
@@ -159,8 +182,8 @@ padding:12px;
 border-radius:14px;
 text-decoration:none;
 font-size:13px;
-font-weight:900;
-background:rgba(255,255,255,0.35);
+font-weight:800;
+background:rgba(255,255,255,0.25);
 color:#3b2a22;
 transition:0.25s;
 }
@@ -169,11 +192,11 @@ transition:0.25s;
 transform:translateY(-2px) scale(1.03);
 }
 
+/* FOOTER RGB */
 .rgb{
-margin:16px;
+margin:18px;
 text-align:center;
-font-weight:900;
-font-family:cursive;
+font-weight:800;
 font-size:14px;
 background:linear-gradient(90deg,#ff4d4d,#ffcc00,#22c55e,#3b82f6,#a855f7);
 background-size:300% 300%;
@@ -187,6 +210,12 @@ animation:rgb 6s infinite;
 50%{background-position:100%}
 100%{background-position:0%}
 }
+
+/* MOBILE FEEL */
+body{
+-webkit-tap-highlight-color:transparent;
+}
+
 </style>
 </head>
 
@@ -199,10 +228,12 @@ animation:rgb 6s infinite;
 
 <div class="wrapper">
 
+<!-- IMAGE -->
 <div class="glass">
-<img id="themeImage" src="" alt="theme">
+<img id="themeImage" src="https://i.ibb.co/hRjTVF3w.png">
 </div>
 
+<!-- MUSIC -->
 <div class="glass">
 <div class="screen">
 <iframe id="player"></iframe>
@@ -217,11 +248,13 @@ animation:rgb 6s infinite;
 </div>
 </div>
 
+<!-- CALENDAR -->
 <div class="glass">
 <div class="month" id="month"></div>
 <div class="grid" id="cal"></div>
 </div>
 
+<!-- NAV -->
 <div class="glass">
 <div class="nav-title">PORTAL</div>
 
@@ -238,24 +271,26 @@ animation:rgb 6s infinite;
 
 <script>
 
-const img=document.getElementById("themeImage");
-
+/* THEME */
 function theme(){
 let h=new Date().getHours();
-let dark = h < 6 || h >= 18;
+let dark=h<6||h>=18;
 
 document.body.classList.toggle("dark",dark);
 
-img.src = dark
+document.getElementById("themeImage").src =
+dark
 ? "https://i.ibb.co/Zz89JYQ2.png"
 : "https://i.ibb.co/hRjTVF3w.png";
 }
 theme();
+setInterval(theme,60000);
 
 /* CALENDAR */
-function calendar(){
+function renderCalendar(){
 let now=new Date();
-document.getElementById("month").innerText=
+
+document.getElementById("month").innerText =
 now.toLocaleString('default',{month:'long',year:'numeric'});
 
 let first=new Date(now.getFullYear(),now.getMonth(),1).getDay();
@@ -264,18 +299,16 @@ let last=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
 let cal=document.getElementById("cal");
 cal.innerHTML="";
 
-for(let i=0;i<first;i++){
-cal.innerHTML += "<div></div>";
-}
+for(let i=0;i<first;i++) cal.innerHTML+="<div></div>";
 
 for(let i=1;i<=last;i++){
-cal.innerHTML += `<div class="date ${i===now.getDate()?'today':''}">${i}</div>`;
+cal.innerHTML+=`<div class="date ${i===now.getDate()?'today':''}">${i}</div>`;
 }
 }
-calendar();
+renderCalendar();
 
 /* MUSIC */
-const songs=[
+let songs=[
 {name:"Golden Brown",id:"kcsGhOmULxQ"},
 {name:"Numb",id:"kXYiU_JCYtU"}
 ];
@@ -283,8 +316,8 @@ const songs=[
 let i=0;
 let playing=false;
 
-const frame=document.getElementById("player");
-const btn=document.getElementById("btn");
+let frame=document.getElementById("player");
+let btn=document.getElementById("btn");
 
 function load(x){
 frame.src=`https://www.youtube.com/embed/${songs[x].id}?enablejsapi=1&origin=${location.origin}`;
@@ -299,8 +332,7 @@ btn.innerText=playing?"❚❚":"▶";
 
 frame.contentWindow.postMessage(JSON.stringify({
 event:"command",
-func:playing?"playVideo":"pauseVideo",
-args:[]
+func:playing?"playVideo":"pauseVideo"
 }),"*");
 }
 
