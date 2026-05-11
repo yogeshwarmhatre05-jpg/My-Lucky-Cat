@@ -4,61 +4,60 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pixel Glow Sapphire Club</title>
+<title>Sapphire Club</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;900&display=swap" rel="stylesheet">
 
 <style>
 
 *{
+  box-sizing:border-box;
   margin:0;
   padding:0;
-  box-sizing:border-box;
 }
 
 body{
   min-height:100vh;
-  overflow-x:hidden;
-  font-family:'Montserrat',sans-serif;
   display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  padding:20px 0 40px;
-  transition:1s;
+  flex-direction:column;
+  align-items:center;
+  font-family:'Montserrat',sans-serif;
+  overflow-x:hidden;
   position:relative;
+  transition:1s;
+  padding-bottom:40px;
 
-  background:
-  radial-gradient(circle at top,#ffe4cf 0%,#ffcfae 35%,#8d654f 100%);
+  background:#0F172A;
 }
 
-/* RGB OUTER BORDER */
+/* RGB BORDER */
 
-.rgb-border{
+body::before{
+  content:"";
   position:fixed;
   inset:0;
   padding:3px;
+
   background:linear-gradient(
-  90deg,
-  #ff0000,
-  #ff9900,
-  #ffee00,
-  #00ff66,
-  #00ffff,
-  #0066ff,
-  #aa00ff,
-  #ff0000
+    90deg,
+    #22c55e,
+    #3b82f6,
+    #a855f7,
+    #ff4d4d,
+    #ffcc00,
+    #22c55e
   );
+
   background-size:400% 400%;
-  animation:rgbMove 10s linear infinite;
+  animation:rgbMove 8s linear infinite;
   z-index:-2;
 }
 
-.rgb-border::before{
+body::after{
   content:"";
-  position:absolute;
+  position:fixed;
   inset:3px;
-  border-radius:0;
-  background:inherit;
+  background:#0F172A;
   z-index:-1;
 }
 
@@ -70,126 +69,97 @@ body{
 /* DARK */
 
 body.dark{
-  background:
-  radial-gradient(circle at top,#0f172a 0%,#111827 45%,#020617 100%);
+  background:#020617;
   color:white;
 }
 
-/* MAIN */
+/* TITLE */
 
-.main{
-  width:94%;
-  max-width:320px;
+.welcome-top{
+  margin-top:18px;
+  font-size:24px;
+  font-weight:900;
+  letter-spacing:4px;
+
+  background:linear-gradient(
+    90deg,
+    #22c55e,
+    #3b82f6,
+    #a855f7,
+    #22c55e
+  );
+
+  background-size:300% 300%;
+  animation:rgbMove 6s linear infinite;
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  text-shadow:0 0 18px rgba(59,130,246,0.5);
+}
+
+/* WRAPPER */
+
+.wrapper{
+  width:100%;
+  max-width:300px;
   display:flex;
   flex-direction:column;
   gap:18px;
   z-index:2;
+  margin-top:20px;
 }
 
-/* TOP LOGO */
+/* CARDS */
 
-.logo-box{
-  position:relative;
-  overflow:hidden;
-  border-radius:26px;
-  padding:3px;
-  background:linear-gradient(
-  90deg,
-  #22c55e,
-  white,
-  #22c55e
-  );
-  background-size:300% 300%;
-  animation:rgbMove 8s linear infinite;
-}
+.music-player,
+.calendar,
+.nav-box{
 
-.logo-inner{
-  background:rgba(255,255,255,0.78);
-  border-radius:23px;
-  padding:18px 12px;
-  text-align:center;
-  backdrop-filter:blur(10px);
-  transition:1s;
-}
+  width:100%;
 
-body.dark .logo-inner{
-  background:rgba(15,23,42,0.82);
-}
-
-.logo{
-  font-size:28px;
-  font-weight:900;
-  letter-spacing:3px;
-  background:linear-gradient(
-  90deg,
-  #22c55e,
-  #3b82f6,
-  #a855f7,
-  #ff4d4d
-  );
-  background-size:300% 300%;
-  animation:rgbMove 6s linear infinite;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-.tagline{
-  margin-top:8px;
-  font-size:11px;
-  letter-spacing:2px;
-  font-weight:700;
-  opacity:0.9;
-}
-
-/* GLASS CARD */
-
-.card{
-  background:rgba(255,255,255,0.72);
-  border:2px solid rgba(255,255,255,0.4);
-  backdrop-filter:blur(10px);
-  border-radius:28px;
-  padding:12px;
-  box-shadow:0 0 20px rgba(0,0,0,0.15);
-  transition:1s;
-}
-
-body.dark .card{
   background:rgba(15,23,42,0.78);
-  border:2px solid #334155;
+
+  border:2px solid #1E293B;
+
+  border-radius:26px;
+
+  padding:12px;
+
+  backdrop-filter:blur(10px);
+
+  box-shadow:0 0 20px rgba(34,197,94,0.15);
+
+  transition:1s;
 }
 
-/* OWNER */
+/* LIVE DOT */
 
-.owner{
-  text-align:center;
+.music-player{
+  position:relative;
 }
 
-.owner-img{
-  width:100px;
-  height:100px;
-  border-radius:22px;
-  object-fit:cover;
-  border:3px solid rgba(255,255,255,0.5);
+.music-player::after{
+  content:"";
+  width:10px;
+  height:10px;
+  border-radius:50%;
+
+  background:#22c55e;
+
+  position:absolute;
+  top:10px;
+  left:10px;
+
+  box-shadow:0 0 10px #22c55e;
+
+  animation:pulse 1.2s infinite;
 }
 
-.owner-name{
-  margin-top:10px;
-  font-size:24px;
-  font-weight:900;
-  background:linear-gradient(
-  90deg,
-  #22c55e,
-  #3b82f6,
-  #a855f7
-  );
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-.quote{
-  margin-top:8px;
-  font-size:11px;
-  opacity:0.8;
+@keyframes pulse{
+  50%{
+    opacity:0.3;
+  }
 }
 
 /* SCREEN */
@@ -197,61 +167,58 @@ body.dark .card{
 .screen{
   width:100%;
   aspect-ratio:16/9;
-  border-radius:18px;
+  border-radius:16px;
   overflow:hidden;
-  border:2px solid rgba(255,255,255,0.25);
+  border:2px solid #1E293B;
   background:black;
+  position:relative;
 }
 
-.screen img,
-.screen iframe{
+.screen::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.08),
+    transparent
+  );
+
+  animation:shine 3s linear infinite;
+  z-index:1;
+}
+
+@keyframes shine{
+  0%{
+    transform:translateX(-100%);
+  }
+  100%{
+    transform:translateX(100%);
+  }
+}
+
+iframe,
+img{
   width:100%;
   height:100%;
-  object-fit:cover;
   border:none;
+  object-fit:cover;
+  display:block;
 }
 
 /* PLAYER */
 
-.player-top{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  margin-bottom:8px;
-}
-
-.live{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#22c55e;
-  box-shadow:0 0 12px #22c55e;
-  animation:pulse 1.2s infinite;
-}
-
-@keyframes pulse{
-  50%{opacity:0.4;}
-}
-
 .song{
+  text-align:center;
+  margin-bottom:8px;
   font-size:11px;
-  white-space:nowrap;
-  overflow:hidden;
+  color:#22c55e;
+  font-weight:700;
 }
 
-.song span{
-  display:inline-block;
-  padding-left:100%;
-  animation:scroll 8s linear infinite;
-}
-
-@keyframes scroll{
-  100%{
-    transform:translateX(-100%);
-  }
-}
-
-/* CONTROLS */
+/* BUTTONS */
 
 .controls{
   display:flex;
@@ -261,13 +228,13 @@ body.dark .card{
 }
 
 .controls button{
-  width:34px;
+  width:35px;
   height:30px;
   border:none;
   border-radius:10px;
-  background:#1e293b;
+  background:#1E293B;
   color:white;
-  font-size:13px;
+  font-size:12px;
   cursor:pointer;
 }
 
@@ -278,6 +245,7 @@ body.dark .card{
   font-size:20px;
   font-weight:900;
   margin-bottom:12px;
+  color:#22c55e;
 }
 
 .days,
@@ -291,6 +259,7 @@ body.dark .card{
   text-align:center;
   font-size:10px;
   font-weight:800;
+  color:#94a3b8;
 }
 
 .dates div{
@@ -298,108 +267,79 @@ body.dark .card{
   display:flex;
   justify-content:center;
   align-items:center;
-  border-radius:10px;
-  font-size:11px;
-  background:#fffaf5;
-  font-weight:700;
-}
 
-body.dark .dates div{
-  background:#1e293b;
+  border-radius:10px;
+
+  background:#1E293B;
+
+  border:1px solid #334155;
+
+  font-size:11px;
+  font-weight:700;
+
+  color:white;
 }
 
 .today{
   background:#22c55e !important;
-  color:#08120d;
+  color:#0F172A !important;
+
+  box-shadow:0 0 15px rgba(34,197,94,0.8);
 }
 
 /* NAV */
 
-.nav{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
 .nav a{
-  text-decoration:none;
+  display:block;
   text-align:center;
+  margin:8px 0;
   padding:12px;
+
   border-radius:14px;
+
+  text-decoration:none;
+
   font-size:12px;
-  font-weight:800;
-  background:linear-gradient(
-  90deg,
-  #22c55e,
-  #3b82f6
-  );
-  color:white;
-}
-
-/* PARTNERS */
-
-.section-title{
-  text-align:center;
-  font-size:18px;
   font-weight:900;
-  margin-bottom:14px;
-}
 
-.partner{
-  background:rgba(255,255,255,0.12);
-  border-radius:18px;
-  padding:12px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:12px;
-  cursor:pointer;
+  color:white;
+
+  background:linear-gradient(
+    90deg,
+    #22c55e,
+    #3b82f6
+  );
+
+  background-size:200% 200%;
+
+  animation:rgbMove 5s linear infinite;
+
   transition:0.3s;
 }
 
-.partner:hover{
-  transform:scale(1.03);
-}
-
-.partner img{
-  width:60px;
-  height:60px;
-  border-radius:14px;
-  object-fit:cover;
-}
-
-.partner-name{
-  font-size:13px;
-  font-weight:800;
-}
-
-/* GAME */
-
-#game{
-  width:100%;
-  height:250px;
-  border-radius:22px;
-  background:
-  radial-gradient(circle,#1e293b,#0f172a);
+.nav a:hover{
+  transform:scale(1.04);
 }
 
 /* FOOTER */
 
 .footer{
-  text-align:center;
+  margin-top:10px;
   font-size:22px;
   font-weight:900;
-  padding:8px 0;
+
   background:linear-gradient(
-  90deg,
-  #ff4d4d,
-  #ffcc00,
-  #22c55e,
-  #3b82f6,
-  #a855f7
+    90deg,
+    #ff4d4d,
+    #ffcc00,
+    #22c55e,
+    #3b82f6,
+    #a855f7
   );
+
   background-size:300% 300%;
   animation:rgbMove 6s linear infinite;
+
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
@@ -409,72 +349,51 @@ body.dark .dates div{
 
 <body>
 
-<div class="rgb-border"></div>
+<div class="welcome-top">
+  SAPPHIRE CLUB
+</div>
 
-<div class="main">
-
-  <!-- LOGO -->
-  <div class="logo-box">
-    <div class="logo-inner">
-      <div class="logo">PIXEL GLOW</div>
-      <div class="tagline">♛ WELCOME TO SAPPHIRE CLUB ♛</div>
-    </div>
-  </div>
-
-  <!-- OWNER -->
-  <div class="card owner">
-
-    <img
-    class="owner-img"
-    src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/yogi136/php8h3mmr9lb0qd8ZyClyS.png">
-
-    <div class="owner-name">√𝓎𝓸𝓰𝓲136</div>
-
-    <div class="quote">
-      “Think like a King. Play like a Master.”
-    </div>
-
-  </div>
+<div class="wrapper">
 
   <!-- CAT -->
-  <div class="card">
+  <div class="music-player">
     <div class="screen">
       <img id="themeImage" src="">
     </div>
   </div>
 
-  <!-- PLAYER -->
-  <div class="card">
+  <!-- VIDEO -->
+  <div class="music-player">
 
-    <div class="player-top">
-      <div class="live"></div>
-
-      <div class="song">
-        <span id="songText">Now Playing</span>
-      </div>
+    <div class="song" id="songText">
+      Now Playing
     </div>
 
     <div class="screen">
+
       <iframe
       id="playerFrame"
       allow="autoplay; fullscreen">
       </iframe>
+
     </div>
 
     <div class="controls">
+
       <button onclick="prevSong()">⏮</button>
+
       <button onclick="playVideo()">▶</button>
+
       <button onclick="pauseVideo()">❚❚</button>
+
       <button onclick="nextSong()">⏭</button>
+
     </div>
 
   </div>
 
-  <!-- GAME -->
-  <canvas id="game"></canvas>
-
   <!-- CALENDAR -->
-  <div class="card">
+  <div class="calendar">
 
     <div class="header" id="monthYear"></div>
 
@@ -493,36 +412,31 @@ body.dark .dates div{
   </div>
 
   <!-- NAV -->
-  <div class="card">
+  <div class="nav-box">
 
     <div class="nav">
+
       <a href="#">RULES</a>
+
       <a href="#">EVENTS</a>
+
       <a href="#">MEMBERS</a>
+
       <a href="#">CLICK HERE</a>
+
     </div>
 
   </div>
 
-  <!-- PARTNERS -->
-  <div class="card">
+</div>
 
-    <div class="section-title">◆ PARTNERS ◆</div>
-
-    <div id="partnersContainer"></div>
-
-  </div>
-
-  <!-- FOOTER -->
-  <div class="footer">
-    Made by yogi136
-  </div>
-
+<div class="footer">
+  Made by yogi136
 </div>
 
 <script>
 
-/* DAY NIGHT CAT */
+/* DAY NIGHT IMAGE */
 
 const dayCat =
 "https://i.ibb.co/qFhrggbt/image.png";
@@ -530,7 +444,7 @@ const dayCat =
 const nightCat =
 "https://i.ibb.co/Zz89JYQ2";
 
-/* DAY NIGHT */
+/* THEME */
 
 function updateTheme(){
 
@@ -565,27 +479,22 @@ let songs = [
 
 {
 src:"https://youtu.be/kcsGhOmULxQ",
-name:"Golden Brown - The Stranglers"
+name:"Golden Brown"
 },
 
 {
 src:"https://youtu.be/qdpXxGPqW-Y",
-name:"Faded - Alan Walker"
+name:"Faded"
 },
 
 {
 src:"https://youtu.be/R5aurUlfn3w",
-name:"Monody - TheFatRat"
+name:"Monody"
 },
 
 {
 src:"https://youtu.be/Jkj36B1YuDU",
-name:"Another Love - Tom Odell"
-},
-
-{
-src:"https://youtu.be/rfTgO9rpqck",
-name:"Heat Waves - Glass Animals"
+name:"Another Love"
 }
 
 ];
@@ -598,21 +507,9 @@ document.getElementById("playerFrame");
 const songText =
 document.getElementById("songText");
 
-function convert(url){
-
-  let id =
-  url.split("youtu.be/")[1].split("?")[0];
-
-  return
-  "https://www.youtube.com/embed/" +
-  id +
-  "?enablejsapi=1";
-
-}
-
 function loadVideo(i){
 
-  const id =
+  let id =
   songs[i].src.split("youtu.be/")[1];
 
   frame.src =
@@ -690,10 +587,12 @@ const month = now.getMonth();
 const today = now.getDate();
 
 const months = [
+
 "January","February","March",
 "April","May","June",
 "July","August","September",
 "October","November","December"
+
 ];
 
 monthYear.innerText =
@@ -719,201 +618,6 @@ for(let i=1;i<=lastDate;i++){
   </div>`;
 
 }
-
-/* PARTNERS */
-
-const partners = [
-
-{
-name:"SAPPHIRE",
-img:"https://i.ibb.co/4RYLGQ3z/image.jpg",
-link:"https://www.chess.com/club/sapphire-1"
-},
-
-{
-name:"PENGUIN CHESS CLUB",
-img:"https://i.ibb.co/0p7z5V4R/your-image.jpg",
-link:"https://www.chess.com/club/penguin-chess-club-3"
-}
-
-];
-
-const container =
-document.getElementById("partnersContainer");
-
-partners.forEach(p=>{
-
-  const card =
-  document.createElement("div");
-
-  card.className = "partner";
-
-  card.innerHTML = `
-  <img src="${p.img}">
-  <div class="partner-name">${p.name}</div>
-  `;
-
-  card.onclick = ()=>{
-
-    window.open(p.link,"_blank");
-
-  };
-
-  container.appendChild(card);
-
-});
-
-/* GAME */
-
-const canvas =
-document.getElementById("game");
-
-const ctx =
-canvas.getContext("2d");
-
-canvas.width = 300;
-canvas.height = 250;
-
-let bubbles = [];
-let pops = [];
-let score = 0;
-
-function spawnBubble(){
-
-  bubbles.push({
-
-    x:Math.random()*280+10,
-    y:260,
-    r:Math.random()*10+8,
-    speed:Math.random()*1+0.5
-
-  });
-
-}
-
-function createPop(x,y){
-
-  for(let i=0;i<8;i++){
-
-    pops.push({
-
-      x:x,
-      y:y,
-      dx:(Math.random()-0.5)*3,
-      dy:(Math.random()-0.5)*3,
-      life:20
-
-    });
-
-  }
-
-}
-
-function tap(e){
-
-  const rect =
-  canvas.getBoundingClientRect();
-
-  const x =
-  (e.touches ?
-  e.touches[0].clientX :
-  e.clientX) - rect.left;
-
-  const y =
-  (e.touches ?
-  e.touches[0].clientY :
-  e.clientY) - rect.top;
-
-  bubbles = bubbles.filter(b=>{
-
-    const d =
-    Math.hypot(b.x-x,b.y-y);
-
-    if(d < b.r){
-
-      createPop(b.x,b.y);
-
-      score++;
-
-      return false;
-
-    }
-
-    return true;
-
-  });
-
-}
-
-canvas.addEventListener("mousedown",tap);
-canvas.addEventListener("touchstart",tap);
-
-let frameCount = 0;
-
-function loop(){
-
-  ctx.clearRect(0,0,300,250);
-
-  if(frameCount % 25 === 0){
-
-    spawnBubble();
-
-  }
-
-  bubbles.forEach(b=>{
-
-    b.y -= b.speed;
-
-    ctx.beginPath();
-
-    ctx.arc(
-    b.x,
-    b.y,
-    b.r,
-    0,
-    Math.PI*2
-    );
-
-    ctx.fillStyle="#22c55e";
-
-    ctx.fill();
-
-  });
-
-  bubbles =
-  bubbles.filter(b=>b.y > -20);
-
-  pops.forEach(p=>{
-
-    p.x += p.dx;
-    p.y += p.dy;
-    p.life--;
-
-    ctx.fillStyle="white";
-
-    ctx.fillRect(p.x,p.y,2,2);
-
-  });
-
-  pops =
-  pops.filter(p=>p.life > 0);
-
-  ctx.fillStyle="white";
-  ctx.font="bold 14px Arial";
-
-  ctx.fillText(
-  "Pops : " + score,
-  10,
-  20
-  );
-
-  frameCount++;
-
-  requestAnimationFrame(loop);
-
-}
-
-loop();
 
 </script>
 
