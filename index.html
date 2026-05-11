@@ -6,352 +6,296 @@
 <title>Sapphire Club</title>
 
 <style>
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+  box-sizing:border-box;
 }
 
-/* ☀️ DAY (BANANA THEME) */
 body{
-min-height:100vh;
-display:flex;
-flex-direction:column;
-align-items:center;
-overflow-x:hidden;
-transition:0.6s ease;
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  font-family:Arial,sans-serif;
+  overflow-x:hidden;
+  position:relative;
+  transition:0.5s;
 
-background:linear-gradient(to bottom,#fff8d6,#ffeaa6,#ffd84d,#f6c400);
-color:#3a2a00;
+  /* 🍌 LIGHT BANANA (PASTEL) */
+  background:linear-gradient(
+    to bottom,
+    #fffdf6,
+    #fff7dd,
+    #fff1c2,
+    #ffeaa8
+  );
 }
 
-/* 🌙 NIGHT (DARK BLUE) */
+/* 🌙 DARK BLUE THEME */
 body.dark{
-background:linear-gradient(to bottom,#0b1020,#0f1b3d,#0a1a4a,#050814);
-color:#dbe7ff;
+
+  background:linear-gradient(
+    to bottom,
+    #0b1220,
+    #0f1b3d,
+    #0a1a4a,
+    #050814
+  );
+
+  color:white;
 }
 
-/* IMAGE THEME (PNG DIRECT SWITCH) */
-body:not(.dark) #themeImage{
-content:url("https://i.ibb.co/hRjTVF3w.png");
+/* TEXT FIX */
+body.dark .welcome-top,
+body.dark .header,
+body.dark .nav-title,
+body.dark .footer,
+body.dark .marquee{
+  color:#e6f0ff;
 }
 
-body.dark #themeImage{
-content:url("https://i.ibb.co/Zz89JYQ2.png");
+/* CARDS */
+.music-player,
+.calendar,
+.nav-box{
+  transition:0.5s;
 }
 
-/* HEADER */
-.header{
-margin:18px 0;
-text-align:center;
-display:flex;
-flex-direction:column;
-gap:4px;
+/* LIGHT MODE CARDS */
+.music-player,
+.calendar{
+  background:rgba(255,255,255,0.75);
+  border:3px solid #f3e2b8;
+  border-radius:28px;
 }
 
-.glow{
-font-size:56px;
-font-weight:1000;
-letter-spacing:6px;
-color:#fff7b2;
-text-shadow:0 0 10px rgba(255,215,0,0.8),
-0 0 20px rgba(255,200,0,0.6);
+/* DARK MODE CARDS */
+body.dark .music-player,
+body.dark .calendar{
+  background:rgba(15,23,42,0.78);
+  border:3px solid #334155;
 }
 
-.sub{
-font-size:12px;
-letter-spacing:4px;
-opacity:0.85;
+/* NAV */
+body.dark .nav-box{
+  background:rgba(2,6,23,0.95);
+  border:3px solid #334155;
 }
 
-/* WRAPPER */
-.wrapper{
-width:92%;
-max-width:360px;
-display:flex;
-flex-direction:column;
-gap:16px;
-}
-
-/* GLASS */
-.glass{
-background:rgba(255, 230, 120, 0.25);
-backdrop-filter:blur(10px);
-border-radius:20px;
-padding:12px;
-border:1px solid rgba(255, 215, 0, 0.4);
-}
-
-body.dark .glass{
-background:rgba(60, 90, 160, 0.15);
-border:1px solid rgba(120, 160, 255, 0.25);
+.welcome-top{
+  margin-top:14px;
+  font-size:20px;
+  font-weight:900;
+  color:#6b5b3a;
 }
 
 /* IMAGE */
-img{
-width:100%;
-border-radius:16px;
+.screen img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  border-radius:16px;
 }
 
-/* MUSIC */
-.screen{
-width:100%;
-aspect-ratio:16/9;
-border-radius:16px;
-overflow:hidden;
-}
-
-iframe{
-width:100%;
-height:100%;
-border:none;
-}
-
-.song{
-text-align:center;
-font-size:13px;
-font-weight:800;
-margin:8px 0;
-}
-
-/* BUTTONS */
-.controls{
-display:flex;
-justify-content:center;
-gap:10px;
-}
-
+/* BUTTON */
 button{
-padding:10px 14px;
-border:none;
-border-radius:50%;
-cursor:pointer;
-font-weight:900;
-background:linear-gradient(145deg,#ffe066,#ffcc00);
-color:#3a2a00;
-transition:0.2s;
+  padding:10px;
+  border-radius:50%;
+  border:none;
+  cursor:pointer;
+  background:#fff6d6;
+  font-weight:900;
 }
 
 body.dark button{
-background:linear-gradient(145deg,#2b4cff,#1a2a66);
-color:#dbe7ff;
-}
-
-button:hover{
-transform:scale(1.1);
+  background:#1e2b4d;
+  color:white;
 }
 
 /* CALENDAR */
-.month{
-text-align:center;
-font-weight:900;
-margin-bottom:10px;
+.dates div{
+  padding:6px;
+  border-radius:10px;
+  text-align:center;
+  background:#fffaf0;
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(7,1fr);
-gap:6px;
-}
-
-.date{
-text-align:center;
-font-size:12px;
-padding:6px;
-border-radius:10px;
-background:rgba(255,255,255,0.3);
-}
-
-body.dark .date{
-background:rgba(255,255,255,0.08);
+body.dark .dates div{
+  background:#1e293b;
+  color:white;
 }
 
 .today{
-background:#ffcc00;
-color:#000;
-font-weight:900;
+  background:#ffd166!important;
 }
 
-/* LINKS */
-.nav-title{
-text-align:center;
-font-weight:900;
-margin-bottom:10px;
+/* NAV */
+.nav a{
+  display:block;
+  text-align:center;
+  margin:7px 0;
+  padding:10px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:900;
+  background:#fff4d6;
+  color:#5a4a2f;
 }
 
-.link{
-display:flex;
-justify-content:center;
-margin:8px 0;
-padding:12px;
-border-radius:14px;
-text-decoration:none;
-font-size:13px;
-font-weight:900;
-background:rgba(255, 215, 0, 0.3);
-color:#3a2a00;
-transition:0.25s;
+body.dark .nav a{
+  background:#1e293b;
+  color:white;
 }
 
-body.dark .link{
-background:rgba(80,120,255,0.2);
-color:#dbe7ff;
-}
-
-.link:hover{
-transform:translateY(-2px) scale(1.03);
-}
-
-/* RGB TEXT */
-.rgb{
-margin:14px;
-text-align:center;
-font-weight:900;
-font-family:cursive;
-font-size:14px;
-background:linear-gradient(90deg,#ffcc00,#ffe066,#ffd000,#ffb300);
-background-size:300% 300%;
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:rgb 6s infinite;
-}
-
-@keyframes rgb{
-0%{background-position:0%}
-50%{background-position:100%}
-100%{background-position:0%}
-}
 </style>
 </head>
 
 <body>
 
-<div class="header">
-<div class="glow">WELCOME</div>
-<div class="sub">TO SAPPHIRE CLUB</div>
-</div>
+<div class="welcome-top">WELCOME TO SAPPHIRE</div>
 
 <div class="wrapper">
 
 <!-- IMAGE -->
-<div class="glass">
+<div class="music-player">
+<div class="screen">
 <img id="themeImage">
+</div>
 </div>
 
 <!-- MUSIC -->
-<div class="glass">
+<div class="music-player">
+
 <div class="screen">
-<iframe id="player"></iframe>
+<iframe id="playerFrame" allow="autoplay"></iframe>
 </div>
 
-<div class="song">Now Playing: <span id="songName"></span></div>
-
-<div class="controls">
-<button onclick="prev()">⏮</button>
-<button onclick="toggle()" id="btn">▶</button>
-<button onclick="next()">⏭</button>
+<div style="text-align:center;margin-top:10px;">
+<button id="toggleBtn" onclick="togglePlay()">▶</button>
 </div>
+
 </div>
 
 <!-- CALENDAR -->
-<div class="glass">
-<div class="month" id="month"></div>
-<div class="grid" id="cal"></div>
+<div class="calendar">
+
+<div class="header" id="monthYear"></div>
+
+<div class="dates" id="dates"></div>
+
 </div>
 
 <!-- NAV -->
-<div class="glass">
-<div class="nav-title">PORTAL</div>
-<a class="link" href="https://www.chess.com" target="_blank">♟ RULES</a>
-<a class="link" href="https://www.youtube.com" target="_blank">🎬 EVENTS</a>
-<a class="link" href="https://www.google.com" target="_blank">👥 MEMBERS</a>
+<div class="nav-box">
+
+<div class="nav-title">MENU</div>
+
+<div class="nav">
+<a href="https://www.chess.com">RULES</a>
+<a href="https://www.youtube.com">EVENTS</a>
+<a href="https://www.google.com">MEMBERS</a>
 </div>
 
 </div>
 
-<div class="rgb">Made by yogi136 • Sapphire Club 🍌</div>
+</div>
+
+<div class="footer">Made by yogi136</div>
 
 <script>
 
-/* THEME SWITCH */
-function theme(){
+/* 🌙 THEME SWITCH */
+function updateTheme(){
+
 let h = new Date().getHours();
+let img = document.getElementById("themeImage");
 
 if(h >= 6 && h < 18){
+
 document.body.classList.remove("dark");
+img.src = "https://i.ibb.co/qFhrggbt/image.png";
+
 }else{
+
 document.body.classList.add("dark");
-}
-}
-theme();
-setInterval(theme,60000);
+img.src = "https://i.ibb.co/93NMvDYs/image.png";
 
-/* CALENDAR */
+}
+
+}
+
+updateTheme();
+setInterval(updateTheme,60000);
+
+/* 📅 CALENDAR */
 let now=new Date();
+let monthYear=document.getElementById("monthYear");
+let dates=document.getElementById("dates");
 
-document.getElementById("month").innerText=
-now.toLocaleString('default',{month:'long',year:'numeric'});
+const months=[
+"Jan","Feb","Mar","Apr","May","Jun",
+"Jul","Aug","Sep","Oct","Nov","Dec"
+];
+
+monthYear.innerText = months[now.getMonth()]+" "+now.getFullYear();
 
 let first=new Date(now.getFullYear(),now.getMonth(),1).getDay();
 let last=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
 
-let html="";
-
-let days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-html+=days.map(d=>`<div class="date" style="font-weight:900">${d}</div>`).join("");
-
-for(let i=0;i<first;i++) html+="<div></div>";
+for(let i=0;i<first;i++){
+dates.innerHTML+="<div></div>";
+}
 
 for(let i=1;i<=last;i++){
-html+=`<div class="date ${i===now.getDate()?'today':''}">${i}</div>`;
+
+if(i===now.getDate()){
+dates.innerHTML+=`<div class="today">${i}</div>`;
+}else{
+dates.innerHTML+=`<div>${i}</div>`;
 }
 
-document.getElementById("cal").innerHTML=html;
+}
 
-/* MUSIC */
+/* 🎵 MUSIC */
 let songs=[
-{name:"Golden Brown",url:"https://www.youtube.com/watch?v=kcsGhOmULxQ"},
-{name:"Numb",url:"https://www.youtube.com/watch?v=kXYiU_JCYtU"}
+{
+src:"https://youtu.be/kcsGhOmULxQ",
+name:"Golden Brown"
+}
 ];
 
-let i=0,playing=false;
-let frame=document.getElementById("player");
-let btn=document.getElementById("btn");
+let i=0;
+let playing=false;
 
-function id(u){
-return new URL(u).searchParams.get("v");
+let frame=document.getElementById("playerFrame");
+let btn=document.getElementById("toggleBtn");
+
+function convert(url){
+let id=url.split("youtu.be/")[1];
+return "https://www.youtube.com/embed/"+id+"?enablejsapi=1";
 }
 
-function load(x){
-i=x;
-frame.src=`https://www.youtube.com/embed/${id(songs[i].url)}?enablejsapi=1`;
-document.getElementById("songName").innerText=songs[i].name;
+function load(){
+frame.src=convert(songs[i].src);
 }
 
-load(i);
+load();
 
-function toggle(){
-playing=!playing;
-btn.innerText=playing?"❚❚":"▶";
+/* toggle */
+function togglePlay(){
 
-if(playing){
-frame.src+="&autoplay=1";
+if(!playing){
+frame.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}',"*");
+btn.innerText="❚❚";
+playing=true;
 }else{
-load(i);
-}
+frame.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}',"*");
+btn.innerText="▶";
+playing=false;
 }
 
-function next(){
-load((i+1)%songs.length);
-playing=false;
-btn.innerText="▶";
-}
-
-function prev(){
-load((i-1+songs.length)%songs.length);
-playing=false;
-btn.innerText="▶";
 }
 
 </script>
