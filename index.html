@@ -7,9 +7,7 @@
 
 <style>
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 body{
   margin:0;
@@ -19,39 +17,37 @@ body{
   align-items:center;
   font-family:Arial,sans-serif;
   overflow-x:hidden;
-  position:relative;
   transition:0.5s;
-
-  background:linear-gradient(
-    to bottom,
-    #fffbea 0%,
-    #fff3c4 35%,
-    #ffe08a 65%,
-    #ffd36b 100%
-  );
+  background:linear-gradient(to bottom,#fffbea,#ffe08a,#ffd36b);
 }
 
 /* DARK MODE */
 body.dark{
-  background:linear-gradient(
-    to bottom,
-    #0f172a 0%,
-    #111827 35%,
-    #1e293b 65%,
-    #020617 100%
-  );
+  background:linear-gradient(to bottom,#0f172a,#111827,#020617);
   color:white;
+}
+
+/* toggle button */
+#themeBtn{
+  position:fixed;
+  top:10px;
+  right:10px;
+  padding:8px 12px;
+  border-radius:12px;
+  border:none;
+  font-weight:bold;
+  cursor:pointer;
+  z-index:1000;
 }
 
 /* title */
 .welcome-top{
   margin-top:14px;
-  font-size:20px;
+  font-size:22px;
   font-weight:900;
-  color:#5c3b2e;
 }
 
-/* wrapper */
+/* layout */
 .wrapper{
   width:100%;
   max-width:320px;
@@ -59,37 +55,40 @@ body.dark{
   flex-direction:column;
   gap:18px;
   margin-top:20px;
-  align-items:center;
 }
 
 /* cards */
 .music-player, .calendar, .nav-box{
-  width:100%;
-  background:rgba(255,255,255,0.72);
+  background:rgba(255,255,255,0.75);
   border-radius:28px;
   padding:10px;
   border:3px solid #d9b79f;
+  transition:0.2s;
 }
 
-/* dark cards */
 body.dark .music-player,
 body.dark .calendar,
 body.dark .nav-box{
-  background:rgba(15,23,42,0.78);
+  background:rgba(15,23,42,0.85);
   border:3px solid #334155;
-  color:white;
 }
 
-/* image + video box */
+/* BEAT */
+.beat{
+  box-shadow:0 0 15px #ffb38a,
+             0 0 35px #ff6b6b,
+             0 0 60px #ff3d3d;
+  transform:scale(1.02);
+  transition:0.2s;
+}
+
+/* screen */
 .screen{
   width:100%;
   aspect-ratio:16/9;
   border-radius:16px;
   overflow:hidden;
   border:2px solid #edd5c4;
-  display:flex;
-  justify-content:center;
-  align-items:center;
 }
 
 /* image */
@@ -97,20 +96,10 @@ img{
   width:100%;
   height:100%;
   object-fit:cover;
-  display:block;
-}
-
-/* video centered fix */
-iframe{
-  width:100%;
-  height:100%;
-  border:none;
 }
 
 /* calendar */
-.calendar{
-  padding:14px;
-}
+.calendar{padding:14px;}
 
 .header{
   text-align:center;
@@ -118,16 +107,10 @@ iframe{
   font-weight:900;
 }
 
-.days, .dates{
+.days,.dates{
   display:grid;
   grid-template-columns:repeat(7,1fr);
   gap:5px;
-}
-
-.days div{
-  text-align:center;
-  font-size:10px;
-  font-weight:800;
 }
 
 .dates div{
@@ -147,33 +130,22 @@ iframe{
 
 /* nav */
 .nav-box{
-  background:rgba(92,59,46,0.95);
-  border:3px solid #f3d5bf;
+  background:#5c3b2e;
+  color:white;
   border-radius:24px;
   padding:14px;
-  color:white;
-  width:100%;
 }
 
-.nav-title{
-  text-align:center;
-  font-size:13px;
-  font-weight:900;
-  margin-bottom:10px;
-  color:#ffe7d2;
-}
-
-.nav a{
+.nav-box a{
   display:block;
   text-align:center;
-  margin:7px 0;
+  margin:6px 0;
   padding:10px;
-  border-radius:14px;
+  border-radius:12px;
   text-decoration:none;
-  font-size:12px;
   font-weight:900;
-  color:#5c3b2e;
   background:#fff1e5;
+  color:#5c3b2e;
 }
 
 </style>
@@ -181,25 +153,23 @@ iframe{
 
 <body>
 
+<button id="themeBtn">🌙 / ☀️</button>
+
 <div class="welcome-top">WELCOME TO SAPPHIRE</div>
 
 <div class="wrapper">
 
   <!-- IMAGE -->
-  <div class="music-player">
+  <div class="music-player beat-target">
     <div class="screen">
       <img id="themeImage" src="https://i.ibb.co/qFhrggbt/image.png">
     </div>
   </div>
 
-  <!-- VIDEO (CENTERED FIXED) -->
-  <div class="music-player">
+  <!-- YOUTUBE -->
+  <div class="music-player beat-target">
     <div class="screen">
-      <iframe
-        id="playerFrame"
-        src="https://www.youtube.com/embed/kcsGhOmULxQ?autoplay=1"
-        allow="autoplay; fullscreen">
-      </iframe>
+      <div id="player"></div>
     </div>
   </div>
 
@@ -217,22 +187,23 @@ iframe{
 
   <!-- MENU -->
   <div class="nav-box">
-    <div class="nav-title">CAT MENU</div>
-    <div class="nav">
-      <a href="#">RULES</a>
-      <a href="#">EVENTS</a>
-      <a href="#">MEMBERS</a>
-      <a href="#">CLICK HERE</a>
-    </div>
+    <a href="#">RULES</a>
+    <a href="#">EVENTS</a>
+    <a href="#">MEMBERS</a>
+    <a href="#">CLICK HERE</a>
   </div>
 
 </div>
 
+<script src="https://www.youtube.com/iframe_api"></script>
+
 <script>
 
-/* THEME SWITCH */
-function updateTheme(){
+let beatInterval;
+let player;
 
+/* AUTO THEME */
+function updateTheme(){
   const hour=new Date().getHours();
   const img=document.getElementById("themeImage");
 
@@ -244,9 +215,50 @@ function updateTheme(){
     img.src="https://i.ibb.co/93NMvDYs/image.png";
   }
 }
-
 updateTheme();
 setInterval(updateTheme,60000);
+
+/* MANUAL TOGGLE */
+document.getElementById("themeBtn").onclick=function(){
+  document.body.classList.toggle("dark");
+};
+
+/* YOUTUBE */
+function onYouTubeIframeAPIReady(){
+  player=new YT.Player('player',{
+    videoId:'kcsGhOmULxQ',
+    playerVars:{autoplay:1,controls:1},
+    events:{onStateChange:onStateChange}
+  });
+}
+
+/* BEAT */
+function startBeat(){
+  const targets=document.querySelectorAll(".beat-target");
+
+  beatInterval=setInterval(()=>{
+    targets.forEach(el=>el.classList.add("beat"));
+
+    setTimeout(()=>{
+      targets.forEach(el=>el.classList.remove("beat"));
+    },250);
+
+  },705);
+}
+
+function stopBeat(){
+  clearInterval(beatInterval);
+  document.querySelectorAll(".beat-target")
+    .forEach(el=>el.classList.remove("beat"));
+}
+
+function onStateChange(event){
+  if(event.data===YT.PlayerState.PLAYING){
+    startBeat();
+  }else{
+    stopBeat();
+  }
+}
 
 /* CALENDAR */
 const monthYear=document.getElementById("monthYear");
