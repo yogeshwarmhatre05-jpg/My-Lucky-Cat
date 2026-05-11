@@ -20,12 +20,10 @@ flex-direction:column;
 align-items:center;
 overflow-x:hidden;
 transition:0.5s;
-
-/* color */
 background:linear-gradient(to bottom,#fffaf4,#ffe9d6,#f5d2bc,#c49a7a);
 }
 
-/* dark mode */
+/* DARK MODE */
 body.dark{
 background:linear-gradient(to bottom,#0f172a,#111827,#1e293b,#020617);
 color:white;
@@ -41,7 +39,6 @@ gap:4px;
 z-index:2;
 }
 
-/* 🔥 WELCOME (reduced size) */
 .glow{
 font-size:56px;
 font-weight:1000;
@@ -230,10 +227,12 @@ animation:rgb 6s infinite;
 
 <div class="wrapper">
 
+<!-- IMAGE -->
 <div class="glass">
-<img id="themeImage" src="https://i.ibb.co/qFhrggbt/image.png">
+<img id="themeImage" src="https://i.ibb.co/hRjTVF3w.png">
 </div>
 
+<!-- MUSIC -->
 <div class="glass">
 <div class="screen">
 <iframe id="player"></iframe>
@@ -248,11 +247,13 @@ animation:rgb 6s infinite;
 </div>
 </div>
 
+<!-- CALENDAR -->
 <div class="glass">
 <div class="month" id="month"></div>
 <div class="grid" id="cal"></div>
 </div>
 
+<!-- NAV -->
 <div class="glass">
 <div class="nav-title">PORTAL</div>
 
@@ -268,12 +269,23 @@ animation:rgb 6s infinite;
 <div class="rgb">Made by yogi136 • Sapphire Club</div>
 
 <script>
+
+/* DAY / NIGHT THEME + IMAGE SWITCH */
 function theme(){
 let h=new Date().getHours();
-document.body.classList.toggle("dark",!(h>=6 && h<18));
+let img=document.getElementById("themeImage");
+
+if(h>=6 && h<18){
+document.body.classList.remove("dark");
+img.src="https://i.ibb.co/hRjTVF3w.png"; // DAY
+}else{
+document.body.classList.add("dark");
+img.src="https://i.ibb.co/Zz89JYQ2.png"; // NIGHT
+}
 }
 theme();
 
+/* CALENDAR */
 let now=new Date();
 document.getElementById("month").innerText=
 now.toLocaleString('default',{month:'long',year:'numeric'});
@@ -288,6 +300,7 @@ html+=`<div class="date ${i===now.getDate()?'today':''}">${i}</div>`;
 }
 document.getElementById("cal").innerHTML=html;
 
+/* MUSIC */
 let songs=[
 {name:"Golden Brown",url:"https://www.youtube.com/watch?v=kcsGhOmULxQ"},
 {name:"Numb",url:"https://www.youtube.com/watch?v=kXYiU_JCYtU"}
@@ -324,6 +337,7 @@ function prev(){
 i=(i-1+songs.length)%songs.length;
 load(i);playing=false;btn.innerText="▶";
 }
+
 </script>
 
 </body>
