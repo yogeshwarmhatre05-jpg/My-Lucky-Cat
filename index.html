@@ -79,8 +79,6 @@ body{
 
 }
 
-/* RGB TEXT */
-
 @keyframes rgbText{
 
   0%{
@@ -96,8 +94,6 @@ body{
   }
 
 }
-
-/* SHINE */
 
 @keyframes shineMove{
 
@@ -125,10 +121,16 @@ body{
   width:90%;
   max-width:340px;
 
+  min-height:120px;
+
   position:relative;
   overflow:hidden;
 
-  padding:18px 20px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:22px 20px 18px;
 
   border-radius:28px;
 
@@ -199,13 +201,23 @@ body{
   position:relative;
   z-index:2;
 
+  width:100%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  text-align:center;
+
   font-size:32px;
-  line-height:1.2;
+  line-height:1.15;
 
   font-family:'Orbitron',sans-serif;
   font-weight:900;
 
   letter-spacing:3px;
+
+  padding-top:8px;
 
   background:
   linear-gradient(
@@ -232,10 +244,17 @@ body{
   width:90%;
   max-width:300px;
 
+  min-height:120px;
+
   position:relative;
   overflow:hidden;
 
-  padding:20px 18px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+
+  padding:22px 18px;
 
   border-radius:28px;
 
@@ -270,7 +289,17 @@ body{
   color:#a855f7;
 }
 
+/* OWNER TITLE */
+
 .owner-title{
+
+  width:100%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  text-align:center;
 
   font-size:12px;
 
@@ -283,7 +312,17 @@ body{
   margin-bottom:10px;
 }
 
+/* OWNER NAME */
+
 .owner-name{
+
+  width:100%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  text-align:center;
 
   font-size:30px;
 
@@ -294,6 +333,8 @@ body{
   font-weight:900;
 
   letter-spacing:2px;
+
+  padding:0 8px;
 
   background:
   linear-gradient(
@@ -485,6 +526,8 @@ iframe{
 
 <div class="top-section">
 
+  <!-- WELCOME -->
+
   <div class="welcome-top">
 
     <div class="welcome-text">
@@ -492,6 +535,8 @@ iframe{
     </div>
 
   </div>
+
+  <!-- OWNER -->
 
   <div class="owner-box">
 
