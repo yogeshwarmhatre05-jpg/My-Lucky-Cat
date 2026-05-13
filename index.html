@@ -1,17 +1,15 @@
-<!DOCTYPE html><html lang="en">
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sapphire Club</title><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-:root{
-  --bg1:#1e3a8a;
-  --bg2:#0f172a;
-  --bg3:#020617;
-  --gold:#ffd700;
-  --gold-soft:rgba(255,215,0,0.35);
-  --card:rgba(10,25,55,0.85);
-  --border:rgba(255,215,0,0.45);
-}
+<title>Sapphire Club</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
 
 *{
   margin:0;
@@ -21,83 +19,359 @@
 
 body{
   min-height:100vh;
+  overflow-x:hidden;
   display:flex;
   flex-direction:column;
   align-items:center;
-  padding:18px 10px 40px;
-  font-family:Poppins, sans-serif;
-  background: radial-gradient(circle at top, var(--bg1), var(--bg2) 55%, var(--bg3));
+  padding:18px 0 40px;
+  font-family:'Poppins',sans-serif;
+
+  background:
+  radial-gradient(
+    circle at top,
+    #1e3a8a 0%,
+    #0f172a 45%,
+    #020617 100%
+  );
+
   color:#f5d77a;
+  position:relative;
 }
 
-/* subtle frame */
-.frame{
+/* GOLD BORDER */
+
+.gold-border{
   position:fixed;
   inset:0;
   pointer-events:none;
+  z-index:999;
 }
 
-.frame::before{
+.gold-border::before{
   content:"";
   position:absolute;
-  inset:10px;
-  border:1px solid var(--border);
-  border-radius:18px;
-  box-shadow:0 0 18px rgba(255,215,0,0.12);
+  inset:0;
+
+  border:3px solid transparent;
+
+  border-image:
+  linear-gradient(
+    90deg,
+    #fff7cc,
+    #ffd700,
+    #ffb700,
+    #fff0a8,
+    #ffd700
+  ) 1;
+
+  animation:goldMove 4s linear infinite;
+
+  box-shadow:
+  0 0 20px #ffd700,
+  0 0 45px rgba(255,215,0,0.7);
 }
 
-.top{
+@keyframes goldMove{
+
+  0%{
+    filter:hue-rotate(0deg);
+  }
+
+  100%{
+    filter:hue-rotate(20deg);
+  }
+
+}
+
+@keyframes goldText{
+
+  0%{
+    background-position:0% 50%;
+  }
+
+  50%{
+    background-position:100% 50%;
+  }
+
+  100%{
+    background-position:0% 50%;
+  }
+
+}
+
+@keyframes shineMove{
+
+  100%{
+    left:140%;
+  }
+
+}
+
+/* TOP */
+
+.top-section{
   width:100%;
-  max-width:360px;
   display:flex;
   flex-direction:column;
-  gap:14px;
+  align-items:center;
+  gap:18px;
   margin-top:10px;
 }
 
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:16px;
+/* WELCOME BOX */
+
+.welcome-top{
+
+  width:90%;
+  max-width:340px;
+
+  min-height:120px;
+
+  position:relative;
+  overflow:hidden;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:22px 20px 18px;
+
+  border-radius:28px;
+
+  background:
+  linear-gradient(
+    135deg,
+    rgba(15,23,42,0.95),
+    rgba(30,58,138,0.88)
+  );
+
+  border:2px solid rgba(255,215,0,0.7);
+
+  backdrop-filter:blur(10px);
+
+  box-shadow:
+  0 0 20px rgba(255,215,0,0.25),
+  0 0 50px rgba(30,58,138,0.45);
+
   text-align:center;
 }
 
-.title{
-  font-family:Orbitron, sans-serif;
-  font-size:30px;
-  font-weight:800;
-  letter-spacing:2px;
-}
+.welcome-top::before{
+  content:"◌⑅⃝ᵐᶦˢˢ(꜆˘͈ෆ˘͈꜀)ʸᵒᵘ⑅⃝◌";
 
-.subtitle{
+  position:absolute;
+
+  top:6px;
+  left:50%;
+
+  transform:translateX(-50%);
+
   font-size:12px;
-  opacity:0.85;
-  margin-top:4px;
+
+  letter-spacing:8px;
+
+  color:#ffd700;
 }
 
-.owner{
-  font-family:Orbitron;
-  font-size:24px;
-  margin-top:6px;
+.welcome-top::after{
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:-120%;
+
+  width:80%;
+  height:100%;
+
+  background:
+  linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,215,0,0.3),
+    transparent
+  );
+
+  transform:skewX(-20deg);
+
+  animation:shineMove 4s linear infinite;
 }
+
+/* WELCOME TEXT */
+
+.welcome-text{
+
+  position:relative;
+  z-index:2;
+
+  font-size:32px;
+  line-height:1.15;
+
+  font-family:'Orbitron',sans-serif;
+  font-weight:900;
+
+  letter-spacing:3px;
+
+  background:
+  linear-gradient(
+    90deg,
+    #fff7cc,
+    #ffd700,
+    #ffb700,
+    #fff0a8,
+    #ffd700
+  );
+
+  background-size:300% 300%;
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  animation:goldText 5s ease infinite;
+}
+
+/* OWNER */
+
+.owner-box{
+
+  width:90%;
+  max-width:300px;
+
+  min-height:120px;
+
+  position:relative;
+  overflow:hidden;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+
+  padding:22px 18px;
+
+  border-radius:28px;
+
+  text-align:center;
+
+  background:
+  linear-gradient(
+    135deg,
+    rgba(15,23,42,0.95),
+    rgba(30,58,138,0.88)
+  );
+
+  border:2px solid rgba(255,215,0,0.7);
+
+  box-shadow:
+  0 0 20px rgba(255,215,0,0.25),
+  0 0 40px rgba(30,58,138,0.35);
+}
+
+.owner-box::before{
+  content:"🌼";
+
+  position:absolute;
+
+  top:8px;
+  right:14px;
+
+  font-size:24px;
+
+  color:#ffd700;
+}
+
+.owner-title{
+
+  font-size:12px;
+
+  font-weight:800;
+
+  letter-spacing:6px;
+
+  color:#ffe8a3;
+
+  margin-bottom:10px;
+}
+
+.owner-name{
+
+  font-size:30px;
+
+  line-height:1.2;
+
+  font-family:'Orbitron',sans-serif;
+
+  font-weight:900;
+
+  letter-spacing:2px;
+
+  background:
+  linear-gradient(
+    90deg,
+    #fff7cc,
+    #ffd700,
+    #ffb700,
+    #fff0a8,
+    #ffd700
+  );
+
+  background-size:300% 300%;
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  animation:goldText 5s ease infinite;
+}
+
+/* WRAPPER */
 
 .wrapper{
   width:100%;
-  max-width:360px;
-  margin-top:18px;
+  max-width:300px;
   display:flex;
   flex-direction:column;
-  gap:14px;
+  gap:18px;
+  margin-top:22px;
 }
 
-.video{
+/* CARDS */
+
+.music-player,
+.calendar,
+.nav-box{
+
+  width:100%;
+
+  background:rgba(10,25,55,0.88);
+
+  border-radius:24px;
+
+  padding:12px;
+
+  border:2px solid rgba(255,215,0,0.65);
+
+  box-shadow:
+  0 0 18px rgba(255,215,0,0.18),
+  0 0 35px rgba(30,58,138,0.4);
+}
+
+/* PLAYER */
+
+.song{
+  text-align:center;
+  margin-bottom:10px;
+  font-size:11px;
+  font-weight:700;
+  color:#ffe8a3;
+}
+
+.screen{
   width:100%;
   aspect-ratio:16/9;
-  border-radius:12px;
+  border-radius:16px;
   overflow:hidden;
-  border:1px solid var(--border);
-  background:#000;
+  background:black;
+  border:2px solid rgba(255,215,0,0.5);
 }
 
 iframe{
@@ -106,137 +380,355 @@ iframe{
   border:none;
 }
 
-button{
+.controls{
+  display:flex;
+  justify-content:center;
   margin-top:10px;
-  width:100%;
-  padding:10px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  background:#0f172a;
-  color:#f5d77a;
+}
+
+/* BUTTONS */
+
+.controls button,
+.nav a{
+
+  background:rgba(15,23,42,0.95);
+
+  border:2px solid rgba(255,215,0,0.7);
+
+  color:#ffe8a3;
+
+  font-weight:800;
+
+  transition:0.3s;
+
+  box-shadow:
+  0 0 12px rgba(255,215,0,0.15);
+}
+
+.controls button{
+
+  width:120px;
+
+  height:36px;
+
+  border-radius:12px;
+
   cursor:pointer;
-  transition:0.2s;
-}
 
-button:hover{
-  background:#14244f;
-}
-
-button:active{
-  transform:scale(0.98);
-}
-
-.cal-header{
-  font-weight:700;
-  margin-bottom:10px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:4px;
-}
-
-.day{
-  font-size:11px;
-  opacity:0.8;
-}
-
-.date{
-  padding:6px 0;
-  border-radius:8px;
-  background:#0f172a;
-  font-size:11px;
-}
-
-.today{
-  background:var(--gold);
-  color:#000;
-  font-weight:700;
+  font-size:12px;
 }
 
 .nav a{
+
   display:block;
+
   text-align:center;
-  padding:10px;
-  margin:6px 0;
+
+  margin:8px 0;
+
+  padding:12px;
+
+  border-radius:14px;
+
   text-decoration:none;
-  color:#f5d77a;
-  border:1px solid var(--border);
-  border-radius:10px;
-  transition:0.2s;
+
+  font-size:12px;
 }
 
+/* HOVER */
+
+.controls button:hover,
 .nav a:hover{
+
   background:#1e3a8a;
+
+  transform:scale(1.03);
+
+  box-shadow:
+  0 0 20px rgba(255,215,0,0.4);
 }
 
-.footer{
-  margin-top:18px;
-  font-size:14px;
-  opacity:0.9;
+/* CALENDAR */
+
+.header{
+  text-align:center;
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:12px;
+  color:#ffd700;
 }
 
-.footer span{
+.days,
+.dates{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+}
+
+.days div{
+  text-align:center;
+  font-size:10px;
+  font-weight:800;
+  color:#ffe8a3;
+}
+
+.dates div{
+  height:30px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:10px;
+  background:#0f172a;
+  font-size:11px;
   font-weight:700;
+  color:#fff0b3;
 }
 
-</style></head><body><div class="frame"></div><div class="top">  <div class="card">
-    <div class="title">SAPPHIRE</div>
-    <div class="subtitle">community dashboard</div>
-  </div>  <div class="card">
-    <div class="subtitle">OWNER</div>
-    <div class="owner">Rosemarie</div>
-  </div></div><div class="wrapper">  <div class="card">
-    <div class="subtitle">Now Playing</div><div class="video">
-  <iframe id="player" src="https://www.youtube.com/embed/e_AZJzYe7CU?enablejsapi=1"></iframe>
+.today{
+  background:#ffd700 !important;
+  color:#000 !important;
+}
+
+/* FOOTER */
+
+#yogiText{
+  font-size:22px;
+  font-weight:900;
+  font-family:cursive;
+
+  background:linear-gradient(
+    90deg,
+    #fff7cc,
+    #ffd700,
+    #ffb700,
+    #fff0a8,
+    #ffd700
+  );
+
+  background-size:300% 300%;
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  animation:goldText 5s ease infinite;
+
+  display:inline-block;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="gold-border"></div>
+
+<!-- TOP SECTION -->
+
+<div class="top-section">
+
+  <div class="welcome-top">
+
+    <div class="welcome-text">
+      SAPPHIRE
+    </div>
+
+  </div>
+
+  <div class="owner-box">
+
+    <div class="owner-title">
+      OWNER
+    </div>
+
+    <div class="owner-name">
+      Rosemarie
+    </div>
+
+  </div>
+
 </div>
 
-<button id="btn">Play / Pause</button>
+<div class="wrapper">
 
-  </div>  <div class="card">
-    <div class="cal-header" id="head"></div><div class="grid">
-  <div class="day">S</div><div class="day">M</div><div class="day">T</div><div class="day">W</div><div class="day">T</div><div class="day">F</div><div class="day">S</div>
+  <!-- PLAYER -->
+
+  <div class="music-player">
+
+    <div class="song">
+      Now Playing : CHIHIRO - Billie Eilish
+    </div>
+
+    <div class="screen">
+
+      <iframe
+      id="playerFrame"
+      src="https://www.youtube.com/embed/e_AZJzYe7CU?enablejsapi=1"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+      </iframe>
+
+    </div>
+
+    <div class="controls">
+
+      <button id="playBtn">
+        PLAY
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- CALENDAR -->
+
+  <div class="calendar">
+
+    <div class="header" id="monthYear"></div>
+
+    <div class="days">
+
+      <div>SUN</div>
+      <div>MON</div>
+      <div>TUE</div>
+      <div>WED</div>
+      <div>THU</div>
+      <div>FRI</div>
+      <div>SAT</div>
+
+    </div>
+
+    <div class="dates" id="dates"></div>
+
+  </div>
+
+  <!-- NAVIGATION -->
+
+  <div class="nav-box">
+
+    <div class="nav">
+
+      <a href="https://www.chess.com/clubs/forum/view/club-rules-578">
+        RULES
+      </a>
+
+      <a href="https://www.chess.com/clubs/events/sapphire-1">
+        EVENTS
+      </a>
+
+      <a href="https://www.chess.com/clubs/members/sapphire-1">
+        MEMBERS
+      </a>
+
+      <a href="https://www.chess.com/clubs/forum/view/dont-click-here-14">
+        CLICK HERE
+      </a>
+
+    </div>
+
+  </div>
+
 </div>
 
-<div class="grid" id="dates"></div>
+<!-- FOOTER -->
 
-  </div>  <div class="card nav">
-    <a href="#">Rules</a>
-    <a href="#">Events</a>
-    <a href="#">Members</a>
-    <a href="#">Forum</a>
-  </div></div><div class="footer">
-  Made by <span>yogi136</span>
-</div><script>
+<div style="text-align:center; margin-top:18px;">
 
-const frame = document.getElementById("player");
-const btn = document.getElementById("btn");
+  <div id="yogiText">
+    Made by yogi136.Sapphire
+  </div>
+
+</div>
+
+<script>
+
+/* VIDEO PLAYER */
+
+const frame =
+document.getElementById("playerFrame");
+
+const playBtn =
+document.getElementById("playBtn");
+
 let playing = false;
 
-btn.onclick = () => {
-  frame.contentWindow.postMessage(
-    JSON.stringify({event:"command", func: playing ? "pauseVideo" : "playVideo"}),
+playBtn.addEventListener("click",()=>{
+
+  if(!playing){
+
+    frame.contentWindow.postMessage(
+    '{"event":"command","func":"playVideo","args":""}',
     "*"
-  );
-  playing = !playing;
-};
+    );
+
+    playBtn.innerText = "PAUSE";
+
+    playing = true;
+
+  }else{
+
+    frame.contentWindow.postMessage(
+    '{"event":"command","func":"pauseVideo","args":""}',
+    "*"
+    );
+
+    playBtn.innerText = "PLAY";
+
+    playing = false;
+
+  }
+
+});
+
+/* CALENDAR */
+
+const monthYear =
+document.getElementById("monthYear");
+
+const dates =
+document.getElementById("dates");
 
 const now = new Date();
-const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
-document.getElementById("head").innerText = months[now.getMonth()] + " " + now.getFullYear();
+const year = now.getFullYear();
 
-const dates = document.getElementById("dates");
-const first = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
-const last = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+const month = now.getMonth();
 
-for(let i=0;i<first;i++) dates.innerHTML += "<div></div>";
+const today = now.getDate();
 
-for(let i=1;i<=last;i++){
-  const cls = i === now.getDate() ? "date today" : "date";
-  dates.innerHTML += `<div class='${cls}'>${i}</div>`;
+const months = [
+
+"January","February","March",
+"April","May","June",
+"July","August","September",
+"October","November","December"
+
+];
+
+monthYear.innerText =
+`${months[month]} ${year}`;
+
+const firstDay =
+new Date(year,month,1).getDay();
+
+const lastDate =
+new Date(year,month+1,0).getDate();
+
+for(let i=0;i<firstDay;i++){
+
+  dates.innerHTML += `<div></div>`;
+
 }
 
-</script></body>
+for(let i=1;i<=lastDate;i++){
+
+  dates.innerHTML +=
+  `<div class="${i===today?'today':''}">
+  ${i}
+  </div>`;
+
+}
+
+</script>
+
+</body>
 </html>
