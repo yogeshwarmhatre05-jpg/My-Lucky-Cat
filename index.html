@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,9 +50,7 @@ body{
   content:"";
   position:absolute;
   inset:0;
-
   border:3px solid transparent;
-
   border-image:
   linear-gradient(
     90deg,
@@ -72,39 +69,18 @@ body{
 }
 
 @keyframes goldMove{
-
-  0%{
-    filter:hue-rotate(0deg);
-  }
-
-  100%{
-    filter:hue-rotate(20deg);
-  }
-
+  0%{ filter:hue-rotate(0deg); }
+  100%{ filter:hue-rotate(20deg); }
 }
 
 @keyframes goldText{
-
-  0%{
-    background-position:0% 50%;
-  }
-
-  50%{
-    background-position:100% 50%;
-  }
-
-  100%{
-    background-position:0% 50%;
-  }
-
+  0%{ background-position:0% 50%; }
+  50%{ background-position:100% 50%; }
+  100%{ background-position:0% 50%; }
 }
 
 @keyframes shineMove{
-
-  100%{
-    left:140%;
-  }
-
+  100%{ left:140%; }
 }
 
 /* TOP */
@@ -121,21 +97,16 @@ body{
 /* WELCOME BOX */
 
 .welcome-top{
-
   width:90%;
   max-width:340px;
-
   min-height:120px;
-
   position:relative;
   overflow:hidden;
-
   display:flex;
   justify-content:center;
   align-items:center;
-
+  flex-direction:column;
   padding:22px 20px 18px;
-
   border-radius:28px;
 
   background:
@@ -146,7 +117,6 @@ body{
   );
 
   border:2px solid rgba(255,215,0,0.7);
-
   backdrop-filter:blur(10px);
 
   box-shadow:
@@ -158,70 +128,41 @@ body{
 
 .welcome-top::before{
   content:"◌⑅⃝ᵐᶦˢˢ(꜆˘͈ෆ˘͈꜀)ʸᵒᵘ⑅⃝◌";
-
   position:absolute;
-
   top:6px;
   left:50%;
-
   transform:translateX(-50%);
-
   font-size:12px;
-
   letter-spacing:8px;
-
   color:#ffd700;
 }
 
 .welcome-top::after{
   content:"";
-
   position:absolute;
-
   top:0;
   left:-120%;
-
   width:80%;
   height:100%;
-
   background:
-  linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,215,0,0.3),
-    transparent
-  );
-
+  linear-gradient(120deg, transparent, rgba(255,215,0,0.3), transparent);
   transform:skewX(-20deg);
-
   animation:shineMove 4s linear infinite;
 }
 
 /* WELCOME TEXT */
 
 .welcome-text{
-
   position:relative;
   z-index:2;
-
   font-size:32px;
   line-height:1.15;
-
   font-family:'Orbitron',sans-serif;
   font-weight:900;
-
   letter-spacing:3px;
 
   background:
-  linear-gradient(
-    90deg,
-    #fff7cc,
-    #ffd700,
-    #ffb700,
-    #fff0a8,
-    #ffd700
-  );
-
+  linear-gradient(90deg,#fff7cc,#ffd700,#ffb700,#fff0a8,#ffd700);
   background-size:300% 300%;
 
   -webkit-background-clip:text;
@@ -230,35 +171,33 @@ body{
   animation:goldText 5s ease infinite;
 }
 
+/* AI MODIFIED TEXT */
+
+.ai-mod{
+  margin-top:6px;
+  font-size:10px;
+  letter-spacing:3px;
+  font-weight:700;
+  color:rgba(255,215,0,0.8);
+}
+
 /* OWNER */
 
 .owner-box{
-
   width:90%;
   max-width:300px;
-
   min-height:120px;
-
   position:relative;
   overflow:hidden;
-
   display:flex;
   justify-content:center;
   align-items:center;
   flex-direction:column;
-
   padding:22px 18px;
-
   border-radius:28px;
 
-  text-align:center;
-
   background:
-  linear-gradient(
-    135deg,
-    rgba(15,23,42,0.95),
-    rgba(30,58,138,0.88)
-  );
+  linear-gradient(135deg,rgba(15,23,42,0.95),rgba(30,58,138,0.88));
 
   border:2px solid rgba(255,215,0,0.7);
 
@@ -267,59 +206,24 @@ body{
   0 0 40px rgba(30,58,138,0.35);
 }
 
-.owner-box::before{
-  content:"🌼";
-
-  position:absolute;
-
-  top:8px;
-  right:14px;
-
-  font-size:24px;
-
-  color:#ffd700;
-}
-
 .owner-title{
-
   font-size:12px;
-
   font-weight:800;
-
   letter-spacing:6px;
-
   color:#ffe8a3;
-
   margin-bottom:10px;
 }
 
 .owner-name{
-
   font-size:30px;
-
-  line-height:1.2;
-
   font-family:'Orbitron',sans-serif;
-
   font-weight:900;
-
   letter-spacing:2px;
 
-  background:
-  linear-gradient(
-    90deg,
-    #fff7cc,
-    #ffd700,
-    #ffb700,
-    #fff0a8,
-    #ffd700
-  );
-
+  background:linear-gradient(90deg,#fff7cc,#ffd700,#ffb700,#fff0a8,#ffd700);
   background-size:300% 300%;
-
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-
   animation:goldText 5s ease infinite;
 }
 
@@ -339,20 +243,12 @@ body{
 .music-player,
 .calendar,
 .nav-box{
-
   width:100%;
-
   background:rgba(10,25,55,0.88);
-
   border-radius:24px;
-
   padding:12px;
-
   border:2px solid rgba(255,215,0,0.65);
-
-  box-shadow:
-  0 0 18px rgba(255,215,0,0.18),
-  0 0 35px rgba(30,58,138,0.4);
+  box-shadow:0 0 18px rgba(255,215,0,0.18),0 0 35px rgba(30,58,138,0.4);
 }
 
 /* PLAYER */
@@ -386,66 +282,39 @@ iframe{
   margin-top:10px;
 }
 
-/* BUTTONS */
-
 .controls button,
 .nav a{
-
   background:rgba(15,23,42,0.95);
-
   border:2px solid rgba(255,215,0,0.7);
-
   color:#ffe8a3;
-
   font-weight:800;
-
   transition:0.3s;
-
-  box-shadow:
-  0 0 12px rgba(255,215,0,0.15);
+  box-shadow:0 0 12px rgba(255,215,0,0.15);
 }
 
 .controls button{
-
   width:120px;
-
   height:36px;
-
   border-radius:12px;
-
   cursor:pointer;
-
   font-size:12px;
 }
 
 .nav a{
-
   display:block;
-
   text-align:center;
-
   margin:8px 0;
-
   padding:12px;
-
   border-radius:14px;
-
   text-decoration:none;
-
   font-size:12px;
 }
 
-/* HOVER */
-
 .controls button:hover,
 .nav a:hover{
-
   background:#1e3a8a;
-
   transform:scale(1.03);
-
-  box-shadow:
-  0 0 20px rgba(255,215,0,0.4);
+  box-shadow:0 0 20px rgba(255,215,0,0.4);
 }
 
 /* CALENDAR */
@@ -495,24 +364,11 @@ iframe{
   font-size:22px;
   font-weight:900;
   font-family:cursive;
-
-  background:linear-gradient(
-    90deg,
-    #fff7cc,
-    #ffd700,
-    #ffb700,
-    #fff0a8,
-    #ffd700
-  );
-
+  background:linear-gradient(90deg,#fff7cc,#ffd700,#ffb700,#fff0a8,#ffd700);
   background-size:300% 300%;
-
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-
   animation:goldText 5s ease infinite;
-
-  display:inline-block;
 }
 
 </style>
@@ -522,210 +378,104 @@ iframe{
 
 <div class="gold-border"></div>
 
-<!-- TOP SECTION -->
-
 <div class="top-section">
 
   <div class="welcome-top">
 
-    <div class="welcome-text">
-      SAPPHIRE
-    </div>
+    <div class="welcome-text">SAPPHIRE</div>
+    <div class="ai-mod">AI MODIFIED</div>
 
   </div>
 
   <div class="owner-box">
-
-    <div class="owner-title">
-      OWNER
-    </div>
-
-    <div class="owner-name">
-      Rosemarie
-    </div>
-
+    <div class="owner-title">OWNER</div>
+    <div class="owner-name">Rosemarie</div>
   </div>
 
 </div>
 
 <div class="wrapper">
 
-  <!-- PLAYER -->
-
   <div class="music-player">
-
-    <div class="song">
-      Now Playing : CHIHIRO - Billie Eilish
-    </div>
+    <div class="song">Now Playing : CHIHIRO - Billie Eilish</div>
 
     <div class="screen">
-
-      <iframe
-      id="playerFrame"
+      <iframe id="playerFrame"
       src="https://www.youtube.com/embed/e_AZJzYe7CU?enablejsapi=1"
       allow="autoplay; encrypted-media"
-      allowfullscreen>
-      </iframe>
-
+      allowfullscreen></iframe>
     </div>
 
     <div class="controls">
-
-      <button id="playBtn">
-        PLAY
-      </button>
-
+      <button id="playBtn">PLAY</button>
     </div>
-
   </div>
-
-  <!-- CALENDAR -->
 
   <div class="calendar">
-
     <div class="header" id="monthYear"></div>
-
     <div class="days">
-
-      <div>SUN</div>
-      <div>MON</div>
-      <div>TUE</div>
-      <div>WED</div>
-      <div>THU</div>
-      <div>FRI</div>
-      <div>SAT</div>
-
+      <div>SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
     </div>
-
     <div class="dates" id="dates"></div>
-
   </div>
 
-  <!-- NAVIGATION -->
-
   <div class="nav-box">
-
     <div class="nav">
-
-      <a href="https://www.chess.com/clubs/forum/view/club-rules-578">
-        RULES
-      </a>
-
-      <a href="https://www.chess.com/clubs/events/sapphire-1">
-        EVENTS
-      </a>
-
-      <a href="https://www.chess.com/clubs/members/sapphire-1">
-        MEMBERS
-      </a>
-
-      <a href="https://www.chess.com/clubs/forum/view/dont-click-here-14">
-        CLICK HERE
-      </a>
-
+      <a href="https://www.chess.com/clubs/forum/view/club-rules-578">RULES</a>
+      <a href="https://www.chess.com/clubs/events/sapphire-1">EVENTS</a>
+      <a href="https://www.chess.com/clubs/members/sapphire-1">MEMBERS</a>
+      <a href="https://www.chess.com/clubs/forum/view/dont-click-here-14">CLICK HERE</a>
     </div>
-
   </div>
 
 </div>
 
-<!-- FOOTER -->
-
 <div style="text-align:center; margin-top:18px;">
-
-  <div id="yogiText"> Sapphire </div>
-
+  <div id="yogiText">Sapphire</div>
 </div>
 
 <script>
-
-/* VIDEO PLAYER */
-
-const frame =
-document.getElementById("playerFrame");
-
-const playBtn =
-document.getElementById("playBtn");
-
+const frame = document.getElementById("playerFrame");
+const playBtn = document.getElementById("playBtn");
 let playing = false;
 
-playBtn.addEventListener("click",()=>{
-
-  if(!playing){
-
-    frame.contentWindow.postMessage(
-    '{"event":"command","func":"playVideo","args":""}',
-    "*"
-    );
-
+playBtn.addEventListener("click", () => {
+  if (!playing) {
+    frame.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', "*");
     playBtn.innerText = "PAUSE";
-
     playing = true;
-
-  }else{
-
-    frame.contentWindow.postMessage(
-    '{"event":"command","func":"pauseVideo","args":""}',
-    "*"
-    );
-
+  } else {
+    frame.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', "*");
     playBtn.innerText = "PLAY";
-
     playing = false;
-
   }
-
 });
 
-/* CALENDAR */
-
-const monthYear =
-document.getElementById("monthYear");
-
-const dates =
-document.getElementById("dates");
+const monthYear = document.getElementById("monthYear");
+const dates = document.getElementById("dates");
 
 const now = new Date();
-
 const year = now.getFullYear();
-
 const month = now.getMonth();
-
 const today = now.getDate();
 
 const months = [
-
-"January","February","March",
-"April","May","June",
-"July","August","September",
-"October","November","December"
-
+"January","February","March","April","May","June",
+"July","August","September","October","November","December"
 ];
 
-monthYear.innerText =
-`${months[month]} ${year}`;
+monthYear.innerText = `${months[month]} ${year}`;
 
-const firstDay =
-new Date(year,month,1).getDay();
-
-const lastDate =
-new Date(year,month+1,0).getDate();
+const firstDay = new Date(year,month,1).getDay();
+const lastDate = new Date(year,month+1,0).getDate();
 
 for(let i=0;i<firstDay;i++){
-
   dates.innerHTML += `<div></div>`;
-
 }
 
 for(let i=1;i<=lastDate;i++){
-
-  dates.innerHTML +=
-  `<div class="${i===today?'today':''}">
-  ${i}
-  </div>`;
-
+  dates.innerHTML += `<div class="${i===today?'today':''}">${i}</div>`;
 }
-
 </script>
 
 </body>
