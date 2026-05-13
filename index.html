@@ -1,10 +1,18 @@
-
 <!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sapphire Club</title><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"><style>
 
-/* basic reset */
+:root{
+  --bg1:#1e3a8a;
+  --bg2:#0f172a;
+  --bg3:#020617;
+  --gold:#ffd700;
+  --gold-soft:rgba(255,215,0,0.35);
+  --card:rgba(10,25,55,0.85);
+  --border:rgba(255,215,0,0.45);
+}
+
 *{
   margin:0;
   padding:0;
@@ -16,86 +24,79 @@ body{
   display:flex;
   flex-direction:column;
   align-items:center;
-  padding:20px 10px 40px;
-  font-family: Poppins, sans-serif;
-
-  background: radial-gradient(circle at top, #1e3a8a, #0f172a 50%, #020617);
+  padding:18px 10px 40px;
+  font-family:Poppins, sans-serif;
+  background: radial-gradient(circle at top, var(--bg1), var(--bg2) 55%, var(--bg3));
   color:#f5d77a;
 }
 
-/* border glow (kept simple) */
-.border{
+/* subtle frame */
+.frame{
   position:fixed;
   inset:0;
   pointer-events:none;
 }
 
-.border::before{
+.frame::before{
   content:"";
   position:absolute;
-  inset:0;
-  border:2px solid rgba(255,215,0,0.7);
-  box-shadow:0 0 25px rgba(255,215,0,0.25);
+  inset:10px;
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:0 0 18px rgba(255,215,0,0.12);
 }
 
-/* top section */
 .top{
   width:100%;
-  max-width:340px;
+  max-width:360px;
   display:flex;
   flex-direction:column;
-  gap:15px;
+  gap:14px;
   margin-top:10px;
 }
 
-.box{
-  background:rgba(10,25,55,0.85);
-  border:1px solid rgba(255,215,0,0.5);
-  border-radius:20px;
-  padding:18px;
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
   text-align:center;
 }
 
 .title{
-  font-family: Orbitron, sans-serif;
-  font-size:28px;
-  font-weight:900;
+  font-family:Orbitron, sans-serif;
+  font-size:30px;
+  font-weight:800;
+  letter-spacing:2px;
 }
 
-.small{
+.subtitle{
   font-size:12px;
-  opacity:0.9;
+  opacity:0.85;
+  margin-top:4px;
 }
 
 .owner{
-  font-family: Orbitron;
-  font-size:26px;
-  margin-top:5px;
+  font-family:Orbitron;
+  font-size:24px;
+  margin-top:6px;
 }
 
-/* main wrapper */
 .wrapper{
   width:100%;
-  max-width:340px;
-  margin-top:20px;
+  max-width:360px;
+  margin-top:18px;
   display:flex;
   flex-direction:column;
-  gap:15px;
+  gap:14px;
 }
 
-.card{
-  background:rgba(10,25,55,0.85);
-  border:1px solid rgba(255,215,0,0.4);
-  border-radius:18px;
-  padding:12px;
-}
-
-/* player */
 .video{
   width:100%;
   aspect-ratio:16/9;
   border-radius:12px;
   overflow:hidden;
+  border:1px solid var(--border);
   background:#000;
 }
 
@@ -110,19 +111,22 @@ button{
   width:100%;
   padding:10px;
   border-radius:10px;
-  border:1px solid rgba(255,215,0,0.6);
+  border:1px solid var(--border);
   background:#0f172a;
   color:#f5d77a;
   cursor:pointer;
+  transition:0.2s;
+}
+
+button:hover{
+  background:#14244f;
 }
 
 button:active{
   transform:scale(0.98);
 }
 
-/* calendar */
 .cal-header{
-  text-align:center;
   font-weight:700;
   margin-bottom:10px;
 }
@@ -133,23 +137,24 @@ button:active{
   gap:4px;
 }
 
-.day, .date{
-  text-align:center;
+.day{
   font-size:11px;
+  opacity:0.8;
 }
 
 .date{
   padding:6px 0;
   border-radius:8px;
   background:#0f172a;
+  font-size:11px;
 }
 
 .today{
-  background:#ffd700;
+  background:var(--gold);
   color:#000;
+  font-weight:700;
 }
 
-/* nav */
 .nav a{
   display:block;
   text-align:center;
@@ -157,54 +162,66 @@ button:active{
   margin:6px 0;
   text-decoration:none;
   color:#f5d77a;
-  border:1px solid rgba(255,215,0,0.5);
+  border:1px solid var(--border);
   border-radius:10px;
+  transition:0.2s;
 }
 
-.nav a:active{
-  transform:scale(0.98);
+.nav a:hover{
+  background:#1e3a8a;
 }
 
-</style></head><body><div class="border"></div><div class="top">  <div class="box">
+.footer{
+  margin-top:18px;
+  font-size:14px;
+  opacity:0.9;
+}
+
+.footer span{
+  font-weight:700;
+}
+
+</style></head><body><div class="frame"></div><div class="top">  <div class="card">
     <div class="title">SAPPHIRE</div>
-    <div class="small">welcome section</div>
-  </div>  <div class="box">
-    <div class="small">OWNER</div>
+    <div class="subtitle">community dashboard</div>
+  </div>  <div class="card">
+    <div class="subtitle">OWNER</div>
     <div class="owner">Rosemarie</div>
-  </div></div><div class="wrapper">  <!-- player -->  <div class="card">
-    <div class="small">Now Playing - Billie Eilish</div><div class="video">
+  </div></div><div class="wrapper">  <div class="card">
+    <div class="subtitle">Now Playing</div><div class="video">
   <iframe id="player" src="https://www.youtube.com/embed/e_AZJzYe7CU?enablejsapi=1"></iframe>
 </div>
 
-<button id="btn">PLAY / PAUSE</button>
+<button id="btn">Play / Pause</button>
 
-  </div>  <!-- calendar -->  <div class="card">
+  </div>  <div class="card">
     <div class="cal-header" id="head"></div><div class="grid">
   <div class="day">S</div><div class="day">M</div><div class="day">T</div><div class="day">W</div><div class="day">T</div><div class="day">F</div><div class="day">S</div>
 </div>
 
 <div class="grid" id="dates"></div>
 
-  </div>  <!-- nav -->  <div class="card nav">
-    <a href="#">RULES</a>
-    <a href="#">EVENTS</a>
-    <a href="#">MEMBERS</a>
-    <a href="#">CLICK HERE</a>
-  </div></div><script>
+  </div>  <div class="card nav">
+    <a href="#">Rules</a>
+    <a href="#">Events</a>
+    <a href="#">Members</a>
+    <a href="#">Forum</a>
+  </div></div><div class="footer">
+  Made by <span>yogi136</span>
+</div><script>
 
-// video toggle (simple version)
 const frame = document.getElementById("player");
 const btn = document.getElementById("btn");
 let playing = false;
 
 btn.onclick = () => {
   frame.contentWindow.postMessage(
-    JSON.stringify({event:"command", func: playing ? "pauseVideo" : "playVideo"}), "*"
+    JSON.stringify({event:"command", func: playing ? "pauseVideo" : "playVideo"}),
+    "*"
   );
   playing = !playing;
 };
 
-// calendar
 const now = new Date();
 const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
