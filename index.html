@@ -26,19 +26,12 @@ body{
   font-family:'Poppins',sans-serif;
 
   background:
-  radial-gradient(
-    circle at top,
-    #1e3a8a 0%,
-    #0f172a 45%,
-    #020617 100%
-  );
+  radial-gradient(circle at top,#1e3a8a 0%,#0f172a 45%,#020617 100%);
 
   color:#f5d77a;
-  position:relative;
 }
 
 /* GOLD BORDER */
-
 .gold-border{
   position:fixed;
   inset:0;
@@ -51,21 +44,9 @@ body{
   position:absolute;
   inset:0;
   border:3px solid transparent;
-  border-image:
-  linear-gradient(
-    90deg,
-    #fff7cc,
-    #ffd700,
-    #ffb700,
-    #fff0a8,
-    #ffd700
-  ) 1;
-
+  border-image:linear-gradient(90deg,#fff7cc,#ffd700,#ffb700,#fff0a8,#ffd700) 1;
   animation:goldMove 4s linear infinite;
-
-  box-shadow:
-  0 0 20px #ffd700,
-  0 0 45px rgba(255,215,0,0.7);
+  box-shadow:0 0 20px #ffd700,0 0 45px rgba(255,215,0,0.7);
 }
 
 @keyframes goldMove{
@@ -83,8 +64,7 @@ body{
   100%{ left:140%; }
 }
 
-/* TOP */
-
+/* TOP SECTION */
 .top-section{
   width:100%;
   display:flex;
@@ -94,132 +74,61 @@ body{
   margin-top:10px;
 }
 
-/* WELCOME BOX */
-
+/* WELCOME */
 .welcome-top{
   width:90%;
   max-width:340px;
   min-height:120px;
   position:relative;
-  overflow:hidden;
   display:flex;
   justify-content:center;
   align-items:center;
   flex-direction:column;
-  padding:22px 20px 18px;
+  padding:22px;
   border-radius:28px;
-
-  background:
-  linear-gradient(
-    135deg,
-    rgba(15,23,42,0.95),
-    rgba(30,58,138,0.88)
-  );
-
+  background:linear-gradient(135deg,rgba(15,23,42,0.95),rgba(30,58,138,0.88));
   border:2px solid rgba(255,215,0,0.7);
   backdrop-filter:blur(10px);
-
-  box-shadow:
-  0 0 20px rgba(255,215,0,0.25),
-  0 0 50px rgba(30,58,138,0.45);
-
-  text-align:center;
+  box-shadow:0 0 20px rgba(255,215,0,0.25),0 0 50px rgba(30,58,138,0.45);
 }
-
-.welcome-top::before{
-  content:"◌⑅⃝ᵐᶦˢˢ(꜆˘͈ෆ˘͈꜀)ʸᵒᵘ⑅⃝◌";
-  position:absolute;
-  top:6px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:12px;
-  letter-spacing:8px;
-  color:#ffd700;
-}
-
-.welcome-top::after{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-120%;
-  width:80%;
-  height:100%;
-  background:
-  linear-gradient(120deg, transparent, rgba(255,215,0,0.3), transparent);
-  transform:skewX(-20deg);
-  animation:shineMove 4s linear infinite;
-}
-
-/* WELCOME TEXT */
 
 .welcome-text{
-  position:relative;
-  z-index:2;
   font-size:32px;
-  line-height:1.15;
   font-family:'Orbitron',sans-serif;
   font-weight:900;
   letter-spacing:3px;
-
-  background:
-  linear-gradient(90deg,#fff7cc,#ffd700,#ffb700,#fff0a8,#ffd700);
+  background:linear-gradient(90deg,#fff7cc,#ffd700,#ffb700,#fff0a8,#ffd700);
   background-size:300% 300%;
-
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-
   animation:goldText 5s ease infinite;
 }
 
-/* AI MODIFIED TEXT */
-
-.ai-mod{
-  margin-top:6px;
-  font-size:10px;
-  letter-spacing:3px;
-  font-weight:700;
-  color:rgba(255,215,0,0.8);
-}
-
 /* OWNER */
-
 .owner-box{
   width:90%;
   max-width:300px;
   min-height:120px;
-  position:relative;
-  overflow:hidden;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
-  padding:22px 18px;
+  padding:22px;
   border-radius:28px;
-
-  background:
-  linear-gradient(135deg,rgba(15,23,42,0.95),rgba(30,58,138,0.88));
-
+  background:linear-gradient(135deg,rgba(15,23,42,0.95),rgba(30,58,138,0.88));
   border:2px solid rgba(255,215,0,0.7);
-
-  box-shadow:
-  0 0 20px rgba(255,215,0,0.25),
-  0 0 40px rgba(30,58,138,0.35);
 }
 
 .owner-title{
   font-size:12px;
-  font-weight:800;
   letter-spacing:6px;
-  color:#ffe8a3;
-  margin-bottom:10px;
+  font-weight:800;
 }
 
 .owner-name{
   font-size:30px;
   font-family:'Orbitron',sans-serif;
   font-weight:900;
-  letter-spacing:2px;
-
   background:linear-gradient(90deg,#fff7cc,#ffd700,#ffb700,#fff0a8,#ffd700);
   background-size:300% 300%;
   -webkit-background-clip:text;
@@ -228,7 +137,6 @@ body{
 }
 
 /* WRAPPER */
-
 .wrapper{
   width:100%;
   max-width:300px;
@@ -238,35 +146,20 @@ body{
   margin-top:22px;
 }
 
-/* CARDS */
-
-.music-player,
-.calendar,
-.nav-box{
-  width:100%;
+/* BOXES */
+.music-player,.calendar,.nav-box{
   background:rgba(10,25,55,0.88);
   border-radius:24px;
   padding:12px;
   border:2px solid rgba(255,215,0,0.65);
-  box-shadow:0 0 18px rgba(255,215,0,0.18),0 0 35px rgba(30,58,138,0.4);
 }
 
 /* PLAYER */
-
-.song{
-  text-align:center;
-  margin-bottom:10px;
-  font-size:11px;
-  font-weight:700;
-  color:#ffe8a3;
-}
-
 .screen{
   width:100%;
   aspect-ratio:16/9;
   border-radius:16px;
   overflow:hidden;
-  background:black;
   border:2px solid rgba(255,215,0,0.5);
 }
 
@@ -282,43 +175,17 @@ iframe{
   margin-top:10px;
 }
 
-.controls button,
-.nav a{
+button{
+  width:120px;
+  height:36px;
+  border-radius:12px;
   background:rgba(15,23,42,0.95);
   border:2px solid rgba(255,215,0,0.7);
   color:#ffe8a3;
   font-weight:800;
-  transition:0.3s;
-  box-shadow:0 0 12px rgba(255,215,0,0.15);
-}
-
-.controls button{
-  width:120px;
-  height:36px;
-  border-radius:12px;
-  cursor:pointer;
-  font-size:12px;
-}
-
-.nav a{
-  display:block;
-  text-align:center;
-  margin:8px 0;
-  padding:12px;
-  border-radius:14px;
-  text-decoration:none;
-  font-size:12px;
-}
-
-.controls button:hover,
-.nav a:hover{
-  background:#1e3a8a;
-  transform:scale(1.03);
-  box-shadow:0 0 20px rgba(255,215,0,0.4);
 }
 
 /* CALENDAR */
-
 .header{
   text-align:center;
   font-size:20px;
@@ -327,18 +194,10 @@ iframe{
   color:#ffd700;
 }
 
-.days,
-.dates{
+.days,.dates{
   display:grid;
   grid-template-columns:repeat(7,1fr);
   gap:5px;
-}
-
-.days div{
-  text-align:center;
-  font-size:10px;
-  font-weight:800;
-  color:#ffe8a3;
 }
 
 .dates div{
@@ -358,8 +217,7 @@ iframe{
   color:#000 !important;
 }
 
-/* FOOTER */
-
+/* FOOTER TEXT */
 #yogiText{
   font-size:22px;
   font-weight:900;
@@ -369,6 +227,14 @@ iframe{
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   animation:goldText 5s ease infinite;
+}
+
+.ai-mod{
+  font-size:10px;
+  margin-top:8px;
+  font-weight:700;
+  color:#ffd700;
+  letter-spacing:3px;
 }
 
 </style>
@@ -381,10 +247,7 @@ iframe{
 <div class="top-section">
 
   <div class="welcome-top">
-
     <div class="welcome-text">SAPPHIRE</div>
-    <div class="ai-mod">AI MODIFIED</div>
-
   </div>
 
   <div class="owner-box">
@@ -397,17 +260,10 @@ iframe{
 <div class="wrapper">
 
   <div class="music-player">
-    <div class="song">Now Playing : CHIHIRO - Billie Eilish</div>
-
     <div class="screen">
       <iframe id="playerFrame"
       src="https://www.youtube.com/embed/e_AZJzYe7CU?enablejsapi=1"
-      allow="autoplay; encrypted-media"
       allowfullscreen></iframe>
-    </div>
-
-    <div class="controls">
-      <button id="playBtn">PLAY</button>
     </div>
   </div>
 
@@ -419,63 +275,31 @@ iframe{
     <div class="dates" id="dates"></div>
   </div>
 
-  <div class="nav-box">
-    <div class="nav">
-      <a href="https://www.chess.com/clubs/forum/view/club-rules-578">RULES</a>
-      <a href="https://www.chess.com/clubs/events/sapphire-1">EVENTS</a>
-      <a href="https://www.chess.com/clubs/members/sapphire-1">MEMBERS</a>
-      <a href="https://www.chess.com/clubs/forum/view/dont-click-here-14">CLICK HERE</a>
-    </div>
-  </div>
-
 </div>
 
 <div style="text-align:center; margin-top:18px;">
   <div id="yogiText">Sapphire</div>
+  <div class="ai-mod">AI MODIFIED</div>
 </div>
 
 <script>
-const frame = document.getElementById("playerFrame");
-const playBtn = document.getElementById("playBtn");
-let playing = false;
+const monthYear=document.getElementById("monthYear");
+const dates=document.getElementById("dates");
 
-playBtn.addEventListener("click", () => {
-  if (!playing) {
-    frame.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', "*");
-    playBtn.innerText = "PAUSE";
-    playing = true;
-  } else {
-    frame.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', "*");
-    playBtn.innerText = "PLAY";
-    playing = false;
-  }
-});
+const now=new Date();
+const year=now.getFullYear();
+const month=now.getMonth();
+const today=now.getDate();
 
-const monthYear = document.getElementById("monthYear");
-const dates = document.getElementById("dates");
+const months=["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-const now = new Date();
-const year = now.getFullYear();
-const month = now.getMonth();
-const today = now.getDate();
+monthYear.innerText=`${months[month]} ${year}`;
 
-const months = [
-"January","February","March","April","May","June",
-"July","August","September","October","November","December"
-];
+const firstDay=new Date(year,month,1).getDay();
+const lastDate=new Date(year,month+1,0).getDate();
 
-monthYear.innerText = `${months[month]} ${year}`;
-
-const firstDay = new Date(year,month,1).getDay();
-const lastDate = new Date(year,month+1,0).getDate();
-
-for(let i=0;i<firstDay;i++){
-  dates.innerHTML += `<div></div>`;
-}
-
-for(let i=1;i<=lastDate;i++){
-  dates.innerHTML += `<div class="${i===today?'today':''}">${i}</div>`;
-}
+for(let i=0;i<firstDay;i++) dates.innerHTML+=`<div></div>`;
+for(let i=1;i<=lastDate;i++) dates.innerHTML+=`<div class="${i===today?'today':''}">${i}</div>`;
 </script>
 
 </body>
